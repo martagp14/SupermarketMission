@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GroceryListChecker : MonoBehaviour
 {
+    private LevelLoader levelLoader;
+
     //List of pending to classify item
     List<Food> pendings;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelLoader = FindObjectOfType<LevelLoader>();
     }
 
     // Update is called once per frame

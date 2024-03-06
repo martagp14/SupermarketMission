@@ -21,18 +21,16 @@ public class StoryBehaviour : MonoBehaviour
     private int index = 0;
     private int numLines = 5;
 
+    private LevelLoader levelLoader;
+
     // Start is called before the first frame update
     void Start()
     {
         storyCanvas.gameObject.SetActive(false);
         nameCanvas.gameObject.SetActive(true);
 
-        lines = new string[numLines];
-        lines[0] = "¡<Nombre jugador>! ¿Puedes venir un momento, por favor?";
-        lines[1] = "Aquí estás. Pues verás, tengo una misión para ti";
-        lines[2] = "Tu padre iba ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
-        lines[3] = "¿Crees que podrías conseguirlos todos tu solo, agente <inicial del nombre jugador>?";
-        lines[4] = "¿Si? Te veo decidido. Pues aquí tienes la lista. Prepárate para la misión.";
+        levelLoader = FindObjectOfType<LevelLoader>();
+        levelLoader.StartScene();
     }
 
     // Update is called once per frame
@@ -40,10 +38,10 @@ public class StoryBehaviour : MonoBehaviour
     {
         if (storyCanvas.isActiveAndEnabled)
         {
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown(KeyCode.T))
             {
                 //Skip story
-                GameManager.GetInstance().GoToScene("GroceryList");
+                levelLoader.LoadNextLevel("GroceryList");
             }
         }
     }
@@ -53,14 +51,24 @@ public class StoryBehaviour : MonoBehaviour
         //Todo: Check is name Input is empty
 
         GameManager.GetInstance().playerName = nameInput.text;
+        var initial = GameManager.GetInstance().playerName.Substring(0, 1).ToUpper();
+        GameManager.GetInstance().playerInitial = initial;
         Debug.Log("Player Name: " + GameManager.GetInstance().playerName);
         storyCanvas.gameObject.SetActive(true);
         nameCanvas.gameObject.SetActive(false);
-
+        SetLines();
         //Todo: start comic animation
         dialogM.SetText(lines[0]);
-        //DialogManager.CompleteTextRevealed += showNewText;
+    }
 
+    void SetLines()
+    {
+        lines = new string[numLines];
+        lines[0] = "¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor?";
+        lines[1] = "Aquí estás. Pues verás, tengo una misión para ti";
+        lines[2] = "Tu padre iba ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
+        lines[3] = "¿Crees que podrías conseguirlos todos tu solo, agente " + GameManager.GetInstance().playerInitial + "? ";
+        lines[4] = "¿Si? Te veo decidido. Pues aquí tienes la lista. Prepárate para la misión.";
     }
 
     //void completedLine()
@@ -75,6 +83,14 @@ public class StoryBehaviour : MonoBehaviour
         {
             index++;
             dialogM.SetText(lines[index]);
+        }
+        else
+        {
+            if(index == lines.Length - 1)
+            {
+                //Skip story
+                GameManager.GetInstance().GoToScene("GroceryList");
+            }
         }
     }
 

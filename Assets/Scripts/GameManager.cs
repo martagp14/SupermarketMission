@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public string playerName;
+    public string playerInitial;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void LoadMain()

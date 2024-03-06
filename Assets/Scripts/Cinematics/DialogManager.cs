@@ -8,12 +8,9 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
-    private TMP_Text textBox;
+    //Todo: Limpiar todo lo de avanzar rapido el texto porque no se usa
 
-    ////Prototyping
-    //[Header("Test String")]
-    //[SerializeField]
-    //private string testText;
+    private TMP_Text textBox;
 
     //Typewriter functionality
     private int currentCharacterIndex;
@@ -25,7 +22,7 @@ public class DialogManager : MonoBehaviour
 
     [Header("Typewriting Settings")]
     [SerializeField]
-    private float charactersPerSecond = 20;
+    private float charactersPerSecond = 30;
     [SerializeField]
     private float interpuntuactionDelay = 0.5f;
 
@@ -73,14 +70,13 @@ public class DialogManager : MonoBehaviour
     {
         textBox.ForceMeshUpdate();
         //SetText(testText);
-        Debug.Log("This strart");
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1)|| Input.GetKeyDown("space"))
         {
-            Debug.Log(textBox.maxVisibleCharacters +" - " + (textBox.textInfo.characterCount - 1) +" - "+ readyForNewText);
+            //Debug.Log(textBox.maxVisibleCharacters +" - " + (textBox.textInfo.characterCount - 1) +" - "+ readyForNewText);
             if(textBox.maxVisibleCharacters <= textBox.textInfo.characterCount -1)
             {
                 Skip();
@@ -135,7 +131,6 @@ public class DialogManager : MonoBehaviour
             StopCoroutine(typeWriterCoroutine);
 
         textBox.text = text;
-        Debug.Log("info " + textBox.textInfo.characterCount);
         textBox.maxVisibleCharacters = 0;
         currentCharacterIndex = 0;
 
