@@ -26,4 +26,13 @@ public class GroceryListChecker : MonoBehaviour
         //Then check each category, run through every item and check its category propert
         return true;
     }
+
+    void OnClickCheck()
+    {
+        //Check if correct
+        if (checkClassification())
+        {
+            GameManager.GetInstance().GoToScene("SupermarketMap");
+        }
+    }
 }
