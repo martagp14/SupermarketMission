@@ -45,6 +45,8 @@ public class DialogManager : MonoBehaviour
     public static event Action<char> CharacterRevealed;
 
     [SerializeField] private StoryBehaviour sb;
+    [SerializeField] private LevelIntroLoader introLoader;
+
 
     private void Awake()
     {
@@ -83,9 +85,13 @@ public class DialogManager : MonoBehaviour
             }
             else
             {
-                if (readyForNewText)
+                if (readyForNewText&&sb!=null)
                 {
                     sb.showNewText();
+                }
+                if(readyForNewText&&sb == null&& introLoader != null)
+                {
+                    introLoader.StartLightTransition();
                 }
             }
             
@@ -143,7 +149,7 @@ public class DialogManager : MonoBehaviour
 
         while (currentCharacterIndex < textInfo.characterCount)
         {
-            //Debug.Log("Uno  mas" + currentCharacterIndex + "--" + textInfo.characterCount);
+            Debug.Log("Uno  mas" + currentCharacterIndex + "--" + textInfo.characterCount);
 
             var lastCharacterIndex = textInfo.characterCount - 1;
             if(currentCharacterIndex == lastCharacterIndex)
