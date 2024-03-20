@@ -87,7 +87,7 @@ public class DialogManager : MonoBehaviour
             {
                 if (readyForNewText&&sb!=null)
                 {
-                    sb.showNewText();
+                    sb.ShowNewText();
                 }
                 if(readyForNewText&&sb == null&& introLoader != null)
                 {

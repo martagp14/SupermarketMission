@@ -31,6 +31,17 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
+    public void StartFakeTransition()
+    {
+        StartCoroutine(FakeLoading());
+    }
+    IEnumerator FakeLoading()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
+        transition.SetTrigger("End");
+    }
+
     //public void StartScene()
     //{
     //    StartCoroutine(HideInnerDialog());

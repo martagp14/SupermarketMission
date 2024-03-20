@@ -21,18 +21,43 @@ public class StoryBehaviour : MonoBehaviour
     private int index = 0;
     private int numLines = 5;
 
+    private bool changeInProgress;
+
     private LevelLoader levelLoader;
     private LevelIntroLoader levelIntroLoader;
+
+    [Header("StartCinematic")]
+    [SerializeField] private Image image1;
+
+    [Header("EndCinematic")]
+    [SerializeField] private Image image;
+    [SerializeField] private Image imageCharacter;
+    [SerializeField] private Sprite imageGarden;
+    [SerializeField] private Sprite imageMum;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        changeInProgress = false;
         storyCanvas.gameObject.SetActive(false);
-        nameCanvas.gameObject.SetActive(true);
 
         levelLoader = FindObjectOfType<LevelLoader>();
         levelIntroLoader = FindObjectOfType<LevelIntroLoader>();
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "StartingCinematic":
+                nameCanvas.gameObject.SetActive(true);
+                break;
+            case "FinalCinematic":
+                SetLines();
+                StartCoroutine(showIntroMessage());
+                break;
+            default:
+                break;
+        }
+
         ////levelLoader.StartScene();
     }
 
@@ -65,21 +90,44 @@ public class StoryBehaviour : MonoBehaviour
 
     IEnumerator showIntroMessage()
     {
+        levelIntroLoader.SetIntroText();
         levelIntroLoader.StartDarkTransition();
         yield return new WaitForSeconds(1f);
-        nameCanvas.gameObject.SetActive(false);
+        if(nameCanvas)
+            nameCanvas.gameObject.SetActive(false);
         storyCanvas.gameObject.SetActive(true);
         dialogM.SetText(lines[0]);
     }
 
     void SetLines()
     {
-        lines = new string[numLines];
-        lines[0] = "¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor?";
-        lines[1] = "Aquí estás. Pues verás, tengo una misión para ti.";
-        lines[2] = "Tu padre iba ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
-        lines[3] = "¿Crees que podrías conseguirlos todos tu solo, agente " + GameManager.GetInstance().playerInitial + "? ";
-        lines[4] = "¿Si? Te veo decidido. Pues aquí tienes la lista. Prepárate para la misión.";
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "StartingCinematic":
+                numLines = 5;
+                lines = new string[numLines];
+                lines[0] = "¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor?";
+                lines[1] = "Aquí estás. Pues verás, tengo una misión para ti.";
+                lines[2] = "Tu padre iba ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
+                lines[3] = "¿Crees que podrías conseguirlos todos tu solo, agente " + GameManager.GetInstance().playerInitial + "? ";
+                lines[4] = "¿Si? Te veo decidido. Pues aquí tienes la lista. Prepárate para la misión.";
+                break;
+            case "FinalCinematic":
+                numLines = 6;
+                lines = new string[numLines];
+                lines[0] = "Por fin en la caja";
+                lines[1] = "¡Siguiente!";
+                lines[2] = "¡Ya has vuelto!";
+                lines[3] = "Veamos cual ha sido tu desempeño en esta misión…";
+                lines[4] = "Has tardado <Insertar tiempo>, y has traído <Numero de elementos> de los <numero total de elementos> alimentos objetivo.";
+                //Dependiendo estado de los alimentos sacar un dialogo distinto
+                lines[5] = "¡Y todo esta en perfecto estado! Muy bien organizado";
+                break;
+            default:
+                lines[0] = "[Dialogo no definido]";
+                break;
+        }
+        
     }
 
     //void completedLine()
@@ -87,23 +135,56 @@ public class StoryBehaviour : MonoBehaviour
     //    DialogManager.CompleteTextRevealed += showNewText;
     //}
 
-    public void showNewText()
+    public void ShowNewText()
     {
-        Debug.Log("Next line");
-        if (index < lines.Length - 1)
+        if (!changeInProgress)
         {
-            index++;
-            dialogM.SetText(lines[index]);
-        }
-        else
-        {
-            if(index == lines.Length - 1)
+            Debug.Log("Next line");
+            if (index < lines.Length - 1)
             {
-                //Skip story
-                GameManager.GetInstance().GoToScene("GroceryList");
+                index++;
+                dialogM.SetText(lines[index]);
             }
+            else
+            {
+                if (index == lines.Length - 1)
+                {
+                    //Skip story
+                    GameManager.GetInstance().GoToScene("GroceryList");
+                }
+            }
+            ChangeStoryImage();
         }
     }
 
+    private void ChangeStoryImage()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "StartingCinematic":
+                
+                break;
+            case "FinalCinematic":
+                if (index == 1)
+                {
+                    StartCoroutine(changeBackground());
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
+    IEnumerator changeBackground()
+    {
+        changeInProgress = true;
+        yield return new WaitForSeconds(2f);
+        levelLoader.StartFakeTransition();
+        yield return new WaitForSeconds(1f);
+        changeInProgress = false;
+        image.sprite = imageGarden;
+        imageCharacter.sprite = imageMum;
+        ShowNewText();
+        
+    }
 }

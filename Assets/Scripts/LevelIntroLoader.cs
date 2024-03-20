@@ -14,17 +14,28 @@ public class LevelIntroLoader : MonoBehaviour
     //public string introSceneText;
     [SerializeField] TMP_Text introText;
 
+    private string text;
+
     [SerializeField]
     private DialogManager dialogM;
 
-    //private void Start()
-    //{
-    //    introSceneText = "¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor?";
-    //}
-
-    private void Start()
+    public void SetIntroText()
     {
         //Definir frases segun nombre escena
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "StartingCinematic":
+                text = "¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor ? ";
+                break;
+            case "FinalCinematic":
+                //transition.SetTrigger("ForceBlack");
+                Debug.Log("blaaaaaack");
+                //StartDarkTransition();
+                text = "Uff, por fin en la caja.";
+                break;
+            default: 
+                break;
+        }
        
     }
 
@@ -48,17 +59,6 @@ public class LevelIntroLoader : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-    //public void StartScene()
-    //{
-    //    StartCoroutine(HideInnerDialog());
-    //}
-
-    //IEnumerator HideInnerDialog()
-    //{
-    //    transition.SetTrigger("End");
-    //    yield return new WaitForSeconds(transitionTime);
-    //}
-
     public void StartDarkTransition()
     {
         Debug.Log("Oscurecer");
@@ -69,12 +69,19 @@ public class LevelIntroLoader : MonoBehaviour
     {
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        dialogM.SetText("¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor ? ");
+        dialogM.SetText(text);
     }
 
     public void StartLightTransition()
     {
         Debug.Log("Aclarar");
+        StartCoroutine(hideIntrotext());
+    }
+
+    IEnumerator hideIntrotext()
+    {
         transition.SetTrigger("End");
+        yield return new WaitForSeconds(transitionTime);
+        //this.gameObject.SetActive(false);
     }
 }
