@@ -6,17 +6,40 @@ public class TrolleyMovement : MonoBehaviour
 {
 
     private ObstaclesGame miniGameManager;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         miniGameManager = FindObjectOfType<ObstaclesGame>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            anim.SetTrigger("MoveLeft");
+            StartCoroutine(DeactivateTrigger());
+        }
+        if (Input.GetKeyDown(KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            anim.SetTrigger("MoveRight");
+            StartCoroutine(DeactivateTrigger());
+        }
     }
 
     //Movement of the trolley using arrow or mouse
+    IEnumerator DeactivateTrigger()
+    {
+        yield return new WaitForSeconds(0.5f);
+        anim.ResetTrigger("MoveLeft");
+        anim.ResetTrigger("MoveRight");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        anim.SetTrigger("Damaged");
+        miniGameManager.DamagePlayer();
+    }
 }
