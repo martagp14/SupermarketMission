@@ -8,7 +8,11 @@ public class Food : MonoBehaviour
     public enum Category
     {
         fruit,
-        bread
+        bakery,
+        legume,
+        fridge,
+        fish,
+        perfumery
     };
     public enum hardnessLevel
     {
@@ -37,6 +41,9 @@ public class Food : MonoBehaviour
     public hardnessLevel hardness; // { get; private set; }
 
     GameObject gameObject;
+
+    [SerializeField]
+    Sprite sprite;
 
     public Food()
     {

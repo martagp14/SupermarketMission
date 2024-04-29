@@ -17,4 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SupermarketMap.unity
     guid: 6a640fd8441055c4e9fa6188d264f564
+  - enabled: 1
+    path: Assets/Scenes/ObstaclesGame.unity
+    guid: 863fd43b3969ccf4b976d7ca24d14c65
+  - enabled: 1
+    path: Assets/Scenes/FinalCinematic.unity
+    guid: dfcba55a5e37faf46b4dadfd60cfb2dc
+  - enabled: 1
+    path: Assets/Scenes/SupermarketSection.unity
+    guid: 4fa546cf3f08d1e4d8539ca89b4aff86
+  - enabled: 1
+    path: Assets/Scenes/SupermarketMapSelection.unity
+    guid: 2e27fe631a63f814280ff29c00740919
   m_configObjects: {}

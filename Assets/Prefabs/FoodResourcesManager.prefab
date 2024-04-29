@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1338596650235749774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6647226481653224042}
+  - component: {fileID: 7683565779563175617}
+  m_Layer: 0
+  m_Name: FoodResourcesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6647226481653224042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338596650235749774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7683565779563175617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338596650235749774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee2a02e220cb164a9167fe94c554fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bakery:
+  - {fileID: 21300000, guid: 82196bb175ff9074e948cd4d509058d2, type: 3}
+  - {fileID: 21300000, guid: b237fc555656de2438f3f40000edb315, type: 3}
+  - {fileID: 21300000, guid: 692327ae6e02b654f9eceb2397f65ce9, type: 3}
+  - {fileID: 21300000, guid: e2af82c8f77667a41a98b64701e3e6b8, type: 3}
+  - {fileID: 21300000, guid: 7ba295c819becca4e972c6431801a732, type: 3}
+  - {fileID: 21300000, guid: c1cc1f8645815fe408b16c1ecf51ba7d, type: 3}
+  - {fileID: 21300000, guid: ad643af1a626df64cbd4e6a3ebd9ee14, type: 3}
+  - {fileID: 21300000, guid: b298924d32f340044b667259acab4f63, type: 3}
+  fish: []
+  legume: []
+  fridge: []
+  fruits: []
+  perfumery: []
+  bakeryFoods:
+  - {fileID: 4359427896799794157, guid: a3aee10efe39abb4eb1a43138443d97a, type: 3}
+  - {fileID: 4359427896799794157, guid: fc4597d391c4d364f8dc156f430f58a3, type: 3}
+  - {fileID: 4359427896799794157, guid: ba3727bfea67cd1418a008f2786ad847, type: 3}
+  - {fileID: 4359427896799794157, guid: 5862e9f9366108d478441d565d209663, type: 3}
+  - {fileID: 4359427896799794157, guid: f0822d60e85390241b2404bc815ff8cd, type: 3}
+  - {fileID: 4359427896799794157, guid: 1e68fc1ff04701142981c6027a85428b, type: 3}
+  - {fileID: 4359427896799794157, guid: 388f495eb4a063d41820d047a5b78102, type: 3}
+  - {fileID: 4359427896799794157, guid: e7805b3479d83ed4fb43e52631826416, type: 3}
+  fishFoods: []
+  legumeFoods: []
+  fridgeFoods: []
+  fruitsFoods: []
+  perfumeryFoods: []

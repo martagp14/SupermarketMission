@@ -12,12 +12,12 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
     private int scrollIndex;
 
     [SerializeField]
-    private Canvas upperParent;
+    public Canvas upperParent;
     private Canvas targetParent;
     private Transform initialParent;
     
     [SerializeField]
-    private Canvas canvas;
+    public Canvas canvas;
     [SerializeField]
     private string value;
 
