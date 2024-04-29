@@ -67,9 +67,33 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
         {
             if (eventData.pointerEnter.GetComponent<DropFieldGroceryList>() == null)
             {
-                transform.position = iniPos;
-                transform.parent = initialParent;
-                this.transform.SetSiblingIndex(scrollIndex);
+                if (eventData.pointerEnter.transform.parent.GetComponent<DragAndDropGroceryList>() != null)
+                {
+                    Debug.Log("Nombre objeto " + eventData.pointerEnter.gameObject.name);
+                    if (eventData.pointerEnter.gameObject.GetComponentInParent<DropFieldGroceryList>() != null)
+                    {
+                        GameObject usefulParent = eventData.pointerEnter.gameObject.GetComponentInParent<DropFieldGroceryList>().gameObject;
+                        //Si se suelta encima de un alimento que ya esta asignado, meterlo en su misma asignacion
+                    
+                        Debug.Log("Nombre objeto hihihi " + usefulParent.gameObject.name);
+
+                        this.GetComponent<RectTransform>().anchoredPosition = usefulParent.GetComponent<RectTransform>().anchoredPosition;
+                        usefulParent.GetComponent<DropFieldGroceryList>().AddItemToList(this.gameObject);
+                        this.transform.parent = usefulParent.transform.GetChild(0).transform;
+                    }
+                    else
+                    {
+                        transform.position = iniPos;
+                        transform.parent = initialParent;
+                        this.transform.SetSiblingIndex(scrollIndex);
+                    }
+                }
+                else {
+                    transform.position = iniPos;
+                    transform.parent = initialParent;
+                    this.transform.SetSiblingIndex(scrollIndex);
+                }
+                
             }
         }
 

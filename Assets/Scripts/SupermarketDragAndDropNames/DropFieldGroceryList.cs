@@ -50,4 +50,9 @@ public class DropFieldGroceryList : MonoBehaviour, IDropHandler
             
         }
     }
+
+    public void AddItemToList(GameObject newItem)
+    {
+        items.Add(newItem);
+    }
 }
