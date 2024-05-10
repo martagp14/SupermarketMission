@@ -13,7 +13,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     [SerializeField]
     private Canvas canvas;
     [SerializeField]
-    private string value;
+    private Food.Category value;
+
+    PointerEventData eData;
 
     void Start()
     {
@@ -24,8 +26,26 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("BeginDrag");
+        //Debug.Log("BeginDrag");
         canvasGroup.blocksRaycasts = false;
+        //if (this.transform.parent.GetComponentInParent<DropField>())
+        //{
+        //    Debug.Log("El padre es un drop field " + this.transform.parent);
+        //    this.transform.parent.GetComponentInParent<DropField>().element = null;
+        //    this.transform.parent.GetComponentInParent<DropField>().isOccupied = false;
+
+        //}
+        if (eData != null)
+        {
+            Debug.Log("Supueto en el que estaba " + eData.pointerEnter);
+            if (eData.pointerEnter.GetComponentInParent<DropField>())
+            {
+                Debug.Log("El padre es un drop field " + eData.pointerEnter);
+                eData.pointerEnter.GetComponentInParent<DropField>().element = null;
+                eData.pointerEnter.GetComponentInParent<DropField>().isOccupied = false;
+                eData = null;
+            }
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -36,8 +56,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("Enddrag");
+        //Debug.Log("Enddrag");
         canvasGroup.blocksRaycasts = true;
+        
         if (eventData.pointerEnter==null)
         {
             //For the object to come back if it's drag outside the screen
@@ -49,16 +70,30 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             {
                 transform.position = iniPos;
             }
+            else {
+                if (!eventData.pointerEnter.GetComponent<DropField>().isOccupied)
+                {
+                    eventData.pointerEnter.GetComponent<DropField>().isOccupied = true;
+                    eventData.pointerEnter.GetComponentInParent<DropField>().element = this;
+                    Debug.Log("supuesto receptor"+eventData.pointerEnter);
+                    eData = eventData;
+                    Debug.Log("supuesto receptor" + eventData.pointerEnter);
+                }
+                else
+                {
+                    transform.position = iniPos;
+                }
+            }
         }
 
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Click");
+        //Debug.Log("Click");
     }
 
-    public string getValue()
+    public Food.Category getValue()
     {
         return this.value;
     }

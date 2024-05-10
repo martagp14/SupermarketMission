@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class DropFieldGroceryList : MonoBehaviour, IDropHandler
 {
     [SerializeField]
-    private Food.Category value;
+    public Food.Category value;
     [SerializeField]
     private int index;
     [SerializeField]
@@ -17,28 +17,31 @@ public class DropFieldGroceryList : MonoBehaviour, IDropHandler
     [SerializeField]
     private Transform panelList;
 
-    private List<GameObject> items = new List<GameObject>();
+    public List<GameObject> items = new List<GameObject>();
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Item dropped");
+        Debug.Log("Item dropped "+eventData);
         if(eventData.pointerDrag != null)
         {
-            if(eventData.pointerDrag.GetComponent<Food>().category == this.value)
+            if (eventData.pointerDrag.GetComponent<Food>())
             {
-                Debug.Log("Correct");
-                this.isCorrect = true;
-                dndManager.SetResult(index, true);
+                if (eventData.pointerDrag.GetComponent<Food>().category == this.value)
+                {
+                    Debug.Log("Correct");
+                    this.isCorrect = true;
+                    dndManager.SetResult(index, true);
+                }
+                else
+                {
+                    Debug.Log("Bad");
+                    this.isCorrect = false;
+                    dndManager.SetResult(index, false);
+                }
+                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition;
+                items.Add(eventData.pointerDrag);
+                eventData.pointerDrag.transform.parent = panelList;
             }
-            else
-            {
-                Debug.Log("Bad");
-                this.isCorrect = false;
-                dndManager.SetResult(index, false);
-            }
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition;
-            items.Add(eventData.pointerDrag);
-            eventData.pointerDrag.transform.parent = panelList;
         }
     }
 

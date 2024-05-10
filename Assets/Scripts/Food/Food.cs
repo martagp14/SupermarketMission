@@ -43,7 +43,7 @@ public class Food : MonoBehaviour
     GameObject gameObject;
 
     [SerializeField]
-    Sprite sprite;
+    public Sprite sprite;
 
     public Food()
     {

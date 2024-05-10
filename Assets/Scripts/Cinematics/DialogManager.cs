@@ -76,7 +76,7 @@ public class DialogManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1)|| Input.GetKeyDown("space"))
+        if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
         {
             //Debug.Log(textBox.maxVisibleCharacters +" - " + (textBox.textInfo.characterCount - 1) +" - "+ readyForNewText);
             if(textBox.maxVisibleCharacters <= textBox.textInfo.characterCount -1)

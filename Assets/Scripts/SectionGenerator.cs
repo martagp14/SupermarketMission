@@ -25,37 +25,40 @@ public class SectionGenerator : MonoBehaviour
         //Get actual section del GM
         //Get lista de alimentos de la seccion
         List<String> elements = new List<String>();
-        List<Sprite> foodSprites = new List<Sprite>();
+        List<Food> foodSprites = new List<Food>();
+        //List<Sprite> foodSprites = new List<Sprite>();
         //switch (GameManager.GetInstance().actualSection)
         switch (Food.Category.bakery)
         {
             case Food.Category.bakery:
                 elements.AddRange(GameManager.GetInstance().bakeryList);
-                foodSprites.AddRange(foodResources.GetComponent<FoodResourcesManager>().bakery);
+                foodSprites.AddRange(foodResources.GetComponent<FoodResourcesManager>().bakeryFoods);
+                //foodSprites.AddRange(foodResources.GetComponent<FoodResourcesManager>().bakery);
                 break;
-            case Food.Category.fish:
-                elements = GameManager.GetInstance().fishList;
-                foodSprites = foodResources.GetComponent<FoodResourcesManager>().fish;
-                break;
-            case Food.Category.fridge:
-                elements = GameManager.GetInstance().fridgeList;
-                foodSprites = foodResources.GetComponent<FoodResourcesManager>().fridge;
-                break;
-            case Food.Category.fruit:
-                elements = GameManager.GetInstance().fruitList;
-                foodSprites = foodResources.GetComponent<FoodResourcesManager>().fruits;
-                break;
-            case Food.Category.legume:
-                elements = GameManager.GetInstance().legumeList;
-                foodSprites = foodResources.GetComponent<FoodResourcesManager>().legume;
-                break;
-            case Food.Category.perfumery:
-                elements = GameManager.GetInstance().perfumeryList;
-                foodSprites = foodResources.GetComponent<FoodResourcesManager>().perfumery;
-                break;
+            //case Food.Category.fish:
+            //    elements = GameManager.GetInstance().fishList;
+            //    foodSprites = foodResources.GetComponent<FoodResourcesManager>().fish;
+            //    break;
+            //case Food.Category.fridge:
+            //    elements = GameManager.GetInstance().fridgeList;
+            //    foodSprites = foodResources.GetComponent<FoodResourcesManager>().fridge;
+            //    break;
+            //case Food.Category.fruit:
+            //    elements = GameManager.GetInstance().fruitList;
+            //    foodSprites = foodResources.GetComponent<FoodResourcesManager>().fruits;
+            //    break;
+            //case Food.Category.legume:
+            //    elements = GameManager.GetInstance().legumeList;
+            //    foodSprites = foodResources.GetComponent<FoodResourcesManager>().legume;
+            //    break;
+            //case Food.Category.perfumery:
+            //    elements = GameManager.GetInstance().perfumeryList;
+            //    foodSprites = foodResources.GetComponent<FoodResourcesManager>().perfumery;
+            //    break;
             default:
                 elements = new List<string>();
-                foodSprites = new List<Sprite>();
+                //foodSprites = new List<Sprite>();
+                foodSprites = new List<Food>();
                 break;
         }
 
@@ -74,7 +77,7 @@ public class SectionGenerator : MonoBehaviour
             //TO DO
             GameObject element = Instantiate(foodElement);
             element.transform.parent = sectionPanel.transform;
-            Sprite s = foodSprites[index];
+            Sprite s = foodSprites[index].sprite;
             element.transform.Find("Background").GetComponent<Image>().sprite = s;
             element.transform.Find("Background").Find("Checkmark").GetComponent<Image>().sprite = s;
             foodSprites.RemoveAt(index);
@@ -87,7 +90,7 @@ public class SectionGenerator : MonoBehaviour
             element.transform.parent = sectionPanel.transform;
             //Asignar imagenes aleatorias de la seccion a los toogles
             var rand = Random.Range(0, foodSprites.Count);
-            Sprite s = foodSprites[rand];
+            Sprite s = foodSprites[rand].sprite;
             element.transform.Find("Background").GetComponent<Image>().sprite = s;
             element.transform.Find("Background").Find("Checkmark").GetComponent<Image>().sprite = s;
             foodSprites.RemoveAt(rand);

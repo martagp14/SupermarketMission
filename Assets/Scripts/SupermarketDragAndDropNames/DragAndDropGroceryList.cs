@@ -40,8 +40,14 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("BeginDrag");
+        //Debug.Log("BeginDrag");
         canvasGroup.blocksRaycasts = false;
+        //Borrar el objecto de la lista cuando se le esta sacando de un drop field
+        if (this.transform.parent.GetComponentInParent<DropFieldGroceryList>())
+        {
+            Debug.Log("El padre es un drop field "+ this.transform.parent);
+            this.transform.parent.GetComponentInParent<DropFieldGroceryList>().items.Remove(this.gameObject);
+        }
 
         this.transform.parent = upperParent.gameObject.transform;
     }
@@ -54,7 +60,7 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("Enddrag");
+        //Debug.Log("Enddrag");
         canvasGroup.blocksRaycasts = true;
         if (eventData.pointerEnter==null)
         {
@@ -78,7 +84,7 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
                         Debug.Log("Nombre objeto hihihi " + usefulParent.gameObject.name);
 
                         this.GetComponent<RectTransform>().anchoredPosition = usefulParent.GetComponent<RectTransform>().anchoredPosition;
-                        usefulParent.GetComponent<DropFieldGroceryList>().AddItemToList(this.gameObject);
+                        //usefulParent.GetComponent<DropFieldGroceryList>().AddItemToList(this.gameObject);
                         this.transform.parent = usefulParent.transform.GetChild(0).transform;
                     }
                     else

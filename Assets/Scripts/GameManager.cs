@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
     public List<string> perfumeryList;
 
     public List<Food> bakeryFoodList;
+    public List<Food> fruitFoodList;
+    public List<Food> legumeFoodList;
+    public List<Food> fridgeFoodList;
+    public List<Food> fishFoodList;
+    public List<Food> perfumeryFoodList;
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -35,7 +40,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        this.InitializeLists();
+        //this.InitializeLists();
     }
 
     public static GameManager GetInstance()
@@ -48,14 +53,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(nameScene);
     }
 
-    private void InitializeLists()
-    {
-        //bakeryList = new List<string> { "Barra Pan Perfil", "Pastas de Te Perfil" };
-        //shoppingList = new List<string> { "Barra Pan Perfil", "Pastas de Te Perfil" };
-        //fruitList = new List<string> { "Barra Pan Perfil", "Pastas de Te Perfil" };
-        //legumeList = new List<string> { "Barra Pan Perfil", "Pastas de Te Perfil" };
-        //fridgeList = new List<string> { "Barra Pan Perfil", "Pastas de Te Perfil" };
-        //fishList = new List<string> { "Barra Pan Perfil", "Pastas de Te Perfil" };
-        //perfumeryList = new List<string> { "Barra Pan Perfil", "Pastas de Te Perfil" };
-    }
 }
