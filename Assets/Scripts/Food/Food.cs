@@ -12,7 +12,8 @@ public class Food : MonoBehaviour
         legume,
         fridge,
         fish,
-        perfumery
+        perfumery,
+        cashier
     };
     public enum hardnessLevel
     {

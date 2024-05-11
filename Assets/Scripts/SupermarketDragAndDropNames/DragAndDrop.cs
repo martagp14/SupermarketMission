@@ -9,6 +9,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private RectTransform rectTrans;
     private CanvasGroup canvasGroup;
     private Vector3 iniPos;
+
+    [SerializeField]
+    private Transform initialParent;
     
     [SerializeField]
     private Canvas canvas;
@@ -22,6 +25,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         rectTrans = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         iniPos = transform.position;
+        initialParent = this.transform.parent;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -35,17 +39,19 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         //    this.transform.parent.GetComponentInParent<DropField>().isOccupied = false;
 
         //}
-        if (eData != null)
-        {
-            Debug.Log("Supueto en el que estaba " + eData.pointerEnter);
-            if (eData.pointerEnter.GetComponentInParent<DropField>())
-            {
-                Debug.Log("El padre es un drop field " + eData.pointerEnter);
-                eData.pointerEnter.GetComponentInParent<DropField>().element = null;
-                eData.pointerEnter.GetComponentInParent<DropField>().isOccupied = false;
-                eData = null;
-            }
-        }
+        transform.parent = initialParent;
+
+        //if (eData != null)
+        //{
+        //    Debug.Log("Supueto en el que estaba " + eData.pointerEnter);
+        //    if (eData.pointerEnter.GetComponentInParent<DropField>())
+        //    {
+        //        Debug.Log("El padre es un drop field " + eData.pointerEnter);
+        //        eData.pointerEnter.GetComponentInParent<DropField>().element = null;
+        //        eData.pointerEnter.GetComponentInParent<DropField>().isOccupied = false;
+        //        eData = null;
+        //    }
+        //}
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -63,25 +69,29 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         {
             //For the object to come back if it's drag outside the screen
             transform.position = iniPos;
+            transform.parent = initialParent;
         }
         else
         {
             if (eventData.pointerEnter.GetComponent<DropField>() == null)
             {
                 transform.position = iniPos;
+                transform.parent = initialParent;
             }
             else {
                 if (!eventData.pointerEnter.GetComponent<DropField>().isOccupied)
                 {
-                    eventData.pointerEnter.GetComponent<DropField>().isOccupied = true;
-                    eventData.pointerEnter.GetComponentInParent<DropField>().element = this;
-                    Debug.Log("supuesto receptor"+eventData.pointerEnter);
-                    eData = eventData;
-                    Debug.Log("supuesto receptor" + eventData.pointerEnter);
+                    //eventData.pointerEnter.GetComponent<DropField>().isOccupied = true;
+                    //eventData.pointerEnter.GetComponentInParent<DropField>().element = this;
+                    //Debug.Log("supuesto receptor"+eventData.pointerEnter);
+                    //eData = eventData;
+                    //Debug.Log("supuesto receptor" + eventData.pointerEnter);
+                    transform.parent = eventData.pointerEnter.gameObject.transform;
                 }
                 else
                 {
                     transform.position = iniPos;
+                    transform.parent = initialParent;
                 }
             }
         }
@@ -96,5 +106,11 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public Food.Category getValue()
     {
         return this.value;
+    }
+
+    public void SendBackToIni()
+    {
+        transform.position = iniPos;
+
     }
 }

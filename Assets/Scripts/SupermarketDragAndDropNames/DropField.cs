@@ -21,7 +21,7 @@ public class DropField : MonoBehaviour, IDropHandler
         Debug.Log("Item dropped");
         if(eventData.pointerDrag != null)
         {
-            if (!isOccupied)
+            if (this.transform.childCount==0)
             {
                 if (eventData.pointerDrag.GetComponent<DragAndDrop>().getValue() == this.value)
                 {
@@ -34,6 +34,11 @@ public class DropField : MonoBehaviour, IDropHandler
                     //dndManager.SetResult(index, false);
                 }
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition;
+            }
+            else
+            {
+                //Mandarlo de vuelta en la pos ini
+                eventData.pointerDrag.GetComponent<DragAndDrop>().SendBackToIni();
             }
         }
     }
