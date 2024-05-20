@@ -46,6 +46,9 @@ public class Food : MonoBehaviour
     [SerializeField]
     public Sprite sprite;
 
+    [SerializeField]
+    public bool alreadyTaken;
+
     public Food()
     {
         this.foodName = "";
@@ -56,6 +59,7 @@ public class Food : MonoBehaviour
         this.width = 1;
         this.weight = 1;
         hardness = hardnessLevel.mid;
+        this.alreadyTaken = false;
     }
 
     public Food(string foodName, string color, int price, Category category, int height, int width, int weight, hardnessLevel hardnesslevel)
@@ -68,5 +72,54 @@ public class Food : MonoBehaviour
         this.width = width;
         this.weight = weight;
         hardness = hardnesslevel;
+        this.alreadyTaken = false;
+
+    }
+
+    public Food(Food food)
+    {
+        this.foodName = food.foodName;
+        this.color = food.color;
+        this.price = food.price;
+        this.category = food.category;
+        this.height = food.height;
+        this.width = food.width;
+        this.weight = food.weight;
+        hardness = food.hardness;
+        this.alreadyTaken = false;
+
+    }
+
+    public void CopyFood(Food food)
+    {
+        this.foodName = food.foodName;
+        this.color = food.color;
+        this.price = food.price;
+        this.category = food.category;
+        this.height = food.height;
+        this.width = food.width;
+        this.weight = food.weight;
+        hardness = food.hardness;
+        this.sprite = food.sprite;
+        this.alreadyTaken = false;
+    }
+
+    public Food Clone()
+    {
+        Food clone = new Food
+        {
+            foodName = this.foodName,
+            color = this.color,
+            price = this.price,
+            category = this.category,
+            height = this.height,
+            width = this.width,
+            weight = this.weight,
+            hardness = this.hardness,
+            sprite = this.sprite,
+            alreadyTaken = this.alreadyTaken
+        };
+
+        return clone;
     }
 }

@@ -10,6 +10,7 @@ public class ToggleControl : MonoBehaviour
     void Start()
     {
         toggles = GetComponentsInChildren<Toggle>();
+        Debug.Log("Leentg" +toggles.Length);
     }
 
     public void selectedObjects()
@@ -19,4 +20,6 @@ public class ToggleControl : MonoBehaviour
             Debug.Log(t.isOn);
         }
     }
+
+    
 }

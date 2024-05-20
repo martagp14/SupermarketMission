@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DragAndDropManagerGroceryList : MonoBehaviour
 {
+    //CREO QUE NO SE USA PARA NADA
 
     private bool[] correctness;
     [SerializeField]

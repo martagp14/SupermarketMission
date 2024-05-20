@@ -79,91 +79,91 @@ public class GroceryListChecker : MonoBehaviour
     }
 
     //Generate Grocery List
-    void GenerateGroceyList()
-    {
-        //Set num items
-        FoodResourcesManager fm = Instantiate(prefabFoodManager).GetComponent<FoodResourcesManager>();
-        fm.InitializeCount();
-        //for each food category
-        //rnad num between 0 and num elements categroy
-        //pick that num of elements from category list
-        //save those in categroy list in GM
+    //void GenerateGroceyList()
+    //{
+    //    //Set num items
+    //    FoodResourcesManager fm = Instantiate(prefabFoodManager).GetComponent<FoodResourcesManager>();
+    //    fm.InitializeCount();
+    //    //for each food category
+    //    //rnad num between 0 and num elements categroy
+    //    //pick that num of elements from category list
+    //    //save those in categroy list in GM
         
-        //Bakery
-        int randNum = Random.Range(0, fm.bakeryFoods.Count);
-        List<Food> foodCopy = fm.bakeryFoods;
-        for(int i = 0; i < randNum; i++)
-        {
-            int rand = Random.Range(0, foodCopy.Count);
-            GameManager.GetInstance().bakeryFoodList.Add(foodCopy[rand]);
-            pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
-            foodCopy.RemoveAt(rand);
-        }
-        numItems -= randNum;
-        //Fruits
-        randNum = Random.Range(((numItems - fm.numFoodAccumulative[2])<0)?0: numItems - fm.numFoodAccumulative[2], fm.fruitsFoods.Count);
-        Debug.Log("Num Frutas "+ randNum);
-        //Controlar el numero de cada seccion para llegar a ser 20 siempre
-        foodCopy = fm.fruitsFoods;
-        for (int i = 0; i < randNum; i++)
-        {
-            int rand = Random.Range(0, foodCopy.Count);
-            Debug.Log("Indice de la fruta: "+rand);
-            GameManager.GetInstance().fruitFoodList.Add(foodCopy[rand]);
-            pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
-            foodCopy.RemoveAt(rand);
-        }
-        numItems -= randNum;
-        //Legume
-        randNum = Random.Range(((numItems - fm.numFoodAccumulative[3]) < 0) ? 0 : numItems - fm.numFoodAccumulative[3], fm.legumeFoods.Count);
-        foodCopy = fm.legumeFoods;
-        for (int i = 0; i < randNum; i++)
-        {
-            int rand = Random.Range(0, foodCopy.Count);
-            GameManager.GetInstance().legumeFoodList.Add(foodCopy[rand]);
-            pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
-            foodCopy.RemoveAt(rand);
-        }
-        numItems -= randNum;
-        //Fridge
-        randNum = Random.Range(((numItems - fm.numFoodAccumulative[4]) < 0) ? 0 : numItems - fm.numFoodAccumulative[4], fm.fridgeFoods.Count);
-        foodCopy = fm.fridgeFoods;
-        for (int i = 0; i < randNum; i++)
-        {
-            int rand = Random.Range(0, foodCopy.Count);
-            GameManager.GetInstance().fridgeFoodList.Add(foodCopy[rand]);
-            pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
-            foodCopy.RemoveAt(rand);
-        }
-        numItems -= randNum;
-        //Fish
-        randNum = Random.Range(((numItems - fm.numFoodAccumulative[5]) < 0) ? 0 : numItems - fm.numFoodAccumulative[5], fm.fishFoods.Count);
-        foodCopy = fm.fishFoods;
-        for (int i = 0; i < randNum; i++)
-        {
-            int rand = Random.Range(0, foodCopy.Count);
-            GameManager.GetInstance().fishFoodList.Add(foodCopy[rand]);
-            pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
-            foodCopy.RemoveAt(rand);
-        }
-        numItems -= randNum;
-        //Perfumery
-        randNum = Random.Range(numItems, fm.perfumeryFoods.Count);
-        foodCopy = fm.perfumeryFoods;
-        for (int i = 0; i < randNum; i++)
-        {
-            int rand = Random.Range(0, foodCopy.Count);
-            GameManager.GetInstance().perfumeryFoodList.Add(foodCopy[rand]);
-            pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
-            foodCopy.RemoveAt(rand);
-        }
-        numItems -= randNum;
+    //    //Bakery
+    //    int randNum = Random.Range(0, fm.bakeryFoods.Count);
+    //    List<Food> foodCopy = fm.bakeryFoods;
+    //    for(int i = 0; i < randNum; i++)
+    //    {
+    //        int rand = Random.Range(0, foodCopy.Count);
+    //        GameManager.GetInstance().bakeryFoodList.Add(foodCopy[rand]);
+    //        pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
+    //        foodCopy.RemoveAt(rand);
+    //    }
+    //    numItems -= randNum;
+    //    //Fruits
+    //    randNum = Random.Range(((numItems - fm.numFoodAccumulative[2])<0)?0: numItems - fm.numFoodAccumulative[2], fm.fruitsFoods.Count);
+    //    Debug.Log("Num Frutas "+ randNum);
+    //    //Controlar el numero de cada seccion para llegar a ser 20 siempre
+    //    foodCopy = fm.fruitsFoods;
+    //    for (int i = 0; i < randNum; i++)
+    //    {
+    //        int rand = Random.Range(0, foodCopy.Count);
+    //        Debug.Log("Indice de la fruta: "+rand);
+    //        GameManager.GetInstance().fruitFoodList.Add(foodCopy[rand]);
+    //        pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
+    //        foodCopy.RemoveAt(rand);
+    //    }
+    //    numItems -= randNum;
+    //    //Legume
+    //    randNum = Random.Range(((numItems - fm.numFoodAccumulative[3]) < 0) ? 0 : numItems - fm.numFoodAccumulative[3], fm.legumeFoods.Count);
+    //    foodCopy = fm.legumeFoods;
+    //    for (int i = 0; i < randNum; i++)
+    //    {
+    //        int rand = Random.Range(0, foodCopy.Count);
+    //        GameManager.GetInstance().legumeFoodList.Add(foodCopy[rand]);
+    //        pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
+    //        foodCopy.RemoveAt(rand);
+    //    }
+    //    numItems -= randNum;
+    //    //Fridge
+    //    randNum = Random.Range(((numItems - fm.numFoodAccumulative[4]) < 0) ? 0 : numItems - fm.numFoodAccumulative[4], fm.fridgeFoods.Count);
+    //    foodCopy = fm.fridgeFoods;
+    //    for (int i = 0; i < randNum; i++)
+    //    {
+    //        int rand = Random.Range(0, foodCopy.Count);
+    //        GameManager.GetInstance().fridgeFoodList.Add(foodCopy[rand]);
+    //        pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
+    //        foodCopy.RemoveAt(rand);
+    //    }
+    //    numItems -= randNum;
+    //    //Fish
+    //    randNum = Random.Range(((numItems - fm.numFoodAccumulative[5]) < 0) ? 0 : numItems - fm.numFoodAccumulative[5], fm.fishFoods.Count);
+    //    foodCopy = fm.fishFoods;
+    //    for (int i = 0; i < randNum; i++)
+    //    {
+    //        int rand = Random.Range(0, foodCopy.Count);
+    //        GameManager.GetInstance().fishFoodList.Add(foodCopy[rand]);
+    //        pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
+    //        foodCopy.RemoveAt(rand);
+    //    }
+    //    numItems -= randNum;
+    //    //Perfumery
+    //    randNum = Random.Range(numItems, fm.perfumeryFoods.Count);
+    //    foodCopy = fm.perfumeryFoods;
+    //    for (int i = 0; i < randNum; i++)
+    //    {
+    //        int rand = Random.Range(0, foodCopy.Count);
+    //        GameManager.GetInstance().perfumeryFoodList.Add(foodCopy[rand]);
+    //        pendings.Add(foodCopy[rand].GetComponent<Food>().foodName);
+    //        foodCopy.RemoveAt(rand);
+    //    }
+    //    numItems -= randNum;
 
-        Debug.Log("Elementos restantes: " + numItems);
+    //    Debug.Log("Elementos restantes: " + numItems);
 
-        Debug.Log("Num lista compra"+numItems);
-        this.GenerateClasificationList();
-    }
+    //    Debug.Log("Num lista compra"+numItems);
+    //    this.GenerateClasificationList();
+    //}
 
     void GenerateGroceryListV2()
     {

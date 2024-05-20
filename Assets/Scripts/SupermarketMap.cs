@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class SupermarketMap : MonoBehaviour
 {
+    [SerializeField]
+    private LevelLoader lvlLoader;
+
+    [SerializeField]
+    private GameObject groceryListCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        lvlLoader = FindObjectOfType<LevelLoader>();
+        groceryListCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -41,7 +48,7 @@ public class SupermarketMap : MonoBehaviour
                 section = Food.Category.fridge;
                 break;
             case "Cajas":
-                section = Food.Category.bakery;
+                section = Food.Category.cashier;
                 GameManager.GetInstance().GoToScene("ObstaclesGame");
                 break;
             default:
@@ -50,6 +57,11 @@ public class SupermarketMap : MonoBehaviour
         }
         GameManager.GetInstance().actualSection = section;
         //ZIr  s escena seccion
-        GameManager.GetInstance().GoToScene("SupermarketSection");
+        lvlLoader.LoadNextLevel("SupermarketSection");
+    }
+
+    public void ShowAndHideList()
+    {
+        groceryListCanvas.SetActive(!groceryListCanvas.activeSelf);
     }
 }

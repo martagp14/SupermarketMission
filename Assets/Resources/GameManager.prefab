@@ -45,3 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
+  playerInitial: 
+  actualSection: 0
+  shoppingList: []
+  fruitList: []
+  bakeryList: []
+  legumeList: []
+  fridgeList: []
+  fishList: []
+  perfumeryList: []
+  bakeryFoodList: []
+  fruitFoodList: []
+  legumeFoodList: []
+  fridgeFoodList: []
+  fishFoodList: []
+  perfumeryFoodList: []

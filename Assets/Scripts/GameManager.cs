@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     public Food.Category actualSection;
 
+    public Food[,,] trolleyStatus;
+    //public GameObject[,,] trolleyStatusGO;
+
     //SHOPPING LIST
     public List<string> shoppingList;
     public List<string> fruitList;
@@ -37,10 +40,22 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (instance == null) {
             instance = this;
+            this.InitializeGame();
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
 
         //this.InitializeLists();
+    }
+
+    void InitializeGame()
+    {
+        trolleyStatus = new Food[4, 2, 3];
+        //trolleyStatusGO = new GameObject[4, 2, 3];
     }
 
     public static GameManager GetInstance()
