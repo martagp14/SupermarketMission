@@ -24,7 +24,7 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
     {
         rectTrans = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        iniPos = transform.position;
+        iniPos = transform.localPosition;
         initialParent = transform.parent;   //Este que sea la lista de elementos a colocar
         scrollIndex = transform.GetSiblingIndex();
     }
@@ -54,6 +54,7 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
         {
             //For the object to come back if it's drag outside the screen
             transform.parent = initialParent;
+            transform.localPosition = iniPos;
             this.transform.SetSiblingIndex(scrollIndex);
         }
         else
@@ -76,15 +77,15 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
                     }
                     else
                     {
-                        transform.position = iniPos;
                         transform.parent = initialParent;
+                        transform.localPosition = iniPos;
                         this.transform.SetSiblingIndex(scrollIndex);
                     }
                 }
                 else
                 {
-                    transform.position = iniPos;
                     transform.parent = initialParent;
+                    transform.localPosition = iniPos;
                     this.transform.SetSiblingIndex(scrollIndex);
                 }
 

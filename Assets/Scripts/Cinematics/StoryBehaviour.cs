@@ -26,14 +26,16 @@ public class StoryBehaviour : MonoBehaviour
     private LevelLoader levelLoader;
     private LevelIntroLoader levelIntroLoader;
 
+    [SerializeField] private Animator momAnimator;
+
     [Header("StartCinematic")]
-    [SerializeField] private Image image1;
+    //[SerializeField] private Animator momAnimator;
 
     [Header("EndCinematic")]
     [SerializeField] private Image image;
     [SerializeField] private Image imageCharacter;
     [SerializeField] private Sprite imageGarden;
-    [SerializeField] private Sprite imageMum;
+    //[SerializeField] private Sprite imageMum;
 
 
     // Start is called before the first frame update
@@ -92,6 +94,7 @@ public class StoryBehaviour : MonoBehaviour
     {
         levelIntroLoader.SetIntroText();
         levelIntroLoader.StartDarkTransition();
+        momAnimator.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         if(nameCanvas)
             nameCanvas.gameObject.SetActive(false);
@@ -149,8 +152,16 @@ public class StoryBehaviour : MonoBehaviour
             {
                 if (index == lines.Length - 1)
                 {
-                    //Skip story
-                    GameManager.GetInstance().GoToScene("GroceryList");
+                    if(SceneManager.GetActiveScene().name == "StartingCinematic")
+                    {
+                        //Skip story
+                        levelLoader.LoadNextLevel("GroceryList");
+                    }
+                    else
+                    {
+                        levelLoader.LoadNextLevel("MainMenu");
+                    }
+
                 }
             }
             ChangeStoryImage();
@@ -162,13 +173,14 @@ public class StoryBehaviour : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "StartingCinematic":
-                
+                momAnimator.SetTrigger("Talk");
                 break;
             case "FinalCinematic":
                 if (index == 1)
                 {
                     StartCoroutine(changeBackground());
                 }
+                momAnimator.SetTrigger("Talk");
                 break;
             default:
                 break;
@@ -183,7 +195,8 @@ public class StoryBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
         changeInProgress = false;
         image.sprite = imageGarden;
-        imageCharacter.sprite = imageMum;
+        //imageCharacter.sprite = imageMum;
+        momAnimator.gameObject.SetActive(true);
         ShowNewText();
         
     }

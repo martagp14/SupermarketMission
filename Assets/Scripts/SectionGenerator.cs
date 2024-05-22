@@ -19,12 +19,15 @@ public class SectionGenerator : MonoBehaviour
 
     [SerializeField] List<Food> listElements = new List<Food>();
 
+    [SerializeField] Canvas groceryListCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
         lvlLoader = FindObjectOfType<LevelLoader>();
         PopulateSection();
         toggles = FindObjectsOfType<Toggle>();
+        groceryListCanvas.gameObject.SetActive(false);
     }
 
     void PopulateSection()
@@ -205,6 +208,11 @@ public class SectionGenerator : MonoBehaviour
         Debug.Log("Bien: " + correct + ", Mal: " + wrong);
 
         if (correct == toggles.Length)
-            lvlLoader.LoadNextLevel("SupermarketMapSelection");
+            lvlLoader.LoadNextLevel("TrolleyScene");
+    }
+
+    public void OnClickGroceryList()
+    {
+        groceryListCanvas.gameObject.SetActive(!groceryListCanvas.gameObject.activeSelf);
     }
 }

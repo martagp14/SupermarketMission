@@ -1961,6 +1961,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1859259912548621397, guid: a29cb1fccefa4cd4eb9595cfe4fb07dc, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2448111069240400884, guid: a29cb1fccefa4cd4eb9595cfe4fb07dc, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
