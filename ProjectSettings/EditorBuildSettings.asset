@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TrolleyScene.unity
     guid: ee22492ee02e19a48bb73491c1476342
+  - enabled: 1
+    path: Assets/Scenes/TrolleyScene 1.unity
+    guid: a525b77b1053ed846b1c13f74cb26181
   m_configObjects: {}

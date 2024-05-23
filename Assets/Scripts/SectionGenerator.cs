@@ -208,7 +208,7 @@ public class SectionGenerator : MonoBehaviour
         Debug.Log("Bien: " + correct + ", Mal: " + wrong);
 
         if (correct == toggles.Length)
-            lvlLoader.LoadNextLevel("TrolleyScene");
+            lvlLoader.LoadNextLevel("TrolleyScene 1");
     }
 
     public void OnClickGroceryList()
