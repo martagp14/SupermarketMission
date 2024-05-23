@@ -18,9 +18,12 @@ public class TrolleyDropField : MonoBehaviour, IDropHandler
         {
             if (this.transform.childCount == 0)
             {
-                Debug.Log("Mi pos: " + this.transform.position);
-                eventData.pointerDrag.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
-                eventData.pointerDrag.transform.parent = this.gameObject.transform;
+                if (eventData.pointerDrag.GetComponent<TrolleyDragAndDrop>()) {
+                    Debug.Log("Mi pos: " + this.transform.position);
+                    eventData.pointerDrag.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
+                    eventData.pointerDrag.transform.parent = this.gameObject.transform;
+                }
+                
             }
             else
             {

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public string playerInitial;
 
     public Food.Category actualSection;
+    public Food.Category[] sectionDistribution = new Food.Category[6];
 
     public Food[,,] trolleyStatus;
     //public GameObject[,,] trolleyStatusGO;

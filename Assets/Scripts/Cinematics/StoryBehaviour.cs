@@ -51,8 +51,12 @@ public class StoryBehaviour : MonoBehaviour
         {
             case "StartingCinematic":
                 nameCanvas.gameObject.SetActive(true);
+                momAnimator.gameObject.SetActive(true);
+
                 break;
             case "FinalCinematic":
+                momAnimator.gameObject.SetActive(false);
+
                 SetLines();
                 StartCoroutine(showIntroMessage());
                 break;
@@ -94,7 +98,6 @@ public class StoryBehaviour : MonoBehaviour
     {
         levelIntroLoader.SetIntroText();
         levelIntroLoader.StartDarkTransition();
-        momAnimator.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         if(nameCanvas)
             nameCanvas.gameObject.SetActive(false);
@@ -147,6 +150,8 @@ public class StoryBehaviour : MonoBehaviour
             {
                 index++;
                 dialogM.SetText(lines[index]);
+                ChangeStoryImage();
+
             }
             else
             {
@@ -164,7 +169,6 @@ public class StoryBehaviour : MonoBehaviour
 
                 }
             }
-            ChangeStoryImage();
         }
     }
 

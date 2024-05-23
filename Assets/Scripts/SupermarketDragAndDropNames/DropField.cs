@@ -19,9 +19,9 @@ public class DropField : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("Item dropped");
-        if(eventData.pointerDrag != null)
+        if (eventData.pointerDrag != null)
         {
-            if (this.transform.childCount==0)
+            if (this.transform.childCount == 0)
             {
                 if (eventData.pointerDrag.GetComponent<DragAndDrop>().getValue() == this.value)
                 {
@@ -47,5 +47,9 @@ public class DropField : MonoBehaviour, IDropHandler
     {
         return this.value;
     }
-    //Hay que ver como marcar como false cuando se quita un elemento bien posicionado y no se coloca otro malo ahi.
+
+    public void setValue(Food.Category category)
+    {
+        this.value = category;
+    }
 }
