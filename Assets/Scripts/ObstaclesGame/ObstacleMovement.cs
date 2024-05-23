@@ -5,11 +5,18 @@ using UnityEngine;
 public class ObstacleMovement : MonoBehaviour
 {
 
-    private float speed=10f;
+    [SerializeField] private float speed=10f;
+    private bool stop;
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Translate(Vector3.up * Time.deltaTime * speed);
+        if(!stop)
+            transform.Translate(Vector3.up * Time.deltaTime * speed);
+    }
+
+    public void SetStop(bool value)
+    {
+        stop = value;
     }
 }

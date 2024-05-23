@@ -9,12 +9,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 02b620e5e1a189541b5ead1e2b02a91f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 188.3278
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02b620e5e1a189541b5ead1e2b02a91f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.884937
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 02b620e5e1a189541b5ead1e2b02a91f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.9203477
+      value: 1.8833
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 02b620e5e1a189541b5ead1e2b02a91f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -56,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 02b620e5e1a189541b5ead1e2b02a91f, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -87,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3366d8c18c5df084786831629a65da54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
 --- !u!65 &-1366438432604437617
 BoxCollider:
   m_ObjectHideFlags: 0

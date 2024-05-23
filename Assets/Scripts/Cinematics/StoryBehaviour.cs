@@ -115,7 +115,7 @@ public class StoryBehaviour : MonoBehaviour
                 lines[0] = "¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor?";
                 lines[1] = "Aquí estás. Pues verás, tengo una misión para ti.";
                 lines[2] = "Tu padre iba ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
-                lines[3] = "¿Crees que podrías conseguirlos todos tu solo, agente " + GameManager.GetInstance().playerInitial + "? ";
+                lines[3] = "¿Crees que podrías conseguirlos todos por tu cuenta, agente " + GameManager.GetInstance().playerInitial + "? ";
                 lines[4] = "¿Si? Te veo decidido. Pues aquí tienes la lista. Prepárate para la misión.";
                 break;
             case "FinalCinematic":

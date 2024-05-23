@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class ObstaclesGame : MonoBehaviour
 {
     [SerializeField] private GameObject obstacle;
+    [SerializeField] private GameObject stand;
     [SerializeField] private GameObject GameOverPanel;
 
-    private Vector3[] spawnPoints = { new Vector3(-4.5f, 3.9000001f, 58.4000015f), new Vector3(0f, 3.9000001f, 58.4000015f), new Vector3(4.5f, 3.9000001f, 58.4000015f) };
+    private Vector3[] spawnPoints = { new Vector3(-4.5f, 1.883278f, 58.4000015f), new Vector3(0f, 1.883278f, 58.4000015f), new Vector3(4.5f, 1.883278f, 58.4000015f) };
+    private Vector3[] standSpawnPoints = { new Vector3(-11.5100002f, 2.99039865f, 63.8699989f), new Vector3(11.7370729f, 2.99039841f, 63.8699989f) };
 
     private int playerLifes;
     private bool isGameOver;
@@ -29,6 +31,7 @@ public class ObstaclesGame : MonoBehaviour
         isGameOver = false;
         playerLifes = hearts.Count-1;
         StartCoroutine(SpawnObjects());
+        StartCoroutine(SpawnStands());
     }
 
     // Update is called once per frame
@@ -45,6 +48,21 @@ public class ObstaclesGame : MonoBehaviour
             yield return new WaitForSeconds(1f);
             var obs = Instantiate(obstacle);
             obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
+        }
+        isGameOver = true;
+        GameOver();
+    }
+
+    IEnumerator SpawnStands()
+    {
+        while (!isGameOver && numObstacles < 50)
+        {
+            yield return new WaitForSeconds(1.2f);
+            var obs = Instantiate(stand);
+            var obs2 = Instantiate(stand);
+            obs.gameObject.transform.SetPositionAndRotation(standSpawnPoints[0], new Quaternion(-0.707106769f, 0, 0, 0.707106829f));
+            obs2.gameObject.transform.SetPositionAndRotation(standSpawnPoints[1], new Quaternion(-0.707106769f, 0, 0, 0.707106829f));
+
         }
     }
 
@@ -70,6 +88,11 @@ public class ObstaclesGame : MonoBehaviour
 
     private void GameOver()
     {
+        ObstacleMovement[] elements = FindObjectsOfType<ObstacleMovement>();
+        foreach(ObstacleMovement elem in elements)
+        {
+            elem.SetStop(true);
+        }
         Debug.Log("GameOver");
         this.isGameOver = true;
         //Pausar carrito y obstaculos
