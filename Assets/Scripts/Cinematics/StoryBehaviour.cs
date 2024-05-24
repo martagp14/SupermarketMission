@@ -9,8 +9,8 @@ public class StoryBehaviour : MonoBehaviour
 {
     [SerializeField]
     private Canvas storyCanvas;
-    [SerializeField]
-    private Canvas nameCanvas;
+    //[SerializeField]
+    //private Canvas nameCanvas;
     [SerializeField]
     private TMP_InputField nameInput;
     [SerializeField]
@@ -37,6 +37,7 @@ public class StoryBehaviour : MonoBehaviour
     [SerializeField] private Sprite imageGarden;
     //[SerializeField] private Sprite imageMum;
 
+    private AgentDataCollector dataCollector;
 
     // Start is called before the first frame update
     void Start()
@@ -50,9 +51,11 @@ public class StoryBehaviour : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "StartingCinematic":
-                nameCanvas.gameObject.SetActive(true);
+                //nameCanvas.gameObject.SetActive(true);
                 momAnimator.gameObject.SetActive(true);
-
+                //dataCollector = FindObjectOfType<AgentDataCollector>();
+                SetLines();
+                StartCoroutine(showIntroMessage());
                 break;
             case "FinalCinematic":
                 momAnimator.gameObject.SetActive(false);
@@ -82,16 +85,16 @@ public class StoryBehaviour : MonoBehaviour
 
     public void OnClickEnterName()
     {
-        //Todo: Check is name Input is empty
-
-        GameManager.GetInstance().playerName = nameInput.text;
-        var initial = GameManager.GetInstance().playerName.Substring(0, 1).ToUpper();
-        GameManager.GetInstance().playerInitial = initial;
-        Debug.Log("Player Name: " + GameManager.GetInstance().playerName);
-        SetLines();
-        //levelLoader.StartTransition();
-        StartCoroutine(showIntroMessage());
-        //Todo: start comic animation
+        if (dataCollector.CheckAndSaveAgentData())
+        {
+            //Todo: Check is name Input is empty
+            var initial = GameManager.GetInstance().playerInitial;
+            Debug.Log("Player Name: " + GameManager.GetInstance().playerName);
+            SetLines();
+            //levelLoader.StartTransition();
+            StartCoroutine(showIntroMessage());
+            //Todo: start comic animation
+        }
     }
 
     IEnumerator showIntroMessage()
@@ -99,8 +102,8 @@ public class StoryBehaviour : MonoBehaviour
         levelIntroLoader.SetIntroText();
         levelIntroLoader.StartDarkTransition();
         yield return new WaitForSeconds(1f);
-        if(nameCanvas)
-            nameCanvas.gameObject.SetActive(false);
+        //if(nameCanvas)
+        //    nameCanvas.gameObject.SetActive(false);
         storyCanvas.gameObject.SetActive(true);
         dialogM.SetText(lines[0]);
     }

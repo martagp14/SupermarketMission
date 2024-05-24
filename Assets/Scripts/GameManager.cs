@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public string playerName;
     public string playerInitial;
+    public int playerAge;
+    public string playerGender;
 
     public Food.Category actualSection;
     public Food.Category[] sectionDistribution = new Food.Category[6];
@@ -69,4 +71,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(nameScene);
     }
 
+    public void SavePlayerData(string name, int age, string gender)
+    {
+        playerName = name;
+        playerInitial = playerName.Substring(0, 1).ToUpper();
+        playerAge = age;
+        playerGender = gender;
+    }
 }
