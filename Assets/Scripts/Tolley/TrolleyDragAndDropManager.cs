@@ -28,24 +28,6 @@ public class TrolleyDragAndDropManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Array.Copy(GameManager.GetInstance().trolleyStatus, trolleyStatus, GameManager.GetInstance().trolleyStatus.Length);
-        //Muestra null aunque se supone que lo guarda bien
-        //if (GameManager.GetInstance().trolleyStatus[1, 0, 0])
-        //Debug.Log("TS. " + GameManager.GetInstance().trolleyStatus[1, 0, 0].foodName);
-
-        // Carga los valores del GameManager
-        //trolleyStatus = GameManager.GetInstance().trolleyStatus;
-
-        // Verifica si los datos se han cargado correctamente
-        //if (trolleyStatus == null)
-        //{
-        //    Debug.LogError("trolleyStatus es null en Start.");
-        //}
-        //else
-        //{
-        //    Debug.Log("TS en Start: " + (trolleyStatus[1, 0, 0] != null ? trolleyStatus[1, 0, 0].ToString() : "null"));
-        //}
-
         SetTrolley();
         SetItemsToOrganize();
         lvlLoader = FindObjectOfType<LevelLoader>();
@@ -63,30 +45,6 @@ public class TrolleyDragAndDropManager : MonoBehaviour
         //Ponerles como padre el canvas
         List<Food> newFoods = new List<Food>();
         Debug.Log("Actual section: " + GameManager.GetInstance().actualSection);
-        //switch (GameManager.GetInstance().actualSection)
-        //{
-        //    case Food.Category.bakery:
-        //        newFoods = GameManager.GetInstance().bakeryFoodList;
-        //        Debug.Log(newFoods.Count);
-        //        break;
-        //    case Food.Category.fruit:
-        //        newFoods = GameManager.GetInstance().fruitFoodList; 
-        //        break;
-        //    case Food.Category.legume:
-        //        newFoods = GameManager.GetInstance().legumeFoodList; 
-        //        break;
-        //    case Food.Category.fridge:
-        //        newFoods = GameManager.GetInstance().fridgeFoodList; 
-        //        break;
-        //    case Food.Category.fish:
-        //        newFoods = GameManager.GetInstance().fishFoodList; 
-        //        break;
-        //    case Food.Category.perfumery:
-        //        newFoods = GameManager.GetInstance().perfumeryFoodList;
-        //        break;
-        //    default:
-        //        break;
-        //}
 
         newFoods = GameManager.GetInstance().pickedItems;
         Debug.Log(newFoods.Count);
@@ -97,6 +55,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
             //{
                 GameObject element = Instantiate(TrolleyElementPrefab);
                 element.transform.parent = newFoodParent.transform;
+                element.transform.localScale = new Vector3(1f,1f,1f);
                 element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<Food>().CopyFood(foodItem);
@@ -173,39 +132,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
         //Si hay alimento, instanciar el elemento como hijo de ese
         //Poner el sprite del food
 
-        //LAYER 0
         int[] index;
-        //for (int i = 0; i < layer0.transform.childCount; i++)
-        //{
-        //    index = layer0.transform.GetChild(i).GetComponent<TrolleyDropField>().GetIndexes();
-        //    //Debug.Log(trolleyStatus[index[1], index[0], 0]);
-        //    if (GameManager.GetInstance().trolleyStatus[index[1], 0])
-        //    {
-        //        GameObject element = Instantiate(TrolleyElementPrefab);
-        //        element.GetComponent<RectTransform>().position = layer0.transform.GetChild(i).GetComponent<RectTransform>().position;
-        //        element.transform.parent = layer0.transform.GetChild(i);
-        //        element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
-        //        element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
-        //        element.GetComponent<Food>().CopyFood(GameManager.GetInstance().trolleyStatus[index[1], 0]);
-        //        element.GetComponent<Image>().sprite = element.GetComponent<Food>().sprite;
-        //        Debug.Log("Loaded at " + index[0] + "," + index[1]);
-        //    }
-        //}
-        //for (int i = 0; i < layer1.transform.childCount; i++)
-        //{
-        //    index = layer1.transform.GetChild(i).GetComponent<TrolleyDropField>().GetIndexes();
-        //    //Debug.Log(trolleyStatus[index[1], index[0], 0]);
-        //    if (GameManager.GetInstance().trolleyStatus[index[1], 1])
-        //    {
-        //        GameObject element = Instantiate(TrolleyElementPrefab);
-        //        element.GetComponent<RectTransform>().position = layer1.transform.GetChild(i).GetComponent<RectTransform>().position;
-        //        element.transform.parent = layer1.transform.GetChild(i);
-        //        element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
-        //        element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
-        //        element.GetComponent<Food>().CopyFood(GameManager.GetInstance().trolleyStatus[index[1], 1]);
-        //        element.GetComponent<Image>().sprite = element.GetComponent<Food>().sprite;
-        //    }
-        //}
         for (int i = 0; i < layer2.transform.childCount; i++)
         {
             index = layer2.transform.GetChild(i).GetComponent<TrolleyDropField>().GetIndexes();
@@ -215,10 +142,12 @@ public class TrolleyDragAndDropManager : MonoBehaviour
                 GameObject element = Instantiate(TrolleyElementPrefab);
                 element.GetComponent<RectTransform>().position = layer2.transform.GetChild(i).GetComponent<RectTransform>().position;
                 element.transform.parent = layer2.transform.GetChild(i);
+                element.transform.localScale = new Vector3(1f,1f,1f);
                 element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<Food>().CopyFood(GameManager.GetInstance().trolleyStatus[index[1], index[0]]);
                 element.transform.GetChild(0).GetComponent<Image>().sprite = element.GetComponent<Food>().sprite;
+                this.evaluatePosition(index[1], index[0], element);
             }
         }
     }
@@ -355,83 +284,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
         //Recorrer los hijos y ver si tienen hijo (aka hay alimento)
         //Si hay hijo, coger sus indices y guardar su compeonet food en el sitio correspondiente de array
 
-        //LAYER0
         int[] index;
-        //for (int i = 0; i < layer0.transform.childCount; i++)
-        //{
-        //    index = layer0.transform.GetChild(i).GetComponent<TrolleyDropField>().GetIndexes();
-        //    if (layer0.transform.GetChild(i).childCount > 0)
-        //    {
-        //        Debug.Log(layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName);
-
-        //        switch (layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().category)
-        //        {
-        //            case Food.Category.bakery:
-        //                Debug.Log("Index" + foodManager.GetComponent<FoodResourcesManager>().bakeryFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName));
-        //                GameManager.GetInstance().trolleyStatus[index[1], 0] = foodManager.GetComponent<FoodResourcesManager>().bakeryFoods[foodManager.GetComponent<FoodResourcesManager>().bakeryFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.fruit:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 0] = foodManager.GetComponent<FoodResourcesManager>().fruitsFoods[foodManager.GetComponent<FoodResourcesManager>().fruitsFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.legume:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 0] = foodManager.GetComponent<FoodResourcesManager>().legumeFoods[foodManager.GetComponent<FoodResourcesManager>().legumeFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.fridge:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 0] = foodManager.GetComponent<FoodResourcesManager>().fridgeFoods[foodManager.GetComponent<FoodResourcesManager>().fridgeFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.fish:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 0] = foodManager.GetComponent<FoodResourcesManager>().fishFoods[foodManager.GetComponent<FoodResourcesManager>().fishFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.perfumery:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 0] = foodManager.GetComponent<FoodResourcesManager>().perfumeryFoods[foodManager.GetComponent<FoodResourcesManager>().perfumeryFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer0.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        GameManager.GetInstance().trolleyStatus[index[1], 0] = null;
-        //    }
-        //}
-
-        //for (int i = 0; i < layer1.transform.childCount; i++)
-        //{
-        //    index = layer1.transform.GetChild(i).GetComponent<TrolleyDropField>().GetIndexes();
-        //    if (layer1.transform.GetChild(i).childCount > 0)
-        //    {
-        //        Debug.Log(layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName);
-
-        //        switch (layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().category)
-        //        {
-        //            case Food.Category.bakery:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 1] = foodManager.GetComponent<FoodResourcesManager>().bakeryFoods[foodManager.GetComponent<FoodResourcesManager>().bakeryFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.fruit:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 1] = foodManager.GetComponent<FoodResourcesManager>().fruitsFoods[foodManager.GetComponent<FoodResourcesManager>().fruitsFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.legume:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 1] = foodManager.GetComponent<FoodResourcesManager>().legumeFoods[foodManager.GetComponent<FoodResourcesManager>().legumeFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.fridge:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 1] = foodManager.GetComponent<FoodResourcesManager>().fridgeFoods[foodManager.GetComponent<FoodResourcesManager>().fridgeFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.fish:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 1] = foodManager.GetComponent<FoodResourcesManager>().fishFoods[foodManager.GetComponent<FoodResourcesManager>().fishFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            case Food.Category.perfumery:
-        //                GameManager.GetInstance().trolleyStatus[index[1], 1] = foodManager.GetComponent<FoodResourcesManager>().perfumeryFoods[foodManager.GetComponent<FoodResourcesManager>().perfumeryFoods.FindIndex(s => s.GetComponent<Food>().foodName == layer1.transform.GetChild(i).transform.GetChild(0).GetComponent<Food>().foodName)];
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        GameManager.GetInstance().trolleyStatus[index[1], 1] = null;
-        //    }
-        //}
-
         for (int i = 0; i < layer2.transform.childCount; i++)
         {
             index = layer2.transform.GetChild(i).GetComponent<TrolleyDropField>().GetIndexes();
@@ -479,5 +332,70 @@ public class TrolleyDragAndDropManager : MonoBehaviour
             lvlLoader.LoadNextLevel("SupermarketMapSelection");
         }
         
+    }
+
+    public void evaluatePosition(int indexI, int indexJ, GameObject element)
+    {
+        //Comprobar si hay objeto encima
+        Food thisFood = element.GetComponent<Food>();
+        element.GetComponent<Image>().color = Color.green;
+        if (indexJ>0)
+        {
+            Food aboveFood = GameManager.GetInstance().trolleyStatus[indexI, indexJ - 1];
+            if (aboveFood)
+            {
+
+                //Si lo hay, comprobar dureza de este objeto
+                //Si no es duro, comprobar peso del objeto de encima
+                //Poner tinte al alo segun sea su relacion
+                if (thisFood.hardness == Food.hardnessLevel.fragile)
+                {
+                    if (aboveFood.weight == Food.weightLevel.mid)
+                    {
+                        //Orange
+                        element.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else if (aboveFood.weight == Food.weightLevel.heavy)
+                    {
+                        //Red
+                        element.GetComponent<Image>().color = Color.red;
+                    }
+                }
+                else if (thisFood.hardness == Food.hardnessLevel.mid)
+                {
+                    if (aboveFood.weight == Food.weightLevel.heavy)
+                    {
+                        //Orange
+                        element.GetComponent<Image>().color = Color.yellow;
+                    }
+                }
+            }
+        }
+        if (indexJ > 1)
+        {
+            //Si tiene dos objetos encima, comporbar los dos
+            Food aboveFood = GameManager.GetInstance().trolleyStatus[indexI, indexJ - 2];
+            if (aboveFood)
+            {
+                if (thisFood.hardness == Food.hardnessLevel.fragile)
+                {
+                    if (aboveFood.weight == Food.weightLevel.mid)
+                    {
+                        element.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else if (aboveFood.weight == Food.weightLevel.heavy)
+                    {
+                        element.GetComponent<Image>().color = Color.red;
+                    }
+                }
+                else if (thisFood.hardness == Food.hardnessLevel.mid)
+                {
+                    if (aboveFood.weight == Food.weightLevel.heavy)
+                    {
+                        element.GetComponent<Image>().color = Color.yellow;
+                    }
+                }
+            }
+        }
     }
 }
