@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8359833030290397301}
   - component: {fileID: 4359427896799794157}
   m_Layer: 0
-  m_Name: Cod
+  m_Name: Squib
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347bfa5ead7a60d47b16d27bac2cf770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodName: Bacalao
+  foodName: Calamar
   color: Red
   price: 2
   category: 4
@@ -52,5 +52,5 @@ MonoBehaviour:
   width: 1
   weight: 1
   hardness: 0
-  sprite: {fileID: 21300000, guid: 6dbe9c8419f7d3f478ad20374f502c92, type: 3}
+  sprite: {fileID: 21300000, guid: da4595af59e5b894b96f7bc7a4d0f41b, type: 3}
   alreadyTaken: 0
