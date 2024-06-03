@@ -14,17 +14,18 @@ public class GameManager : MonoBehaviour
     public Food.Category actualSection;
     public Food.Category[] sectionDistribution = new Food.Category[6];
 
-    public Food[,,] trolleyStatus;
+    public Food[,] trolleyStatus;       //8x3
+    //public Food[,,] trolleyStatus;       //4x2x3
     //public GameObject[,,] trolleyStatusGO;
 
     //SHOPPING LIST
-    public List<string> shoppingList;
-    public List<string> fruitList;
-    public List<string> bakeryList;
-    public List<string> legumeList;
-    public List<string> fridgeList;
-    public List<string> fishList;
-    public List<string> perfumeryList;
+    //public List<string> shoppingList;
+    //public List<string> fruitList;
+    //public List<string> bakeryList;
+    //public List<string> legumeList;
+    //public List<string> fridgeList;
+    //public List<string> fishList;
+    //public List<string> perfumeryList;
 
     public List<Food> bakeryFoodList;
     public List<Food> fruitFoodList;
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
     public List<Food> fridgeFoodList;
     public List<Food> fishFoodList;
     public List<Food> perfumeryFoodList;
+
+    public List<Food> pickedItems;
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -57,7 +60,8 @@ public class GameManager : MonoBehaviour
 
     void InitializeGame()
     {
-        trolleyStatus = new Food[4, 2, 3];
+        trolleyStatus = new Food[8, 3];
+        //trolleyStatus = new Food[4, 2, 3];
         //trolleyStatusGO = new GameObject[4, 2, 3];
     }
 

@@ -50,7 +50,7 @@ MonoBehaviour:
   category: 0
   height: 1
   width: 1
-  weight: 1
+  weight: 2
   hardness: 2
   sprite: {fileID: 21300000, guid: a655af367871708458f2f1a63c1e5905, type: 3}
   alreadyTaken: 0

@@ -46,17 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: 
   playerInitial: 
+  playerAge: 0
+  playerGender: 
   actualSection: 0
-  shoppingList: []
-  fruitList: []
-  bakeryList: []
-  legumeList: []
-  fridgeList: []
-  fishList: []
-  perfumeryList: []
+  sectionDistribution: 000000000000000000000000000000000000000000000000
   bakeryFoodList: []
   fruitFoodList: []
   legumeFoodList: []
   fridgeFoodList: []
   fishFoodList: []
   perfumeryFoodList: []
+  pickedItems:
+  - {fileID: 4359427896799794157, guid: a3aee10efe39abb4eb1a43138443d97a, type: 3}
+  - {fileID: 4359427896799794157, guid: ba3727bfea67cd1418a008f2786ad847, type: 3}
+  - {fileID: 4359427896799794157, guid: 5862e9f9366108d478441d565d209663, type: 3}
+  - {fileID: 4359427896799794157, guid: fc4597d391c4d364f8dc156f430f58a3, type: 3}

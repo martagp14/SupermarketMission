@@ -21,6 +21,12 @@ public class Food : MonoBehaviour
         mid,
         hard
     };
+    public enum weightLevel
+    {
+        light,
+        mid,
+        heavy
+    };
 
     //Food properties
     [SerializeField]
@@ -37,7 +43,7 @@ public class Food : MonoBehaviour
     public int width; // { get; private set; }
     [SerializeField]
 
-    public int weight; // { get; private set; }
+    public weightLevel weight; // { get; private set; }
     [SerializeField]
     public hardnessLevel hardness; // { get; private set; }
 
@@ -57,12 +63,12 @@ public class Food : MonoBehaviour
         this.category = Category.fruit;
         this.height = 1;
         this.width = 1;
-        this.weight = 1;
+        this.weight = weightLevel.mid;
         hardness = hardnessLevel.mid;
         this.alreadyTaken = false;
     }
 
-    public Food(string foodName, string color, int price, Category category, int height, int width, int weight, hardnessLevel hardnesslevel)
+    public Food(string foodName, string color, int price, Category category, int height, int width, weightLevel weight, hardnessLevel hardnesslevel)
     {
         this.foodName = foodName;
         this.color = color;

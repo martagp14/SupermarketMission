@@ -87,7 +87,6 @@ public class SectionGenerator : MonoBehaviour
         //Crear toggles
         //Instanciar los elemntos de la lista de la compra y guardar su referencia
         GameObject[] toBuyElements = new GameObject[listElements.Count];
-        Debug.Log("Lista GM: " + GameManager.GetInstance().bakeryList.Count);
         Debug.Log("Num obligatorios: " + listElements.Count);
         Debug.Log("Num sprites: " + allSectionFoods.Count);
         for (int i = 0; i < listElements.Count; i++)
