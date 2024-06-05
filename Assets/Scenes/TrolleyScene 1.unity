@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 17120935}
   - component: {fileID: 17120934}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: NewElementsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -895,6 +895,12 @@ MonoBehaviour:
   layer2: {fileID: 1217172528}
   layer1: {fileID: 0}
   layer0: {fileID: 0}
+  lightFrame: {fileID: 21300000, guid: cabe11a09d62ebe4b95e766808f99184, type: 3}
+  midFrame: {fileID: 21300000, guid: 27c377b16b2272b418387f08ff2d90ac, type: 3}
+  grossFrame: {fileID: 21300000, guid: 10ef67c01884b994a9967bd38307b464, type: 3}
+  lightWeight: {fileID: 21300000, guid: 87d99d2203d60ff498217eadad3d37c7, type: 3}
+  midWeight: {fileID: 21300000, guid: 497360c2a54aa164fa4077c8a9f277fe, type: 3}
+  heavyWeight: {fileID: 21300000, guid: 3ddc412150d3dde4483fb8e86dbabfe2, type: 3}
   newFoodParent: {fileID: 17120931}
   TrolleyElementPrefab: {fileID: 2435267304896813247, guid: 3d9ce4116298e7c4094723aed932ea07, type: 3}
   foodResourcesPrefab: {fileID: 1338596650235749774, guid: 735907f06c0e09a458799466401f043f, type: 3}

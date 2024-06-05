@@ -30,7 +30,8 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
         rectTrans = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         iniPos = transform.localPosition;
-        initialParent = transform.parent;   //Este que sea la lista de elementos a colocar
+        //initialParent = transform.parent;   //Este que sea la lista de elementos a colocar
+        initialParent = GameObject.Find("NewElementsPanel").transform;
         scrollIndex = transform.GetSiblingIndex();
     }
 
@@ -62,8 +63,8 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
         {
             //For the object to come back if it's drag outside the screen
             transform.parent = initialParent;
-            transform.localPosition = iniPos;
-            this.transform.SetSiblingIndex(scrollIndex);
+            //transform.localPosition = iniPos;
+            //this.transform.SetSiblingIndex(scrollIndex);
             this.GetComponent<Image>().color = Color.white;
         }
         else
@@ -94,8 +95,8 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
                 //else
                 //{
                     transform.parent = initialParent;
-                    transform.localPosition = iniPos;
-                    this.transform.SetSiblingIndex(scrollIndex);
+                    //transform.localPosition = iniPos;
+                    //this.transform.SetSiblingIndex(scrollIndex);
                     this.GetComponent<Image>().color = Color.white;
                 //}
 
@@ -110,7 +111,7 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
     }
     public void SendBackToIni()
     {
-        transform.position = iniPos;
+        //transform.position = iniPos;
         this.GetComponent<Image>().color = Color.white;
 
     }

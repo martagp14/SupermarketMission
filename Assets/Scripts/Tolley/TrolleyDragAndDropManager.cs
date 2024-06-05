@@ -13,6 +13,12 @@ public class TrolleyDragAndDropManager : MonoBehaviour
     private GameObject layer2, layer1, layer0;
 
     [SerializeField]
+    private Sprite lightFrame, midFrame, grossFrame;
+
+    [SerializeField]
+    private Sprite lightWeight, midWeight, heavyWeight;
+
+    [SerializeField]
     private GameObject newFoodParent;
 
     [SerializeField]
@@ -55,15 +61,28 @@ public class TrolleyDragAndDropManager : MonoBehaviour
         {
             //if (foodItem.alreadyTaken)
             //{
-                GameObject element = Instantiate(TrolleyElementPrefab);
-                element.transform.parent = newFoodParent.transform;
-                element.transform.localScale = new Vector3(1f,1f,1f);
-                element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
-                element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
-                element.GetComponent<Food>().CopyFood(foodItem);
-                //element.GetComponentInChildren<Image>().sprite = element.GetComponent<Food>().sprite;
-                element.transform.GetChild(0).GetComponent<Image>().sprite = element.GetComponent<Food>().sprite;
-
+            GameObject element = Instantiate(TrolleyElementPrefab);
+            element.transform.parent = newFoodParent.transform;
+            element.transform.localScale = new Vector3(1f,1f,1f);
+            element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
+            element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
+            element.GetComponent<Food>().CopyFood(foodItem);
+            //element.GetComponentInChildren<Image>().sprite = element.GetComponent<Food>().sprite;
+            element.transform.Find("FoodImage").GetComponent<Image>().sprite = element.GetComponent<Food>().sprite;
+            //Hardness
+            if(element.GetComponent<Food>().hardness == Food.hardnessLevel.hard)
+                element.transform.Find("FrameImage").GetComponent<Image>().sprite = grossFrame;
+            else if (element.GetComponent<Food>().hardness == Food.hardnessLevel.mid)
+                element.transform.Find("FrameImage").GetComponent<Image>().sprite = midFrame;
+            else if (element.GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                element.transform.Find("FrameImage").GetComponent<Image>().sprite = lightFrame;
+            //Weight
+            if (element.GetComponent<Food>().weight == Food.weightLevel.heavy)
+                element.transform.Find("WeightImage").GetComponent<Image>().sprite = heavyWeight;
+            else if (element.GetComponent<Food>().weight == Food.weightLevel.mid)
+                element.transform.Find("WeightImage").GetComponent<Image>().sprite = midWeight;
+            else if (element.GetComponent<Food>().weight == Food.weightLevel.light)
+                element.transform.Find("WeightImage").GetComponent<Image>().sprite = lightWeight;
             //}
         }
     }
@@ -147,7 +166,21 @@ public class TrolleyDragAndDropManager : MonoBehaviour
                 element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<Food>().CopyFood(GameManager.GetInstance().trolleyStatus[index[1], index[0]]);
-                element.transform.GetChild(0).GetComponent<Image>().sprite = element.GetComponent<Food>().sprite;
+                element.transform.Find("FoodImage").GetComponent<Image>().sprite = element.GetComponent<Food>().sprite;
+                //Hardness
+                if (element.GetComponent<Food>().hardness == Food.hardnessLevel.hard)
+                    element.transform.Find("FrameImage").GetComponent<Image>().sprite = grossFrame;
+                else if (element.GetComponent<Food>().hardness == Food.hardnessLevel.mid)
+                    element.transform.Find("FrameImage").GetComponent<Image>().sprite = midFrame;
+                else if (element.GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                    element.transform.Find("FrameImage").GetComponent<Image>().sprite = lightFrame;
+                //Weight
+                if (element.GetComponent<Food>().weight == Food.weightLevel.heavy)
+                    element.transform.Find("WeightImage").GetComponent<Image>().sprite = heavyWeight;
+                else if (element.GetComponent<Food>().weight == Food.weightLevel.mid)
+                    element.transform.Find("WeightImage").GetComponent<Image>().sprite = midWeight;
+                else if (element.GetComponent<Food>().weight == Food.weightLevel.light)
+                    element.transform.Find("WeightImage").GetComponent<Image>().sprite = lightWeight;
                 this.evaluatePosition(index[1], index[0], element);
                 trolley[index[1], index[0]] = element;
             }
