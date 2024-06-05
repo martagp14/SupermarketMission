@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -20,8 +21,12 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
     [SerializeField]
     private string value;
 
+    private TrolleyDragAndDropManager dndManager;
+
+
     void Start()
     {
+        dndManager = FindObjectOfType<TrolleyDragAndDropManager>();
         rectTrans = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         iniPos = transform.localPosition;
@@ -33,10 +38,13 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
     {
         canvasGroup.blocksRaycasts = false;
         //Borrar el objecto de la lista cuando se le esta sacando de un drop field
-        if (this.transform.parent.GetComponentInParent<DropFieldGroceryList>())
+        if (this.transform.parent.GetComponentInParent<TrolleyDropField>())
         {
             Debug.Log("El padre es un drop field " + this.transform.parent);
-            this.transform.parent.GetComponentInParent<DropFieldGroceryList>().items.Remove(this.gameObject);
+            dndManager.trolley[this.transform.parent.GetComponentInParent<TrolleyDropField>().GetIndexes()[1], this.transform.parent.GetComponentInParent<TrolleyDropField>().GetIndexes()[0]] = null;
+            this.transform.parent.GetComponentInParent<TrolleyDropField>().RelocateColumnElements(this.transform.parent.GetComponentInParent<TrolleyDropField>().GetIndexes()[0]);
+            //dndManager.evaluateColumn(this.transform.parent.GetComponentInParent<TrolleyDropField>().GetIndexes()[1]);
+            //this.transform.parent.GetComponentInParent<DropFieldGroceryList>().items.Remove(this.gameObject);
         }
 
         this.transform.parent = upperParent.gameObject.transform;
@@ -56,38 +64,40 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
             transform.parent = initialParent;
             transform.localPosition = iniPos;
             this.transform.SetSiblingIndex(scrollIndex);
+            this.GetComponent<Image>().color = Color.white;
         }
         else
         {
             if (eventData.pointerEnter.GetComponent<TrolleyDropField>() == null)
             {
-                if (eventData.pointerEnter.transform.parent.GetComponent<TrolleyDragAndDrop>() != null)
-                {
-                    Debug.Log("Nombre objeto " + eventData.pointerEnter.gameObject.name);
-                    if (eventData.pointerEnter.gameObject.GetComponentInParent<TrolleyDropField>() != null)
-                    {
-                        GameObject usefulParent = eventData.pointerEnter.gameObject.GetComponentInParent<TrolleyDropField>().gameObject;
-                        //Si se suelta encima de un alimento que ya esta asignado, meterlo en su misma asignacion
+                //if (eventData.pointerEnter.transform.parent.GetComponent<TrolleyDragAndDrop>() != null)
+                //{
+                //    Debug.Log("Nombre objeto " + eventData.pointerEnter.gameObject.name);
+                //    if (eventData.pointerEnter.gameObject.GetComponentInParent<TrolleyDropField>() != null)
+                //    {
+                //        GameObject usefulParent = eventData.pointerEnter.gameObject.GetComponentInParent<TrolleyDropField>().gameObject;
+                //        //Si se suelta encima de un alimento que ya esta asignado, meterlo en su misma asignacion
 
-                        Debug.Log("Nombre objeto hihihi " + usefulParent.gameObject.name);
+                //        Debug.Log("Nombre objeto hihihi " + usefulParent.gameObject.name);
 
-                        this.GetComponent<RectTransform>().position = usefulParent.GetComponent<RectTransform>().position;
-                        //usefulParent.GetComponent<DropFieldGroceryList>().AddItemToList(this.gameObject);
-                        this.transform.parent = usefulParent.transform.GetChild(0).transform;
-                    }
-                    else
-                    {
-                        transform.parent = initialParent;
-                        transform.localPosition = iniPos;
-                        this.transform.SetSiblingIndex(scrollIndex);
-                    }
-                }
-                else
-                {
+                //        this.GetComponent<RectTransform>().position = usefulParent.GetComponent<RectTransform>().position;
+                //        //usefulParent.GetComponent<DropFieldGroceryList>().AddItemToList(this.gameObject);
+                //        this.transform.parent = usefulParent.transform.GetChild(0).transform;
+                //    }
+                //    else
+                //    {
+                //        transform.parent = initialParent;
+                //        transform.localPosition = iniPos;
+                //        this.transform.SetSiblingIndex(scrollIndex);
+                //    }
+                //}
+                //else
+                //{
                     transform.parent = initialParent;
                     transform.localPosition = iniPos;
                     this.transform.SetSiblingIndex(scrollIndex);
-                }
+                    this.GetComponent<Image>().color = Color.white;
+                //}
 
             }
         }
@@ -101,6 +111,7 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
     public void SendBackToIni()
     {
         transform.position = iniPos;
+        this.GetComponent<Image>().color = Color.white;
 
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,25 +12,126 @@ public class TrolleyDropField : MonoBehaviour, IDropHandler
     public bool isOccupied = false;
     public DragAndDrop element;
 
+    private TrolleyDragAndDropManager dndManager;
+
+    [SerializeField] private GameObject[] columnDropFields = new GameObject[3];
+
+    void Start()
+    {
+        dndManager = FindObjectOfType<TrolleyDragAndDropManager>();
+        //columnDropFields = (GameObject[]) Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == this.gameObject.name);
+    }
+
+    //public void OnDrop(PointerEventData eventData)
+    //{
+    //    Debug.Log("Item dropped");
+    //    if (eventData.pointerDrag != null)
+    //    {
+    //        if (this.transform.childCount == 0)
+    //        {
+    //            if (eventData.pointerDrag.GetComponent<TrolleyDragAndDrop>()) {
+    //                Debug.Log("Mi pos: " + this.transform.position);
+    //                eventData.pointerDrag.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
+    //                eventData.pointerDrag.transform.parent = this.gameObject.transform;
+    //                dndManager.trolley[indexJ, indexI] = eventData.pointerDrag.gameObject;
+    //                dndManager.evaluateColumn(indexJ);
+    //            }
+
+    //        }
+    //        else
+    //        {
+    //            //Mandarlo de vuelta en la pos ini
+    //            eventData.pointerDrag.GetComponent<TrolleyDragAndDrop>().SendBackToIni();
+    //        }
+    //    }
+    //}
+
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("Item dropped");
         if (eventData.pointerDrag != null)
         {
-            if (this.transform.childCount == 0)
+            if (this.transform.childCount == 0 && dndManager.trolley[indexJ,indexI] == null)
             {
-                if (eventData.pointerDrag.GetComponent<TrolleyDragAndDrop>()) {
+                if (eventData.pointerDrag.GetComponent<TrolleyDragAndDrop>())
+                {
                     Debug.Log("Mi pos: " + this.transform.position);
-                    eventData.pointerDrag.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
-                    eventData.pointerDrag.transform.parent = this.gameObject.transform;
+
+                    PositionElement(indexJ, indexI, eventData.pointerDrag.gameObject);
                 }
-                
+
             }
             else
             {
                 //Mandarlo de vuelta en la pos ini
                 eventData.pointerDrag.GetComponent<TrolleyDragAndDrop>().SendBackToIni();
             }
+        }
+    }
+
+    void PositionElement(int indexJ, int indexI, GameObject element)
+    {
+        Debug.Log("Indices: " + indexJ + ", "+ indexI);
+
+        if (indexI < 2)
+        {
+            
+            if (dndManager.trolley[indexJ, indexI + 1])
+            {
+                Debug.Log("El de abajo ocupado" + element.name);
+                //Con el nuevo padre
+                element.GetComponent<RectTransform>().position = columnDropFields[indexI].GetComponent<RectTransform>().position;
+                element.transform.parent = columnDropFields[indexI].transform;
+                //
+                dndManager.trolley[indexJ, indexI] = element.gameObject;
+                dndManager.evaluateColumn(indexJ);
+            }
+            else
+            {
+                PositionElement(indexJ, indexI + 1, element);
+            }
+        }
+        else
+        {
+            element.GetComponent<RectTransform>().position = columnDropFields[indexI].GetComponent<RectTransform>().position;
+            element.transform.parent = columnDropFields[indexI].transform;
+            //
+            dndManager.trolley[indexJ, indexI] = element.gameObject;
+            dndManager.evaluateColumn(indexJ);
+            //element.GetComponent<TrolleyDragAndDrop>().SendBackToIni();
+        }
+    }
+
+    public void RelocateColumnElements(int indexI)
+    {
+        if (indexI > 0)
+        {
+            Debug.Log("Quizas Colocando uno");
+            //Ver si en la posicion superior a este hay un elemtno
+            if (dndManager.trolley[indexJ, indexI - 1])
+            {
+                Debug.Log("Colocando uno");
+                //Si lo hay, colocarlo en la actual
+                dndManager.trolley[indexJ, indexI - 1] = null;
+                dndManager.trolley[indexJ, indexI] = null;
+                dndManager.trolley[indexJ, indexI] = columnDropFields[indexI-1].transform.GetChild(0).gameObject;
+                //Debug.Log("Colocando :" + columnDropFields[indexI].transform.GetChild(0).gameObject.GetComponent<Food>().foodName + " en " + indexI);
+
+                columnDropFields[indexI - 1].transform.GetChild(0).GetComponent<RectTransform>().position = columnDropFields[indexI].GetComponent<RectTransform>().position;
+                columnDropFields[indexI - 1].transform.GetChild(0).parent = columnDropFields[indexI].transform;
+                
+                //Y llamar a recursividad con la pos de arriba
+                RelocateColumnElements(indexI-1);
+            }
+            else
+            {
+                //Si no lo hay, acabar
+                dndManager.evaluateColumn(indexJ);
+            }
+        }
+        else
+        {
+            dndManager.evaluateColumn(indexJ);
         }
     }
 
