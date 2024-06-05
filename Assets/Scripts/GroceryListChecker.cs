@@ -14,6 +14,8 @@ public class GroceryListChecker : MonoBehaviour
     [SerializeField] private GameObject parentList;
     [SerializeField] private Canvas canvas;
 
+    [SerializeField] Sprite bakeryIcons, fruitsIcons, legumesIcons, fridgeIcons, fishIcons, perfumeryIcons;
+
     //List of pending to classify item
     List<string> pendings = new List<string>();
     List<Food> foodPendings = new List<Food>();
@@ -227,6 +229,29 @@ public class GroceryListChecker : MonoBehaviour
             g.transform.SetSiblingIndex(rand);
             g.GetComponentInChildren<TMP_Text>().text = foodPendings[i].GetComponent<Food>().foodName;
             g.GetComponent<Food>().category = foodPendings[i].category;
+            switch (g.GetComponent<Food>().category)
+            {
+                case Food.Category.bakery:
+                    g.transform.Find("Icons").GetComponent<Image>().sprite = bakeryIcons;
+                    break;
+                case Food.Category.fruit:
+                    g.transform.Find("Icons").GetComponent<Image>().sprite = fruitsIcons;
+                    break;
+                case Food.Category.legume:
+                    g.transform.Find("Icons").GetComponent<Image>().sprite = legumesIcons;
+                    break;
+                case Food.Category.fridge:
+                    g.transform.Find("Icons").GetComponent<Image>().sprite = fridgeIcons;
+                    break;
+                case Food.Category.fish:
+                    g.transform.Find("Icons").GetComponent<Image>().sprite = fishIcons;
+                    break;
+                case Food.Category.perfumery:
+                    g.transform.Find("Icons").GetComponent<Image>().sprite = perfumeryIcons;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
