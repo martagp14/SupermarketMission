@@ -131,8 +131,88 @@ public class SectionGenerator : MonoBehaviour
     //    Debug.Log("Lista GM: " + GameManager.GetInstance().bakeryList.Count);
     //}
 
+    //public void CheckSelection()
+    //{
+    //    int correct = 0, wrong = 0;
+    //    //Recorrer todos los toogles
+    //    Debug.Log(toggles.Length);
+    //    foreach (Toggle t in toggles)
+    //    {
+    //        Debug.Log(listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName));
+
+    //        //Si esta selccionado, comprobar si esta enla lista
+    //        if (t.isOn)
+    //        {
+    //            //Si esta en la lista, esta bine
+    //            if (listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName))
+    //            {
+    //                correct++;
+    //                Debug.Log("Encendido y bien");
+    //                switch (GameManager.GetInstance().actualSection)
+    //                {
+    //                    case Food.Category.bakery:
+    //                        int index = GameManager.GetInstance().bakeryFoodList.FindIndex(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName);
+    //                        GameManager.GetInstance().bakeryFoodList[index].alreadyTaken = true;
+    //                        break;
+    //                    case Food.Category.fruit:
+    //                        index = GameManager.GetInstance().fruitFoodList.FindIndex(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName);
+    //                        GameManager.GetInstance().fruitFoodList[index].alreadyTaken = true;
+    //                        break;
+    //                    case Food.Category.legume:
+    //                        index = GameManager.GetInstance().legumeFoodList.FindIndex(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName);
+    //                        GameManager.GetInstance().legumeFoodList[index].alreadyTaken = true;
+    //                        break;
+    //                    case Food.Category.fridge:
+    //                        index = GameManager.GetInstance().fridgeFoodList.FindIndex(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName);
+    //                        GameManager.GetInstance().fridgeFoodList[index].alreadyTaken = true;
+    //                        break;
+    //                    case Food.Category.fish:
+    //                        index = GameManager.GetInstance().fishFoodList.FindIndex(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName);
+    //                        GameManager.GetInstance().fishFoodList[index].alreadyTaken = true;
+    //                        break;
+    //                    case Food.Category.perfumery:
+    //                        index = GameManager.GetInstance().perfumeryFoodList.FindIndex(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName);
+    //                        GameManager.GetInstance().perfumeryFoodList[index].alreadyTaken = true;
+    //                        break;
+    //                    default:
+    //                        break;
+    //                }
+    //            }
+    //            else
+    //            {
+    //                //Si no esta mal
+    //                wrong++;
+    //                Debug.Log("Encendido pero mal");
+    //            }
+
+    //        }
+    //        else
+    //        {
+    //            //Si esta en la lista, esta mal
+    //            if (listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName))
+    //            {
+    //                wrong++;
+    //                Debug.Log("Apagado pero mal");
+    //            }
+    //            else
+    //            {
+    //                //Sino esta bien
+    //                correct++;
+    //                Debug.Log("Apagado y bien");
+    //            }
+
+    //        }
+    //    }
+    //    //Debug de cuantos estan bien y cuantos estan mal
+    //    Debug.Log("Bien: " + correct + ", Mal: " + wrong);
+
+    //    if (correct == toggles.Length)
+    //        lvlLoader.LoadNextLevel("TrolleyScene 1");
+    //}
+
     public void CheckSelection()
     {
+        //SIN RESTRINGIR QUE SE HAYAN COGIDO BIEN
         int correct = 0, wrong = 0;
         //Recorrer todos los toogles
         Debug.Log(toggles.Length);
@@ -143,6 +223,9 @@ public class SectionGenerator : MonoBehaviour
             //Si esta selccionado, comprobar si esta enla lista
             if (t.isOn)
             {
+                //Se añade como elemento cogido
+                GameManager.GetInstance().pickedItems.Add(t.GetComponent<Food>());
+
                 //Si esta en la lista, esta bine
                 if (listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName))
                 {
@@ -177,6 +260,7 @@ public class SectionGenerator : MonoBehaviour
                         default:
                             break;
                     }
+
                 }
                 else
                 {
@@ -206,7 +290,7 @@ public class SectionGenerator : MonoBehaviour
         //Debug de cuantos estan bien y cuantos estan mal
         Debug.Log("Bien: " + correct + ", Mal: " + wrong);
 
-        if (correct == toggles.Length)
+        //if (correct == toggles.Length)
             lvlLoader.LoadNextLevel("TrolleyScene 1");
     }
 
