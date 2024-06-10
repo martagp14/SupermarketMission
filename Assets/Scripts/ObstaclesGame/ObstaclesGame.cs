@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class ObstaclesGame : MonoBehaviour
 {
     [SerializeField] private GameObject obstacle;
+    [SerializeField] private GameObject sideObstacle;
     [SerializeField] private GameObject stand;
     [SerializeField] private GameObject GameOverPanel;
 
     private Vector3[] spawnPoints = { new Vector3(-4.5f, 1.883278f, 58.4000015f), new Vector3(0f, 1.883278f, 58.4000015f), new Vector3(4.5f, 1.883278f, 58.4000015f) };
-    private Vector3[] standSpawnPoints = { new Vector3(-11.5100002f, 2.99039865f, 63.8699989f), new Vector3(11.7370729f, 2.99039841f, 63.8699989f) };
+    private Vector3[] standSpawnPoints = { new Vector3(11.0100002f, 3.72000003f, 63.7299995f), new Vector3(-10.79f, 3.72000003f, 63.7299995f) };
+    //private Vector3[] standSpawnPoints = { new Vector3(-11.5100002f, 2.99039865f, 63.8699989f), new Vector3(11.7370729f, 2.99039841f, 63.8699989f) };
 
     private int playerLifes;
     private bool isGameOver;
@@ -46,8 +48,25 @@ public class ObstaclesGame : MonoBehaviour
         {
             var index = Random.Range(0, 3);
             yield return new WaitForSeconds(1f);
-            var obs = Instantiate(obstacle);
-            obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
+            if(index != 1)
+            {
+                var rand = Random.Range(0, 2);
+                if(rand == 0)
+                {
+                    var obs = Instantiate(sideObstacle);
+                    obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
+                }
+                else
+                {
+                    var obs = Instantiate(obstacle);
+                    obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
+                }
+            }
+            else
+            {
+                var obs = Instantiate(obstacle);
+                obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
+            }
         }
         isGameOver = true;
         GameOver();
@@ -60,9 +79,9 @@ public class ObstaclesGame : MonoBehaviour
             yield return new WaitForSeconds(1.2f);
             var obs = Instantiate(stand);
             var obs2 = Instantiate(stand);
-            obs.gameObject.transform.SetPositionAndRotation(standSpawnPoints[0], new Quaternion(-0.707106769f, 0, 0, 0.707106829f));
-            obs2.gameObject.transform.SetPositionAndRotation(standSpawnPoints[1], new Quaternion(-0.707106769f, 0, 0, 0.707106829f));
-
+            obs.gameObject.transform.SetPositionAndRotation(standSpawnPoints[0], new Quaternion(-0.707106829f, 0f, 0f, 0.707106709f));
+            obs2.gameObject.transform.SetPositionAndRotation(standSpawnPoints[1], new Quaternion(0f, 0.70723021f, 0.706983387f, 0f));
+            obs2.GetComponent<ObstacleMovement>().speed *= -1;
         }
     }
 
