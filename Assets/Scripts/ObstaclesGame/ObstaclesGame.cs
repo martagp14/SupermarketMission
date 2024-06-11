@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ObstaclesGame : MonoBehaviour
 {
-    [SerializeField] private GameObject obstacle;
+    [SerializeField] private GameObject[] obstacle;
     [SerializeField] private GameObject sideObstacle;
     [SerializeField] private GameObject stand;
     [SerializeField] private GameObject GameOverPanel;
@@ -48,23 +48,24 @@ public class ObstaclesGame : MonoBehaviour
         {
             var index = Random.Range(0, 3);
             yield return new WaitForSeconds(1f);
-            if(index != 1)
+            if (index != 1)
             {
-                var rand = Random.Range(0, 2);
-                if(rand == 0)
+                var rand = Random.Range(0, obstacle.Length + 1);
+                if (rand == obstacle.Length)
                 {
                     var obs = Instantiate(sideObstacle);
                     obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
                 }
                 else
                 {
-                    var obs = Instantiate(obstacle);
+                    var obs = Instantiate(obstacle[rand]);
                     obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
                 }
             }
             else
             {
-                var obs = Instantiate(obstacle);
+                var rand = Random.Range(0, obstacle.Length);
+                var obs = Instantiate(obstacle[rand]);
                 obs.gameObject.transform.SetPositionAndRotation(spawnPoints[index], new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
             }
         }

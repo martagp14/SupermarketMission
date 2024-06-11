@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class SectionGenerator : MonoBehaviour
 {
     [SerializeField] private LevelLoader lvlLoader;
+    [SerializeField] SectionFigureMiniGame minigameFigures;
 
     [SerializeField] private GameObject sectionPanel;
     [SerializeField] private GameObject foodElement;
@@ -25,9 +26,11 @@ public class SectionGenerator : MonoBehaviour
     void Start()
     {
         lvlLoader = FindObjectOfType<LevelLoader>();
+        minigameFigures = FindObjectOfType<SectionFigureMiniGame>();
         PopulateSection();
         toggles = FindObjectsOfType<Toggle>();
         groceryListCanvas.gameObject.SetActive(false);
+        minigameFigures.StartMiniGame();
     }
 
     void PopulateSection()
@@ -92,11 +95,12 @@ public class SectionGenerator : MonoBehaviour
         for (int i = 0; i < listElements.Count; i++)
         {
             //VIGILAR SI ESTA BIEN CON NAME O TIENE QUE SER FOOD NAME
-            int index = allSectionFoods.FindIndex(s => s.name == listElements[i].GetComponent<Food>().name);
+            int index = allSectionFoods.FindIndex(s => s.foodName == listElements[i].GetComponent<Food>().foodName);
             //int index = foodSprites.FindIndex(s => s.name == elements[i].ToString());
             //TO DO
             GameObject element = Instantiate(foodElement);
             element.transform.parent = sectionPanel.transform;
+            Debug.Log(index);
             Sprite s = allSectionFoods[index].sprite;
             element.transform.Find("Background").GetComponent<Image>().sprite = s;
             element.transform.Find("Background").Find("Checkmark").GetComponent<Image>().sprite = s;
@@ -116,7 +120,7 @@ public class SectionGenerator : MonoBehaviour
             element.transform.Find("Background").Find("Checkmark").GetComponent<Image>().sprite = s;
             element.GetComponent<Food>().CopyFood(allSectionFoods[rand].GetComponent<Food>());
             allSectionFoods.RemoveAt(rand);
-            Debug.Log("randFoodIndex: " + rand + "-- count food remaining " + allSectionFoods.Count);
+            //Debug.Log("randFoodIndex: " + rand + "-- count food remaining " + allSectionFoods.Count);
         }
         // Dar una posicion aleatoria entre los hijos a los elemtos iniciales
         for (int i = 0; i < listElements.Count; i++)
@@ -215,10 +219,10 @@ public class SectionGenerator : MonoBehaviour
         //SIN RESTRINGIR QUE SE HAYAN COGIDO BIEN
         int correct = 0, wrong = 0;
         //Recorrer todos los toogles
-        Debug.Log(toggles.Length);
+        //Debug.Log(toggles.Length);
         foreach (Toggle t in toggles)
         {
-            Debug.Log(listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName));
+            //Debug.Log(listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName));
 
             //Si esta selccionado, comprobar si esta enla lista
             if (t.isOn)
@@ -230,7 +234,7 @@ public class SectionGenerator : MonoBehaviour
                 if (listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName))
                 {
                     correct++;
-                    Debug.Log("Encendido y bien");
+                    //Debug.Log("Encendido y bien");
                     switch (GameManager.GetInstance().actualSection)
                     {
                         case Food.Category.bakery:
@@ -266,7 +270,7 @@ public class SectionGenerator : MonoBehaviour
                 {
                     //Si no esta mal
                     wrong++;
-                    Debug.Log("Encendido pero mal");
+                    //Debug.Log("Encendido pero mal");
                 }
 
             }
@@ -276,13 +280,13 @@ public class SectionGenerator : MonoBehaviour
                 if (listElements.Exists(s => s.GetComponent<Food>().foodName == t.GetComponent<Food>().foodName))
                 {
                     wrong++;
-                    Debug.Log("Apagado pero mal");
+                    //Debug.Log("Apagado pero mal");
                 }
                 else
                 {
                     //Sino esta bien
                     correct++;
-                    Debug.Log("Apagado y bien");
+                    //Debug.Log("Apagado y bien");
                 }
 
             }

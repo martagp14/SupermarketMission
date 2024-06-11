@@ -51,7 +51,9 @@ MonoBehaviour:
   actualSection: 0
   sectionDistribution: 000000000000000000000000000000000000000000000000
   bakeryFoodList: []
-  fruitFoodList: []
+  fruitFoodList:
+  - {fileID: 4359427896799794157, guid: 53bea48baac72d54ba1d98d6df0bae6d, type: 3}
+  - {fileID: 4359427896799794157, guid: bcceefdb09abf574ca7bed9d78c7438e, type: 3}
   legumeFoodList: []
   fridgeFoodList: []
   fishFoodList: []
