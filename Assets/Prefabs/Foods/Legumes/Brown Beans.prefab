@@ -52,5 +52,5 @@ MonoBehaviour:
   width: 1
   weight: 1
   hardness: 2
-  sprite: {fileID: 21300000, guid: 0f159cfe66969664497fafcfb66190a4, type: 3}
+  sprite: {fileID: 21300000, guid: 1bfd084f404790f488b66a6e1ce0880c, type: 3}
   alreadyTaken: 0

@@ -449,12 +449,12 @@ MonoBehaviour:
   foodResourcesPrefab: {fileID: 1338596650235749774, guid: 735907f06c0e09a458799466401f043f, type: 3}
   backgroungSection: {fileID: 854039065}
   backgrounds:
-  - {fileID: 21300000, guid: d56779135bb57474a97640ebf06f17d9, type: 3}
-  - {fileID: 21300000, guid: f4285e409e834ac4683b79972e093b30, type: 3}
-  - {fileID: 21300000, guid: 461afabbbda818343967256e3f17cbc5, type: 3}
-  - {fileID: 21300000, guid: 55b45a5e35314b344aa10a0c5d0b58f5, type: 3}
-  - {fileID: 21300000, guid: 152a7666266d2c849b9fe1150b12d3a4, type: 3}
-  - {fileID: 21300000, guid: 24e96191af748dd4cb3f822c2014dfe1, type: 3}
+  - {fileID: 21300000, guid: a3b545d14acf36243b55b5d20b653506, type: 3}
+  - {fileID: 21300000, guid: d14654afa854c32459df27cbd99be50a, type: 3}
+  - {fileID: 21300000, guid: 5a10ce4afbea8a44ea69e9c7d0495657, type: 3}
+  - {fileID: 21300000, guid: a2247ab3bb0ed394b984bb5cfd701aa1, type: 3}
+  - {fileID: 21300000, guid: b03d6d674923d45478e675c6f049c772, type: 3}
+  - {fileID: 21300000, guid: 015658fa3e4538b48ade88a7e46918d0, type: 3}
   listElements: []
   groceryListCanvas: {fileID: 365640804}
 --- !u!114 &327816870 stripped
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8cd403a7df620da4b97cf6e762108ffd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d14654afa854c32459df27cbd99be50a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

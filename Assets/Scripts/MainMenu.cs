@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickPlay()
     {
-        GameManager.GetInstance().GoToScene("StartingCinematic");
+        GameManager.GetInstance().GoToScene("NameScene");
     }
 
     public void OnClickScoreboard()
