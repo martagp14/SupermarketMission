@@ -21,106 +21,75 @@ public class GroceryListDisplay : MonoBehaviour
 
     void DisplayGroceyList()
     {
-        //Coger lista del GM
-        List<Food> foodList = GameManager.GetInstance().bakeryFoodList;
-        //Por cada lista, ir creando los eleemntos de la lista
-        for (int i=0; i< foodList.Count; i++)
-        {
-            GameObject g = Instantiate(prefabFoodItemList);
-            //Poner como padre la lista correspondiente
-            g.transform.SetParent(bakeryScroll.transform);
-            g.transform.localScale = new Vector3(1f, 1f, 1f);
-            //Comprobar si el elemento ya ha sido cogido para tachar el texto
-            g.GetComponentInChildren<TMP_Text>().text = foodList[i].foodName;
-            if(foodList[i].alreadyTaken)
-                g.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Strikethrough;
-            //Quitar drag and drop script
-            g.GetComponent<DragAndDropGroceryList>().enabled = false;
-        }
+        this.FillSectionList(GameManager.GetInstance().bakeryFoodList, bakeryScroll);
+        this.FillSectionList(GameManager.GetInstance().fruitFoodList, fruitsScroll);
+        this.FillSectionList(GameManager.GetInstance().legumeFoodList, legumesScroll);
+        this.FillSectionList(GameManager.GetInstance().fridgeFoodList, fridgeScroll);
+        this.FillSectionList(GameManager.GetInstance().fishFoodList, fishScroll);
+        this.FillSectionList(GameManager.GetInstance().perfumeryFoodList, perfumeryScroll);
+    }
 
-        //Coger lista del GM
-        foodList = GameManager.GetInstance().fruitFoodList;
+    void FillSectionList(List<Food> foodList, GameObject sectionScroll)
+    {
         //Por cada lista, ir creando los eleemntos de la lista
         for (int i = 0; i < foodList.Count; i++)
         {
             GameObject g = Instantiate(prefabFoodItemList);
             //Poner como padre la lista correspondiente
-            g.transform.SetParent(fruitsScroll.transform);
+            g.transform.SetParent(sectionScroll.transform);
             g.transform.localScale = new Vector3(1f, 1f, 1f);
             //Comprobar si el elemento ya ha sido cogido para tachar el texto
             g.GetComponentInChildren<TMP_Text>().text = foodList[i].foodName;
-            if (foodList[i].alreadyTaken) 
+            if (foodList[i].alreadyTaken)
                 g.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Strikethrough;
             //Quitar drag and drop script
             g.GetComponent<DragAndDropGroceryList>().enabled = false;
         }
+    }
 
-        //Coger lista del GM
-        foodList = GameManager.GetInstance().legumeFoodList;
-        //Por cada lista, ir creando los eleemntos de la lista
-        for (int i = 0; i < foodList.Count; i++)
+    void DeleteChildsScrollSection(GameObject sectionScroll)
+    {
+        int childCount = sectionScroll.transform.childCount;
+        for (int i=0; i<childCount; i++)
         {
-            GameObject g = Instantiate(prefabFoodItemList);
-            //Poner como padre la lista correspondiente
-            g.transform.SetParent(legumesScroll.transform);
-            g.transform.localScale = new Vector3(1f, 1f, 1f);
-            //Comprobar si el elemento ya ha sido cogido para tachar el texto
-            g.GetComponentInChildren<TMP_Text>().text = foodList[i].foodName;
-            if (foodList[i].alreadyTaken) 
-                g.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Strikethrough;
-            //Quitar drag and drop script
-            g.GetComponent<DragAndDropGroceryList>().enabled = false;
+            Debug.Log("Estoy borradno "+ sectionScroll.transform.GetChild(0).gameObject);
+            GameObject go = sectionScroll.transform.GetChild(0).gameObject;
+            go.transform.parent = null;
+            Destroy(go);
         }
+    }
 
-        //Coger lista del GM
-        foodList = GameManager.GetInstance().fridgeFoodList;
-        //Por cada lista, ir creando los eleemntos de la lista
-        for (int i = 0; i < foodList.Count; i++)
+    public void RefreshSection()
+    {
+        switch (GameManager.GetInstance().actualSection)
         {
-            GameObject g = Instantiate(prefabFoodItemList);
-            //Poner como padre la lista correspondiente
-            g.transform.SetParent(fridgeScroll.transform);
-            g.transform.localScale = new Vector3(1f, 1f, 1f);
-            //Comprobar si el elemento ya ha sido cogido para tachar el texto
-            g.GetComponentInChildren<TMP_Text>().text = foodList[i].foodName;
-            if (foodList[i].alreadyTaken) 
-                g.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Strikethrough;
-            //Quitar drag and drop script
-            g.GetComponent<DragAndDropGroceryList>().enabled = false;
-        }
-
-        //Coger lista del GM
-        foodList = GameManager.GetInstance().fishFoodList;
-        //Por cada lista, ir creando los eleemntos de la lista
-        for (int i = 0; i < foodList.Count; i++)
-        {
-            GameObject g = Instantiate(prefabFoodItemList);
-            //Poner como padre la lista correspondiente
-            g.transform.SetParent(fishScroll.transform);
-            g.transform.localScale = new Vector3(1f, 1f, 1f);
-            //Comprobar si el elemento ya ha sido cogido para tachar el texto
-            g.GetComponentInChildren<TMP_Text>().text = foodList[i].foodName;
-            if (foodList[i].alreadyTaken) 
-                g.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Strikethrough;
-            //Quitar drag and drop script
-            g.GetComponent<DragAndDropGroceryList>().enabled = false;
-        }
-
-        //Coger lista del GM
-        foodList = GameManager.GetInstance().perfumeryFoodList;
-        //Por cada lista, ir creando los eleemntos de la lista
-        for (int i = 0; i < foodList.Count; i++)
-        {
-            GameObject g = Instantiate(prefabFoodItemList);
-            //Poner como padre la lista correspondiente
-            g.transform.SetParent(perfumeryScroll.transform);
-            g.transform.localScale = new Vector3(1f, 1f, 1f);
-            //Comprobar si el elemento ya ha sido cogido para tachar el texto
-            g.GetComponentInChildren<TMP_Text>().text = foodList[i].foodName;
-            if (foodList[i].alreadyTaken) 
-                g.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Strikethrough;
-            //Quitar drag and drop script
-            g.GetComponent<DragAndDropGroceryList>().enabled = false;
+            case Food.Category.bakery:
+                this.DeleteChildsScrollSection(bakeryScroll);
+                this.FillSectionList(GameManager.GetInstance().bakeryFoodList, bakeryScroll);
+                break;
+            case Food.Category.fruit:
+                this.DeleteChildsScrollSection(fruitsScroll);
+                this.FillSectionList(GameManager.GetInstance().fruitFoodList, fruitsScroll);
+                break;
+            case Food.Category.legume:
+                this.DeleteChildsScrollSection(legumesScroll);
+                this.FillSectionList(GameManager.GetInstance().legumeFoodList, legumesScroll);
+                break;
+            case Food.Category.fridge:
+                this.DeleteChildsScrollSection(fridgeScroll);
+                this.FillSectionList(GameManager.GetInstance().fridgeFoodList, fridgeScroll);
+                break;
+            case Food.Category.fish:
+                this.DeleteChildsScrollSection(fishScroll);
+                this.FillSectionList(GameManager.GetInstance().fishFoodList, fishScroll);
+                break;
+            case Food.Category.perfumery:
+                this.DeleteChildsScrollSection(perfumeryScroll);
+                this.FillSectionList(GameManager.GetInstance().perfumeryFoodList, perfumeryScroll);
+                break;
+            default:
+                
+                break;
         }
     }
 }

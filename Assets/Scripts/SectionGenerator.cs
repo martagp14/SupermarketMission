@@ -301,5 +301,6 @@ public class SectionGenerator : MonoBehaviour
     public void OnClickGroceryList()
     {
         groceryListCanvas.gameObject.SetActive(!groceryListCanvas.gameObject.activeSelf);
+        groceryListCanvas.gameObject.GetComponent<GroceryListDisplay>().RefreshSection();
     }
 }
