@@ -12,7 +12,7 @@ public class ObstacleMovement : MonoBehaviour
     void FixedUpdate()
     {
         if(!stop)
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
+            transform.Translate(Vector3.forward * Time.deltaTime * speed * -1, Space.World);
     }
 
     public void SetStop(bool value)
