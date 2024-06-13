@@ -28,11 +28,24 @@ public class Food : MonoBehaviour
         heavy
     };
 
+    public enum colors
+    {
+        red,
+        blue,
+        green,
+        brown,
+        white,
+        black,
+        purple,
+        orange,
+        yellow
+    }
+
     //Food properties
     [SerializeField]
     public string foodName;// { get; private set; }
     [SerializeField]
-    public string color; // { get; private set; }
+    public colors[] color; // { get; private set; }
     [SerializeField]
     public int price; // { get; private set; }
     [SerializeField]
@@ -58,7 +71,7 @@ public class Food : MonoBehaviour
     public Food()
     {
         this.foodName = "";
-        this.color = "";
+        this.color = new colors[1];
         this.price = 0;
         this.category = Category.fruit;
         this.height = 1;
@@ -68,7 +81,7 @@ public class Food : MonoBehaviour
         this.alreadyTaken = false;
     }
 
-    public Food(string foodName, string color, int price, Category category, int height, int width, weightLevel weight, hardnessLevel hardnesslevel)
+    public Food(string foodName, colors[] color, int price, Category category, int height, int width, weightLevel weight, hardnessLevel hardnesslevel)
     {
         this.foodName = foodName;
         this.color = color;

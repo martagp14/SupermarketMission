@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Coco
-  color: Brown
+  color: 03000000
   price: 4
   category: 0
   height: 1

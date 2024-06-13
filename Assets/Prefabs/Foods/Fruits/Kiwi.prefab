@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Kiwi
-  color: Green
+  color: 0300000002000000
   price: 1
   category: 0
   height: 1

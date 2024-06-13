@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Barra de Pan Integral
-  color: Marron
+  color: 
   price: 3
   category: 1
   height: 1

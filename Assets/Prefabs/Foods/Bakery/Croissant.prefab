@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Croissant
-  color: Marron
+  color: 
   price: 2
   category: 1
   height: 1

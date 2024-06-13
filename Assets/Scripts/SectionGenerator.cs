@@ -9,6 +9,7 @@ public class SectionGenerator : MonoBehaviour
 {
     [SerializeField] private LevelLoader lvlLoader;
     [SerializeField] SectionFigureMiniGame minigameFigures;
+    [SerializeField] SectionColorsMiniGame minigameColors;
 
     [SerializeField] private GameObject sectionPanel;
     [SerializeField] private GameObject foodElement;
@@ -27,10 +28,25 @@ public class SectionGenerator : MonoBehaviour
     {
         lvlLoader = FindObjectOfType<LevelLoader>();
         minigameFigures = FindObjectOfType<SectionFigureMiniGame>();
+        minigameColors = FindObjectOfType<SectionColorsMiniGame>();
         PopulateSection();
         toggles = FindObjectsOfType<Toggle>();
         groceryListCanvas.gameObject.SetActive(false);
-        minigameFigures.StartMiniGame();
+        ChooseMiniGame();
+    }
+
+    void ChooseMiniGame()
+    {
+        if(GameManager.GetInstance().actualSection == Food.Category.fruit)
+        {
+            minigameColors.StartMiniGame();
+            minigameFigures.gameObject.SetActive(false);
+        }
+        else
+        {
+            minigameFigures.StartMiniGame();
+            minigameColors.gameObject.SetActive(false);
+        }
     }
 
     void PopulateSection()

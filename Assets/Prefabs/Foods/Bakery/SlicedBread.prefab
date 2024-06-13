@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Pan de Molde
-  color: Blanco
+  color: 
   price: 3
   category: 1
   height: 1

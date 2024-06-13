@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Mango
-  color: Orange
+  color: 0800000007000000
   price: 3
   category: 0
   height: 1

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: Tarta
-  color: Blue
+  color: 
   price: 10
   category: 1
   height: 1

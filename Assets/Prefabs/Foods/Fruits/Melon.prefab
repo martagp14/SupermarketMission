@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodName: "Mel\xF3n"
-  color: Green
+  color: 0200000004000000
   price: 3
   category: 0
   height: 1
