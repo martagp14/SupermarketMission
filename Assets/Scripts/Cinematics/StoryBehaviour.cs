@@ -119,7 +119,7 @@ public class StoryBehaviour : MonoBehaviour
                 lines[1] = "Aquí estás. Pues verás, tengo una misión para ti.";
                 lines[2] = "Tu padre iba ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
                 lines[3] = "¿Crees que podrías conseguirlos todos por tu cuenta, agente " + GameManager.GetInstance().playerInitial + "? ";
-                lines[4] = "¿Si? Te veo decidido. Pues aquí tienes la lista. Prepárate para la misión.";
+                lines[4] = "¿Si? Veo la decisión en tus ojos. Pues aquí tienes la lista. Prepárate para la misión.";
                 break;
             case "FinalCinematic":
                 numLines = 6;

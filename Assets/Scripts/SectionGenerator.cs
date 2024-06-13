@@ -37,7 +37,7 @@ public class SectionGenerator : MonoBehaviour
 
     void ChooseMiniGame()
     {
-        if(GameManager.GetInstance().actualSection == Food.Category.fruit)
+        if(GameManager.GetInstance().actualSection == Food.Category.fruit && !GameManager.GetInstance().daltonicUser)
         {
             minigameColors.StartMiniGame();
             minigameFigures.gameObject.SetActive(false);

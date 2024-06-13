@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public string playerInitial;
     public int playerAge;
     public string playerGender;
+    public bool daltonicUser = false;
 
     public Food.Category actualSection;
     public Food.Category[] sectionDistribution = new Food.Category[6];
