@@ -9,6 +9,7 @@ public class ObstaclesGame : MonoBehaviour
     [SerializeField] private GameObject sideObstacle;
     [SerializeField] private GameObject stand;
     [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private GameObject CongratsPanel;
 
     private Vector3[] spawnPoints = { new Vector3(-4.5f, 0, 63.2000008f), new Vector3(0, 0, 63.2000008f), new Vector3(4.5f, 0, 63.2000008f) };
     private Vector3[] standSpawnPoints = { new Vector3(11.0100002f, 3.72000003f, 63.7299995f), new Vector3(-10.79f, 3.72000003f, 63.7299995f) };
@@ -28,6 +29,7 @@ public class ObstaclesGame : MonoBehaviour
     void Start()
     {
         this.GameOverPanel.SetActive(false);
+        this.CongratsPanel.SetActive(false);
         introLoader = FindObjectOfType<LevelLoader>();
 
         numObstacles = 0;
@@ -91,11 +93,14 @@ public class ObstaclesGame : MonoBehaviour
         while (!isGameOver && numObstacles < 50)
         {
             yield return new WaitForSeconds(1.2f);
-            var obs = Instantiate(stand);
-            var obs2 = Instantiate(stand);
-            obs.gameObject.transform.SetPositionAndRotation(standSpawnPoints[0], new Quaternion(0, 0, 0, 1f));
-            obs2.gameObject.transform.SetPositionAndRotation(standSpawnPoints[1], new Quaternion(0, 1f, 0, 0));
-            //obs2.GetComponent<ObstacleMovement>().speed *= -1;
+            if ((!isGameOver && numObstacles < 50))
+            {
+                var obs = Instantiate(stand);
+                var obs2 = Instantiate(stand);
+                obs.gameObject.transform.SetPositionAndRotation(standSpawnPoints[0], new Quaternion(0, 0, 0, 1f));
+                obs2.gameObject.transform.SetPositionAndRotation(standSpawnPoints[1], new Quaternion(0, 1f, 0, 0));
+                //obs2.GetComponent<ObstacleMovement>().speed *= -1;
+            }
         }
     }
 
@@ -130,7 +135,10 @@ public class ObstaclesGame : MonoBehaviour
         this.isGameOver = true;
         //Pausar carrito y obstaculos
         //Mostrar canvas de GameOver para pasar a la siguiente escena
-        this.GameOverPanel.SetActive(true);
+        if (playerLifes > 0)
+            this.CongratsPanel.SetActive(true);
+        else
+            this.GameOverPanel.SetActive(true);
     }
 
     public void OnClickedContinue()

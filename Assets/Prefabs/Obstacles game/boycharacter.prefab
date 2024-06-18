@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: boycharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cebf6d2881f236a4590e100411c8b6bf, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 6164996480583612547, guid: cebf6d2881f236a4590e100411c8b6bf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
