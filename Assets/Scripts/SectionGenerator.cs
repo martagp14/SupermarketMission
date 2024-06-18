@@ -49,7 +49,7 @@ public class SectionGenerator : MonoBehaviour
         }
     }
 
-    void PopulateSection()
+    void PopulateSectionWithoutRepetition()
     {
         GameObject foodResources = Instantiate(foodResourcesPrefab);
         //Get actual section del GM
@@ -145,6 +145,105 @@ public class SectionGenerator : MonoBehaviour
             toBuyElements[i].transform.SetSiblingIndex(rand);
         }
     }
+
+    void PopulateSection()
+    {
+        GameObject foodResources = Instantiate(foodResourcesPrefab);
+        //Get actual section del GM
+        //Get lista de alimentos de la seccion
+        //List<String> elements = new List<String>();
+        List<Food> allSectionFoods = new List<Food>();
+        //List<Sprite> foodSprites = new List<Sprite>();
+        Debug.Log("Creamdo seccion de " + GameManager.GetInstance().actualSection);
+
+        switch (GameManager.GetInstance().actualSection)
+        //switch (Food.Category.bakery)
+        {
+            case Food.Category.bakery:
+                backgroungSection.sprite = backgrounds[0];
+                listElements.AddRange(GameManager.GetInstance().bakeryFoodList);
+                allSectionFoods.AddRange(foodResources.GetComponent<FoodResourcesManager>().bakeryFoods);
+                //foodSprites.AddRange(foodResources.GetComponent<FoodResourcesManager>().bakery);
+                break;
+            case Food.Category.fruit:
+                backgroungSection.sprite = backgrounds[1];
+                listElements = GameManager.GetInstance().fruitFoodList;
+                allSectionFoods = foodResources.GetComponent<FoodResourcesManager>().fruitsFoods;
+                break;
+            case Food.Category.legume:
+                backgroungSection.sprite = backgrounds[2];
+                listElements = GameManager.GetInstance().legumeFoodList;
+                allSectionFoods = foodResources.GetComponent<FoodResourcesManager>().legumeFoods;
+                break;
+            case Food.Category.fridge:
+                backgroungSection.sprite = backgrounds[3];
+                listElements = GameManager.GetInstance().fridgeFoodList;
+                allSectionFoods = foodResources.GetComponent<FoodResourcesManager>().fridgeFoods;
+                break;
+            case Food.Category.fish:
+                backgroungSection.sprite = backgrounds[4];
+                listElements = GameManager.GetInstance().fishFoodList;
+                allSectionFoods = foodResources.GetComponent<FoodResourcesManager>().fishFoods;
+                break;
+            case Food.Category.perfumery:
+                backgroungSection.sprite = backgrounds[5];
+                listElements = GameManager.GetInstance().perfumeryFoodList;
+                allSectionFoods = foodResources.GetComponent<FoodResourcesManager>().perfumeryFoods;
+                break;
+            default:
+                listElements = new List<Food>();
+                //foodSprites = new List<Sprite>();
+                allSectionFoods = new List<Food>();
+                break;
+        }
+
+        //NUmero aleatorio de elementos (entre 3 y size list)
+        var numElements = Random.Range(listElements.Count, Random.Range(listElements.Count + 1, 12));
+        //var numElements = Random.Range(listElements.Count, allSectionFoods.Count);
+        Debug.Log("numelements: " + numElements);
+        //Crear toggles
+        //Instanciar los elemntos de la lista de la compra y guardar su referencia
+        GameObject[] toBuyElements = new GameObject[listElements.Count];
+        Debug.Log("Num obligatorios: " + listElements.Count);
+        Debug.Log("Num sprites: " + allSectionFoods.Count);
+        for (int i = 0; i < listElements.Count; i++)
+        {
+            //VIGILAR SI ESTA BIEN CON NAME O TIENE QUE SER FOOD NAME
+            int index = allSectionFoods.FindIndex(s => s.foodName == listElements[i].GetComponent<Food>().foodName);
+            //int index = foodSprites.FindIndex(s => s.name == elements[i].ToString());
+            //TO DO
+            GameObject element = Instantiate(foodElement);
+            element.transform.parent = sectionPanel.transform;
+            Debug.Log(index);
+            Sprite s = allSectionFoods[index].sprite;
+            element.transform.Find("Background").GetComponent<Image>().sprite = s;
+            element.transform.Find("Background").Find("Checkmark").GetComponent<Image>().sprite = s;
+            element.GetComponent<Food>().CopyFood(listElements[i].GetComponent<Food>());
+            allSectionFoods.RemoveAt(index);
+            toBuyElements[i] = element;
+        }
+        //Instanciar elementos de relleno
+        for (int i = 0; i < numElements - listElements.Count; i++)
+        {
+            GameObject element = Instantiate(foodElement);
+            element.transform.parent = sectionPanel.transform;
+            //Asignar imagenes aleatorias de la seccion a los toogles
+            var rand = Random.Range(0, allSectionFoods.Count);
+            Sprite s = allSectionFoods[rand].sprite;
+            element.transform.Find("Background").GetComponent<Image>().sprite = s;
+            element.transform.Find("Background").Find("Checkmark").GetComponent<Image>().sprite = s;
+            element.GetComponent<Food>().CopyFood(allSectionFoods[rand].GetComponent<Food>());
+            //allSectionFoods.RemoveAt(rand);
+            //Debug.Log("randFoodIndex: " + rand + "-- count food remaining " + allSectionFoods.Count);
+        }
+        // Dar una posicion aleatoria entre los hijos a los elemtos iniciales
+        for (int i = 0; i < listElements.Count; i++)
+        {
+            var rand = Random.Range(0, numElements);
+            toBuyElements[i].transform.SetSiblingIndex(rand);
+        }
+    }
+
 
     //public void OnClickedCheckThings()
     //{

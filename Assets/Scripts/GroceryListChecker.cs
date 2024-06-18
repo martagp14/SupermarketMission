@@ -170,6 +170,12 @@ public class GroceryListChecker : MonoBehaviour
     void GenerateGroceryListV2()
     {
         FoodResourcesManager fm = Instantiate(prefabFoodManager).GetComponent<FoodResourcesManager>();
+        SetAsNotTakenFood(fm.bakeryFoods);
+        SetAsNotTakenFood(fm.fruitsFoods);
+        SetAsNotTakenFood(fm.legumeFoods);
+        SetAsNotTakenFood(fm.fridgeFoods);
+        SetAsNotTakenFood(fm.fishFoods);
+        SetAsNotTakenFood(fm.perfumeryFoods);
         List<Food> allFoods = fm.bakeryFoods;
         allFoods.AddRange(fm.fruitsFoods);
         allFoods.AddRange(fm.legumeFoods);
@@ -252,6 +258,13 @@ public class GroceryListChecker : MonoBehaviour
                 default:
                     break;
             }
+        }
+    }
+
+    void SetAsNotTakenFood(List<Food> list)
+    {
+        foreach (Food f in list){
+            f.alreadyTaken = false;
         }
     }
 }
