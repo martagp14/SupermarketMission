@@ -14,6 +14,17 @@ public class GameManager : MonoBehaviour
 
     public bool[] firstTimeScene = { true, true, true, true, true, true, true };
 
+    public float currentSpentTime = 0f;
+    public float groceryListSpentTime = 0f;
+    public float SupermarketMapSpentTime = 0f;
+    public float trolleySpentTime = 0f;
+    public float[] minigamesSpentTime = {0f,0f,0f,0f,0f,0f};
+
+    public int numWrongPickedItems = 0;
+    public int numElementsCorrectPositionTrolley = 0;
+    public int numElementsModeratePositionTrolley = 0;
+    public int numElementsWrongPositionTrolley = 0;
+
     public Food.Category actualSection;
     public Food.Category[] sectionDistribution = new Food.Category[6];
 
@@ -83,4 +94,5 @@ public class GameManager : MonoBehaviour
         playerAge = age;
         playerGender = gender;
     }
+
 }

@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class GroceryListChecker : MonoBehaviour
 {
     private LevelLoader levelLoader;
-    private ExplanationCanvas explanationCanvas;
+    [SerializeField] private ExplanationCanvas explanationCanvas;
+    [SerializeField] private Canvas notificationCanvas;
 
     [SerializeField] private GameObject prefabFoodManager;
     [SerializeField] private GameObject prefabFoodItemList;
@@ -28,10 +29,10 @@ public class GroceryListChecker : MonoBehaviour
     {
         levelLoader = FindObjectOfType<LevelLoader>();
         explanationCanvas = FindObjectOfType<ExplanationCanvas>();
-        explanationCanvas.SetText(0,"Para ser un buen agente, lo primero que hay que hacer es planificar la misión. " +
+        explanationCanvas.SetTextChecking(0,"Para ser un buen agente, lo primero que hay que hacer es planificar la misión. " +
                 "Así que vamos a clasificar los objetivos en las distintas secciones del supermercado donde podemos encontrarlos. \n" +
                 "¿Listo? ¡Pues vamos allá! Arrastra los elementos en cada sección.");
-
+        notificationCanvas.gameObject.SetActive(false);
         this.GenerateGroceryListV2();
         dropFields = FindObjectsOfType<DropFieldGroceryList>();
     }
@@ -77,12 +78,14 @@ public class GroceryListChecker : MonoBehaviour
         //Check if correct
         if (checkClassification())
         {
+            EventManager.OnSaveTimer();
             levelLoader.LoadNextLevel("SupermarketMap");
         }
         else
         {
-            //Por alguna razon cuando hay algo que esta mal colocado, y se coloca bien, sigue diciendo que esta mal
             Debug.Log("Hay algo mal");
+            notificationCanvas.gameObject.SetActive(true);
+            notificationCanvas.GetComponentInChildren<TMP_Text>().text = "Hay algo mal clasificado o te faltan elementos por clasificar";
         }
     }
 

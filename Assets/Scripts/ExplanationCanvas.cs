@@ -17,9 +17,10 @@ public class ExplanationCanvas : MonoBehaviour
     public void Close()
     {
         this.gameObject.SetActive(false);
+        EventManager.OnTimerStart();
     }
 
-    public void SetText(int index, string newText)
+    public void SetTextChecking(int index, string newText)
     {
         if (GameManager.GetInstance().firstTimeScene[index])
         {
@@ -30,5 +31,10 @@ public class ExplanationCanvas : MonoBehaviour
         {
             this.Close();
         }
+    }
+
+    public void SetText(string newText)
+    {
+        text.text = newText;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,8 @@ public class DragAndDropManager : MonoBehaviour
     private DropField[] dropFields = new DropField[6];
     [SerializeField]
     private LevelLoader lvlLoader;
-    private ExplanationCanvas explanationCanvas;
+    [SerializeField] private ExplanationCanvas explanationCanvas;
+    [SerializeField] private Canvas notificationCanvas;
 
     [SerializeField] private GameObject[] sections = new GameObject[6];
     [SerializeField] private Sprite[] sectionImages = new Sprite[6];
@@ -19,8 +21,9 @@ public class DragAndDropManager : MonoBehaviour
 
     void Start()
     {
-        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
-        explanationCanvas.SetText(1, "El segundo paso, es el reconocimiento del terreno. Identifiquemos en este mapa dónde se encuentra cada sección del supermercado. \n" +
+        notificationCanvas.gameObject.SetActive(false);
+        //explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+        explanationCanvas.SetTextChecking(1, "El segundo paso, es el reconocimiento del terreno. Identifiquemos en este mapa dónde se encuentra cada sección del supermercado. \n" +
                     "Arrastra el nombre de cada sección encima del icono que la representa.");
 
         MapGeneration();
@@ -80,6 +83,8 @@ public class DragAndDropManager : MonoBehaviour
                 if (dropFields[i].transform.GetChild(0).GetComponent<DragAndDrop>().getValue() != this.dropFields[i].getValue()){
                     correct = false;
                     Debug.Log("Algo mal con " + this.dropFields[i].getValue());
+                    notificationCanvas.gameObject.SetActive(true);
+                    notificationCanvas.GetComponentInChildren<TMP_Text>().text = "Hay alguna sección mal identificada.";
                 }
                 else
                 {
@@ -90,6 +95,8 @@ public class DragAndDropManager : MonoBehaviour
             {
                 Debug.Log("Algo mal con " + this.dropFields[i].getValue());
                 correct = false;
+                notificationCanvas.gameObject.SetActive(true);
+                notificationCanvas.GetComponentInChildren<TMP_Text>().text = "Faltan secciones por identificar.";
             }
         }
         return correct;
@@ -101,6 +108,7 @@ public class DragAndDropManager : MonoBehaviour
         if (correct)
         {
             Debug.Log("Muy bien");
+            EventManager.OnSaveTimer();
             lvlLoader.LoadNextLevel("SupermarketMapSelection");
         }
         else

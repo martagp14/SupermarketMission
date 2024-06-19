@@ -10,7 +10,7 @@ public class SectionGenerator : MonoBehaviour
     [SerializeField] private LevelLoader lvlLoader;
     [SerializeField] SectionFigureMiniGame minigameFigures;
     [SerializeField] SectionColorsMiniGame minigameColors;
-    private ExplanationCanvas explanationCanvas;
+    [SerializeField] private ExplanationCanvas explanationCanvas;
 
     [SerializeField] private GameObject sectionPanel;
     [SerializeField] private GameObject foodElement;
@@ -30,7 +30,7 @@ public class SectionGenerator : MonoBehaviour
         lvlLoader = FindObjectOfType<LevelLoader>();
         minigameFigures = FindObjectOfType<SectionFigureMiniGame>();
         minigameColors = FindObjectOfType<SectionColorsMiniGame>();
-        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+        //explanationCanvas = FindObjectOfType<ExplanationCanvas>();
         
         PopulateSection();
         toggles = FindObjectsOfType<Toggle>();
@@ -42,7 +42,7 @@ public class SectionGenerator : MonoBehaviour
     {
         if(GameManager.GetInstance().actualSection == Food.Category.fruit && !GameManager.GetInstance().daltonicUser)
         {
-            explanationCanvas.SetText(3, "¡Vaya! Parece que aquí utilizan un sistema de camuflaje. Tendrás que equiparte gafas especiales para poder ver los alimentos. " +
+            explanationCanvas.SetTextChecking(3, "¡Vaya! Parece que aquí utilizan un sistema de camuflaje. Tendrás que equiparte gafas especiales para poder ver los alimentos. " +
             "\nPincha en la barra de abajo que color de gafas quieres usar y date prisa en coger lo que necesites, solo duran unos pocos segundos. \nSaldrás de aquí " +
             "cuando hayas cogido todo lo que necesitas.");            
 
@@ -51,7 +51,7 @@ public class SectionGenerator : MonoBehaviour
         }
         else
         {
-            explanationCanvas.SetText(4, "En esta zona del supermercado utilizan unos sensores para evitar que cojamos lo que queremos. Tendrás que aprovechar para coger el " +
+            explanationCanvas.SetTextChecking(4, "En esta zona del supermercado utilizan unos sensores para evitar que cojamos lo que queremos. Tendrás que aprovechar para coger el " +
             "alimento que necesitas justo cuando su silueta se encuentre en el recuadro resaltado de la izquierda. ¡Actúa rápido o perderás la oportunidad! \nSaldrás de " +
             "aquí cuando hayas cogido todo lo que necesitas.");
             
@@ -127,7 +127,7 @@ public class SectionGenerator : MonoBehaviour
             //int index = foodSprites.FindIndex(s => s.name == elements[i].ToString());
             //TO DO
             GameObject element = Instantiate(foodElement);
-            element.transform.parent = sectionPanel.transform;
+            element.transform.SetParent(sectionPanel.transform,true);
             Debug.Log(index);
             Sprite s = allSectionFoods[index].sprite;
             element.transform.Find("Background").GetComponent<Image>().sprite = s;
@@ -140,7 +140,7 @@ public class SectionGenerator : MonoBehaviour
         for (int i = 0; i < numElements - listElements.Count; i++)
         {
             GameObject element = Instantiate(foodElement);
-            element.transform.parent = sectionPanel.transform;
+            element.transform.SetParent(sectionPanel.transform,false);
             //Asignar imagenes aleatorias de la seccion a los toogles
             var rand = Random.Range(0, allSectionFoods.Count);
             Sprite s = allSectionFoods[rand].sprite;
@@ -225,7 +225,7 @@ public class SectionGenerator : MonoBehaviour
             //int index = foodSprites.FindIndex(s => s.name == elements[i].ToString());
             //TO DO
             GameObject element = Instantiate(foodElement);
-            element.transform.parent = sectionPanel.transform;
+            element.transform.SetParent(sectionPanel.transform, false);
             Debug.Log(index);
             Sprite s = allSectionFoods[index].sprite;
             element.transform.Find("Background").GetComponent<Image>().sprite = s;
@@ -238,7 +238,7 @@ public class SectionGenerator : MonoBehaviour
         for (int i = 0; i < numElements - listElements.Count; i++)
         {
             GameObject element = Instantiate(foodElement);
-            element.transform.parent = sectionPanel.transform;
+            element.transform.SetParent(sectionPanel.transform,true);
             //Asignar imagenes aleatorias de la seccion a los toogles
             var rand = Random.Range(0, allSectionFoods.Count);
             Sprite s = allSectionFoods[rand].sprite;

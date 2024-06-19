@@ -48,10 +48,15 @@ MonoBehaviour:
   playerInitial: 
   playerAge: 0
   playerGender: 
+  daltonicUser: 0
+  firstTimeScene: 01010101010101
   actualSection: 0
   sectionDistribution: 000000000000000000000000000000000000000000000000
   bakeryFoodList: []
-  fruitFoodList: []
+  fruitFoodList:
+  - {fileID: 4359427896799794157, guid: e6dcb0c913c36564cb1ddb6fc9ae12af, type: 3}
+  - {fileID: 4359427896799794157, guid: 482ea0773b7bf324ba90c6398846b914, type: 3}
+  - {fileID: 4359427896799794157, guid: 53bea48baac72d54ba1d98d6df0bae6d, type: 3}
   legumeFoodList: []
   fridgeFoodList: []
   fishFoodList: []

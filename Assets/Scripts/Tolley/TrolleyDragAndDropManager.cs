@@ -38,7 +38,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
     void Start()
     {
         explanationCanvas = FindObjectOfType<ExplanationCanvas>();
-        explanationCanvas.SetText(5, "Ahora que ya tenemos lo que necesitábamos, vamos a guardarlo en nuestra base de operaciones: “El Carro”. ¡Ten cuidado al colocarlo de que" +
+        explanationCanvas.SetTextChecking(5, "Ahora que ya tenemos lo que necesitábamos, vamos a guardarlo en nuestra base de operaciones: “El Carro”. ¡Ten cuidado al colocarlo de que" +
                     " no haya elementos muy pesados encima de elementos frágiles o se estropearán! \n" +
                     "El color de fondo de cada elemento te indicará lo bien colocado que está. Aquí tienes una leyenda por si acaso:");
         SetTrolley();
@@ -355,6 +355,13 @@ public class TrolleyDragAndDropManager : MonoBehaviour
                     default:
                         break;
                 }
+                //Comparar color para guardar su status en GM
+                //switch (trolley[index[1], index[0]].GetComponent<Image>().color)
+                //{
+                //    case Color.yellow:
+                //        break;
+                //}
+
             }
             else
             {
@@ -369,6 +376,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
         {
             SaveTrolley();
             GameManager.GetInstance().pickedItems = new List<Food>();
+            EventManager.OnSaveTimer();
             lvlLoader.LoadNextLevel("SupermarketMapSelection");
         }
         

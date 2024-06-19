@@ -96,7 +96,7 @@ public class SectionFigureMiniGame : MonoBehaviour
             GameObject gO = Instantiate(darkIconPrefab);
             gO.transform.GetChild(0).GetComponent<Image>().sprite = possibilities[currentIndex].sprite;
             gO.AddComponent<Food>().CopyFood(possibilities[currentIndex]);
-            gO.transform.parent = darkIconsPanel.transform;
+            gO.transform.SetParent(darkIconsPanel.transform, false);
             darkIcons.Enqueue(gO);
         }
     }
@@ -136,7 +136,7 @@ public class SectionFigureMiniGame : MonoBehaviour
         GameObject gO = Instantiate(darkIconPrefab);
         gO.transform.GetChild(0).GetComponent<Image>().sprite = possibilities[currentIndex].sprite;
         gO.AddComponent<Food>().CopyFood(possibilities[currentIndex]);
-        gO.transform.parent = darkIconsPanel.transform;
+        gO.transform.SetParent(darkIconsPanel.transform, false);
         darkIcons.Enqueue(gO);
         //Incrementar el index
         currentIndex = ++currentIndex % possibilities.Count;
@@ -211,6 +211,10 @@ public class SectionFigureMiniGame : MonoBehaviour
                 {
                     correctItems.Add(groceryList[index]);
                 }
+                else
+                {
+                    wrongSelected++;
+                }
                 //groceryList.RemoveAt(index);
                 correctSelected++;
                 Debug.Log("se han cogido correctos " + correctItems.Count +" y en la lista hay "+ groceryList.Count);
@@ -235,6 +239,8 @@ public class SectionFigureMiniGame : MonoBehaviour
     {
         Debug.Log("Son correctos: " + correctItems.Count);
         GameManager.GetInstance().pickedItems = correctItems;
+        GameManager.GetInstance().numWrongPickedItems += wrongSelected;
+        EventManager.OnSaveTimer();
         lvlLoader.LoadNextLevel("TrolleyScene 1");
     }
 }

@@ -76,7 +76,7 @@ public class SectionColorsMiniGame : MonoBehaviour
                 {
                     sectionColors.Add(color);
                     GameObject button = Instantiate(colorButtonPrefab);
-                    button.transform.parent = buttonsScrollPanel.transform;
+                    button.transform.SetParent(buttonsScrollPanel.transform, false);
                     button.GetComponent<Image>().color = SetColorButton(color);
                     button.GetComponent<Button>().onClick.AddListener(delegate
                     {
@@ -263,6 +263,10 @@ public class SectionColorsMiniGame : MonoBehaviour
                 correctSelected++;
 
             }
+            else
+            {
+                wrongSelected++;
+            }
             //groceryList.RemoveAt(index);
             Debug.Log("se han cogido correctos " + correctItems.Count + " y en la lista hay " + groceryList.Count);
             //if (correctItems.Count == groceryList.Count)
@@ -281,6 +285,8 @@ public class SectionColorsMiniGame : MonoBehaviour
     {
         Debug.Log("Son correctos: " + correctItems.Count);
         GameManager.GetInstance().pickedItems = correctItems;
+        GameManager.GetInstance().numWrongPickedItems += wrongSelected;
+        EventManager.OnSaveTimer();
         lvlLoader.LoadNextLevel("TrolleyScene 1");
     }
 }

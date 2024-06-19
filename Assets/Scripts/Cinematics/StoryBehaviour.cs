@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -128,7 +129,7 @@ public class StoryBehaviour : MonoBehaviour
                 lines[1] = "¡Siguiente!";
                 lines[2] = "¡Ya has vuelto!";
                 lines[3] = "Veamos cual ha sido tu desempeño en esta misión…";
-                lines[4] = "Has tardado <Insertar tiempo>, y has traído <Numero de elementos> de los <numero total de elementos> alimentos objetivo.";
+                lines[4] = "Has tardado "+ TimeSpan.FromSeconds(GameManager.GetInstance().currentSpentTime).ToString(@"mm\:ss\:ff") + ", y has traído <Numero de elementos> de los <numero total de elementos> alimentos objetivo.";
                 //Dependiendo estado de los alimentos sacar un dialogo distinto
                 lines[5] = "¡Y todo esta en perfecto estado! Muy bien organizado";
                 break;
