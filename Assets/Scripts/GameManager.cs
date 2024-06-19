@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public string playerGender;
     public bool daltonicUser = false;
 
+    public bool[] firstTimeScene = { true, true, true, true, true, true, true };
+
     public Food.Category actualSection;
     public Food.Category[] sectionDistribution = new Food.Category[6];
 
@@ -62,8 +64,6 @@ public class GameManager : MonoBehaviour
     void InitializeGame()
     {
         trolleyStatus = new Food[8, 3];
-        //trolleyStatus = new Food[4, 2, 3];
-        //trolleyStatusGO = new GameObject[4, 2, 3];
     }
 
     public static GameManager GetInstance()

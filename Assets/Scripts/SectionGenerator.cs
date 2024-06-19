@@ -10,6 +10,7 @@ public class SectionGenerator : MonoBehaviour
     [SerializeField] private LevelLoader lvlLoader;
     [SerializeField] SectionFigureMiniGame minigameFigures;
     [SerializeField] SectionColorsMiniGame minigameColors;
+    private ExplanationCanvas explanationCanvas;
 
     [SerializeField] private GameObject sectionPanel;
     [SerializeField] private GameObject foodElement;
@@ -29,6 +30,8 @@ public class SectionGenerator : MonoBehaviour
         lvlLoader = FindObjectOfType<LevelLoader>();
         minigameFigures = FindObjectOfType<SectionFigureMiniGame>();
         minigameColors = FindObjectOfType<SectionColorsMiniGame>();
+        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+        
         PopulateSection();
         toggles = FindObjectsOfType<Toggle>();
         groceryListCanvas.gameObject.SetActive(false);
@@ -39,11 +42,20 @@ public class SectionGenerator : MonoBehaviour
     {
         if(GameManager.GetInstance().actualSection == Food.Category.fruit && !GameManager.GetInstance().daltonicUser)
         {
+            explanationCanvas.SetText(3, "¡Vaya! Parece que aquí utilizan un sistema de camuflaje. Tendrás que equiparte gafas especiales para poder ver los alimentos. " +
+            "\nPincha en la barra de abajo que color de gafas quieres usar y date prisa en coger lo que necesites, solo duran unos pocos segundos. \nSaldrás de aquí " +
+            "cuando hayas cogido todo lo que necesitas.");            
+
             minigameColors.StartMiniGame();
             minigameFigures.gameObject.SetActive(false);
         }
         else
         {
+            explanationCanvas.SetText(4, "En esta zona del supermercado utilizan unos sensores para evitar que cojamos lo que queremos. Tendrás que aprovechar para coger el " +
+            "alimento que necesitas justo cuando su silueta se encuentre en el recuadro resaltado de la izquierda. ¡Actúa rápido o perderás la oportunidad! \nSaldrás de " +
+            "aquí cuando hayas cogido todo lo que necesitas.");
+            
+
             minigameFigures.StartMiniGame();
             minigameColors.gameObject.SetActive(false);
         }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GroceryListChecker : MonoBehaviour
 {
     private LevelLoader levelLoader;
+    private ExplanationCanvas explanationCanvas;
 
     [SerializeField] private GameObject prefabFoodManager;
     [SerializeField] private GameObject prefabFoodItemList;
@@ -26,6 +27,11 @@ public class GroceryListChecker : MonoBehaviour
     void Start()
     {
         levelLoader = FindObjectOfType<LevelLoader>();
+        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+        explanationCanvas.SetText(0,"Para ser un buen agente, lo primero que hay que hacer es planificar la misión. " +
+                "Así que vamos a clasificar los objetivos en las distintas secciones del supermercado donde podemos encontrarlos. \n" +
+                "¿Listo? ¡Pues vamos allá! Arrastra los elementos en cada sección.");
+
         this.GenerateGroceryListV2();
         dropFields = FindObjectsOfType<DropFieldGroceryList>();
     }

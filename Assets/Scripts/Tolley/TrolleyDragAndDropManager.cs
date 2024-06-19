@@ -28,6 +28,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
 
     [SerializeField]
     LevelLoader lvlLoader;
+    private ExplanationCanvas explanationCanvas;
 
     public GameObject[,] trolley = new GameObject[8,3];
 
@@ -36,6 +37,10 @@ public class TrolleyDragAndDropManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+        explanationCanvas.SetText(5, "Ahora que ya tenemos lo que necesitábamos, vamos a guardarlo en nuestra base de operaciones: “El Carro”. ¡Ten cuidado al colocarlo de que" +
+                    " no haya elementos muy pesados encima de elementos frágiles o se estropearán! \n" +
+                    "El color de fondo de cada elemento te indicará lo bien colocado que está. Aquí tienes una leyenda por si acaso:");
         SetTrolley();
         SetItemsToOrganize();
         lvlLoader = FindObjectOfType<LevelLoader>();

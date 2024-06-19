@@ -7,6 +7,7 @@ public class SupermarketMap : MonoBehaviour
 {
     [SerializeField]
     private LevelLoader lvlLoader;
+    private ExplanationCanvas explanationCanvas;
 
     [SerializeField]
     private GameObject groceryListCanvas;
@@ -18,6 +19,10 @@ public class SupermarketMap : MonoBehaviour
     void Start()
     {
         lvlLoader = FindObjectOfType<LevelLoader>();
+        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+        explanationCanvas.SetText(2,"Ya es hora de entrar en acción. Elige en este mapa que sección quieres visitar. \nRecuerda consultar la lista de objetivos pulsando el botón " +
+                    "de la esquina de la izquierda para ver que nos queda pendiente.");
+
         groceryListCanvas.SetActive(false);
         MapGeneration();
     }

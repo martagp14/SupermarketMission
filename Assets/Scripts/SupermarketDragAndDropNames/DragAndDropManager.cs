@@ -11,6 +11,7 @@ public class DragAndDropManager : MonoBehaviour
     private DropField[] dropFields = new DropField[6];
     [SerializeField]
     private LevelLoader lvlLoader;
+    private ExplanationCanvas explanationCanvas;
 
     [SerializeField] private GameObject[] sections = new GameObject[6];
     [SerializeField] private Sprite[] sectionImages = new Sprite[6];
@@ -18,6 +19,10 @@ public class DragAndDropManager : MonoBehaviour
 
     void Start()
     {
+        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+        explanationCanvas.SetText(1, "El segundo paso, es el reconocimiento del terreno. Identifiquemos en este mapa dónde se encuentra cada sección del supermercado. \n" +
+                    "Arrastra el nombre de cada sección encima del icono que la representa.");
+
         MapGeneration();
         var num = FindObjectsOfType<DragAndDrop>().Length;
         correctness = new bool[num];
