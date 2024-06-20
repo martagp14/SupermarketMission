@@ -25,13 +25,18 @@ public class GroceryListChecker : MonoBehaviour
     DropFieldGroceryList[] dropFields = new DropFieldGroceryList[6];
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
+
+        explanationCanvas.SetText("Para ser un buen agente, lo primero que hay que hacer es planificar la misión. " +
+                "Así que vamos a clasificar los objetivos en las distintas secciones del supermercado donde podemos encontrarlos. \n" +
+                "¿Listo? ¡Pues vamos allá! Arrastra los elementos en cada sección.");
+    }
     void Start()
     {
         levelLoader = FindObjectOfType<LevelLoader>();
-        explanationCanvas = FindObjectOfType<ExplanationCanvas>();
-        explanationCanvas.SetTextChecking(0,"Para ser un buen agente, lo primero que hay que hacer es planificar la misión. " +
-                "Así que vamos a clasificar los objetivos en las distintas secciones del supermercado donde podemos encontrarlos. \n" +
-                "¿Listo? ¡Pues vamos allá! Arrastra los elementos en cada sección.");
+        
         notificationCanvas.gameObject.SetActive(false);
         this.GenerateGroceryListV2();
         dropFields = FindObjectsOfType<DropFieldGroceryList>();

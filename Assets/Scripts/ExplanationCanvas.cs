@@ -8,12 +8,6 @@ public class ExplanationCanvas : MonoBehaviour
 {
     [SerializeField] private TMP_Text text;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public void Close()
     {
         this.gameObject.SetActive(false);

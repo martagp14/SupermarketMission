@@ -5241,6 +5241,17 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6062258329303052529, guid: 35c776e17716d234eacba18cb8e7388d, type: 3}
+      propertyPath: m_text
+      value: "Para ser un buen agente, lo primero que hay que hacer es planificar
+        la misi\xF3n. \nAs\xED que vamos a clasificar los objetivos en las distintas
+        secciones del supermercado donde podemos encontrarlos.\n\xBFListo? \xA1Pues
+        vamos all\xE1! Arrastra los elementos en cada secci\xF3n."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062258329303052529, guid: 35c776e17716d234eacba18cb8e7388d, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 8070372598227836448, guid: 35c776e17716d234eacba18cb8e7388d, type: 3}
       propertyPath: m_Pivot.x
       value: 0

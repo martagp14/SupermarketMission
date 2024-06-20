@@ -146,7 +146,7 @@ public class StoryBehaviour : MonoBehaviour
         int numPickedItems = GameManager.GetInstance().pickedListItems;
         int totalItems = GameManager.GetInstance().bakeryFoodList.Count + GameManager.GetInstance().fruitFoodList.Count + GameManager.GetInstance().legumeFoodList.Count +
             GameManager.GetInstance().fridgeFoodList.Count + GameManager.GetInstance().fishFoodList.Count + GameManager.GetInstance().perfumeryFoodList.Count;
-        return "Has tardado " + time + ", y has traído "+ numPickedItems+" de los "+ totalItems +" alimentos objetivo. Y además quisites traerte "+ GameManager.GetInstance().numWrongPickedItems+" que no hacía falta.";
+        return "Has tardado " + time + ", y has traído "+ numPickedItems+" de los "+ totalItems +" alimentos objetivo. Y además quisistes traerte "+ GameManager.GetInstance().numWrongPickedItems+" que no hacía falta.";
     }
 
     string CalculateTrolleyScore()
