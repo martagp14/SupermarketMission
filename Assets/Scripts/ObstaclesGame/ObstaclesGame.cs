@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ObstaclesGame : MonoBehaviour
 {
+    private int MAX_NUMOBSTACLES = 50;
+
     [SerializeField] private GameObject[] obstacle;
     [SerializeField] private GameObject sideObstacle;
     [SerializeField] private GameObject stand;
     [SerializeField] private GameObject GameOverPanel;
     [SerializeField] private GameObject CongratsPanel;
+
+    [SerializeField] TMP_Text numObstaclesText;
 
     private Vector3[] spawnPoints = { new Vector3(-4.5f, 0, 63.2000008f), new Vector3(0, 0, 63.2000008f), new Vector3(4.5f, 0, 63.2000008f) };
     private Vector3[] standSpawnPoints = { new Vector3(11.0100002f, 3.72000003f, 63.7299995f), new Vector3(-10.79f, 3.72000003f, 63.7299995f) };
@@ -39,7 +44,7 @@ public class ObstaclesGame : MonoBehaviour
         numObstacles = 0;
         isGameOver = false;
         playerLifes = hearts.Count-1;
-        StartCoroutine(SpawnObjects());
+        numObstaclesText.text = numObstacles + "/"+ MAX_NUMOBSTACLES;
         StartCoroutine(SpawnStands());
     }
 
@@ -49,10 +54,15 @@ public class ObstaclesGame : MonoBehaviour
         
     }
 
+    public void StartGame()
+    {
+        StartCoroutine(SpawnObjects());
+    }
+
     IEnumerator SpawnObjects()
     {
         Quaternion rotation = new Quaternion(0, 0, 0, 1);
-        while (!isGameOver&&numObstacles<50)
+        while (!isGameOver&&numObstacles< MAX_NUMOBSTACLES)
         {
             var index = Random.Range(0, 3);
             rotation = new Quaternion(0, 0, 0, 1);
@@ -94,10 +104,10 @@ public class ObstaclesGame : MonoBehaviour
 
     IEnumerator SpawnStands()
     {
-        while (!isGameOver && numObstacles < 50)
+        while (!isGameOver && numObstacles < MAX_NUMOBSTACLES)
         {
             yield return new WaitForSeconds(1.2f);
-            if ((!isGameOver && numObstacles < 50))
+            if ((!isGameOver && numObstacles < MAX_NUMOBSTACLES))
             {
                 var obs = Instantiate(stand);
                 var obs2 = Instantiate(stand);
@@ -125,6 +135,7 @@ public class ObstaclesGame : MonoBehaviour
     public void ObstacleReachedTheEnd()
     {
         this.numObstacles++;
+        numObstaclesText.text = numObstacles + "/"+ MAX_NUMOBSTACLES;
         Debug.Log(numObstacles);
     }
 
@@ -139,7 +150,7 @@ public class ObstaclesGame : MonoBehaviour
         this.isGameOver = true;
         //Pausar carrito y obstaculos
         //Mostrar canvas de GameOver para pasar a la siguiente escena
-        if (playerLifes > 0)
+        if (playerLifes >= 0)
             this.CongratsPanel.SetActive(true);
         else
             this.GameOverPanel.SetActive(true);

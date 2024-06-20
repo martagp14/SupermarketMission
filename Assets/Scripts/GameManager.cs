@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public List<Food> fridgeFoodList;
     public List<Food> fishFoodList;
     public List<Food> perfumeryFoodList;
+    public int pickedListItems = 0;
 
     public List<Food> pickedItems;
 

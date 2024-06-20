@@ -261,7 +261,7 @@ public class SectionColorsMiniGame : MonoBehaviour
                 //Si no habia sido aun cogido, se añade a la lista de correctos
                 correctItems.Add(groceryList[index]);
                 correctSelected++;
-
+                GameManager.GetInstance().pickedListItems++;
             }
             else
             {

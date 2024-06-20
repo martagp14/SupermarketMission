@@ -129,15 +129,46 @@ public class StoryBehaviour : MonoBehaviour
                 lines[1] = "¡Siguiente!";
                 lines[2] = "¡Ya has vuelto!";
                 lines[3] = "Veamos cual ha sido tu desempeño en esta misión…";
-                lines[4] = "Has tardado "+ TimeSpan.FromSeconds(GameManager.GetInstance().currentSpentTime).ToString(@"mm\:ss\:ff") + ", y has traído <Numero de elementos> de los <numero total de elementos> alimentos objetivo.";
+                lines[4] = CalculateScore();
                 //Dependiendo estado de los alimentos sacar un dialogo distinto
-                lines[5] = "¡Y todo esta en perfecto estado! Muy bien organizado";
+                lines[5] = CalculateTrolleyScore();
                 break;
             default:
                 lines[0] = "[Dialogo no definido]";
                 break;
         }
         
+    }
+
+    string CalculateScore()
+    {
+        string time = TimeSpan.FromSeconds(GameManager.GetInstance().currentSpentTime).ToString(@"mm\:ss\:ff");
+        int numPickedItems = GameManager.GetInstance().pickedListItems;
+        int totalItems = GameManager.GetInstance().bakeryFoodList.Count + GameManager.GetInstance().fruitFoodList.Count + GameManager.GetInstance().legumeFoodList.Count +
+            GameManager.GetInstance().fridgeFoodList.Count + GameManager.GetInstance().fishFoodList.Count + GameManager.GetInstance().perfumeryFoodList.Count;
+        return "Has tardado " + time + ", y has traído "+ numPickedItems+" de los "+ totalItems +" alimentos objetivo. Y además quisites traerte "+ GameManager.GetInstance().numWrongPickedItems+" que no hacía falta.";
+    }
+
+    string CalculateTrolleyScore()
+    {
+        string line = "";
+        int wrongPosition = GameManager.GetInstance().numElementsWrongPositionTrolley;
+        int moderatePosition = GameManager.GetInstance().numElementsModeratePositionTrolley;
+        if(wrongPosition == 0 && moderatePosition == 0)
+        {
+            line = "Y has traido todo en perfecto estado. Has organizado muy bien el carro, ¡enhorabuena!";
+        }
+        else if(wrongPosition==0&&moderatePosition<4)
+        {
+            line = "Y la mayoría del carro está en perfecto estado. Solo has tenido un par de errores leves que ya irás perfeccionando. ¡Muy bien!";
+        }else if (wrongPosition == 0 && moderatePosition >= 4)
+        {
+            line = "Has tenido algunos fallos leves al colocar las cosas en el carro. Tienes que tener un poco más de cuidado, pero por suerte nada se ha roto.";
+        }else
+        {
+            line = "Parece que alguno de los objetivos se ha roto. Tienes que prestar atención a qué objetos pones encima de cuales. Quizás tengas que volver a ir a hacer la compra...";
+        }
+        return line;
     }
 
     //void completedLine()

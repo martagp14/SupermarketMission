@@ -127,7 +127,7 @@ public class SectionGenerator : MonoBehaviour
             //int index = foodSprites.FindIndex(s => s.name == elements[i].ToString());
             //TO DO
             GameObject element = Instantiate(foodElement);
-            element.transform.SetParent(sectionPanel.transform,true);
+            element.transform.SetParent(sectionPanel.transform,false);
             Debug.Log(index);
             Sprite s = allSectionFoods[index].sprite;
             element.transform.Find("Background").GetComponent<Image>().sprite = s;
@@ -238,7 +238,7 @@ public class SectionGenerator : MonoBehaviour
         for (int i = 0; i < numElements - listElements.Count; i++)
         {
             GameObject element = Instantiate(foodElement);
-            element.transform.SetParent(sectionPanel.transform,true);
+            element.transform.SetParent(sectionPanel.transform,false);
             //Asignar imagenes aleatorias de la seccion a los toogles
             var rand = Random.Range(0, allSectionFoods.Count);
             Sprite s = allSectionFoods[rand].sprite;

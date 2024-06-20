@@ -41,6 +41,13 @@ public class Food : MonoBehaviour
         yellow
     }
 
+    public enum positionStatus
+    {
+        good,
+        moderate,
+        wrong
+    }
+
     //Food properties
     [SerializeField]
     public string foodName;// { get; private set; }
@@ -68,6 +75,8 @@ public class Food : MonoBehaviour
     [SerializeField]
     public bool alreadyTaken;
 
+    public positionStatus trolleyStatus;
+
     public Food()
     {
         this.foodName = "";
@@ -79,9 +88,10 @@ public class Food : MonoBehaviour
         this.weight = weightLevel.mid;
         hardness = hardnessLevel.mid;
         this.alreadyTaken = false;
+        this.trolleyStatus = positionStatus.good;
     }
 
-    public Food(string foodName, colors[] color, int price, Category category, int height, int width, weightLevel weight, hardnessLevel hardnesslevel)
+    public Food(string foodName, colors[] color, int price, Category category, int height, int width, weightLevel weight, hardnessLevel hardnesslevel, positionStatus trolleyStatus)
     {
         this.foodName = foodName;
         this.color = color;
@@ -92,7 +102,7 @@ public class Food : MonoBehaviour
         this.weight = weight;
         hardness = hardnesslevel;
         this.alreadyTaken = false;
-
+        this.trolleyStatus = trolleyStatus;
     }
 
     public Food(Food food)
@@ -106,7 +116,7 @@ public class Food : MonoBehaviour
         this.weight = food.weight;
         hardness = food.hardness;
         this.alreadyTaken = false;
-
+        this.trolleyStatus = food.trolleyStatus;
     }
 
     public void CopyFood(Food food)
@@ -121,6 +131,7 @@ public class Food : MonoBehaviour
         hardness = food.hardness;
         this.sprite = food.sprite;
         this.alreadyTaken = false;
+        this.trolleyStatus = food.trolleyStatus;
     }
 
     public Food Clone()
@@ -136,7 +147,8 @@ public class Food : MonoBehaviour
             weight = this.weight,
             hardness = this.hardness,
             sprite = this.sprite,
-            alreadyTaken = this.alreadyTaken
+            alreadyTaken = this.alreadyTaken,
+            trolleyStatus = this.trolleyStatus
         };
 
         return clone;

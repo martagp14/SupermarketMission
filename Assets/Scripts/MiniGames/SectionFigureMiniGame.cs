@@ -210,6 +210,7 @@ public class SectionFigureMiniGame : MonoBehaviour
                 if (!alreadyTaken)
                 {
                     correctItems.Add(groceryList[index]);
+                    GameManager.GetInstance().pickedListItems++;
                 }
                 else
                 {
