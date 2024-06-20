@@ -394,6 +394,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
         //Comprobar si hay objeto encima
         Food thisFood = element.GetComponent<Food>();
         element.GetComponent<Image>().color = Color.green;
+        element.GetComponent<Food>().trolleyStatus = Food.positionStatus.good;
         if (indexJ>0)
         {
             Food aboveFood = GameManager.GetInstance().trolleyStatus[indexI, indexJ - 1];
