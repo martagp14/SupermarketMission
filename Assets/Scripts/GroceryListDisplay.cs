@@ -14,7 +14,7 @@ public class GroceryListDisplay : MonoBehaviour
     [SerializeField] private GameObject perfumeryScroll;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         DisplayGroceyList();
     }
