@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
         scorebardCanvas.gameObject.SetActive(false);
         optionsCanvas.gameObject.SetActive(false);
         mainCanvas.gameObject.SetActive(true);
+        AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().generalMusic);
     }
 
     // Update is called once per frame

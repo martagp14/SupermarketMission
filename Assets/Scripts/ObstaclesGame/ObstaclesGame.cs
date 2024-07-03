@@ -45,6 +45,7 @@ public class ObstaclesGame : MonoBehaviour
         isGameOver = false;
         playerLifes = hearts.Count-1;
         numObstaclesText.text = numObstacles + "/"+ MAX_NUMOBSTACLES;
+        AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().obstaclesSceneMusic);
         StartCoroutine(SpawnStands());
     }
 

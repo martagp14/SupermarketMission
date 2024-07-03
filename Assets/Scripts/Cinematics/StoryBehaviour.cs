@@ -140,7 +140,7 @@ public class StoryBehaviour : MonoBehaviour
         int numPickedItems = GameManager.GetInstance().pickedListItems;
         int totalItems = GameManager.GetInstance().bakeryFoodList.Count + GameManager.GetInstance().fruitFoodList.Count + GameManager.GetInstance().legumeFoodList.Count +
             GameManager.GetInstance().fridgeFoodList.Count + GameManager.GetInstance().fishFoodList.Count + GameManager.GetInstance().perfumeryFoodList.Count;
-        return "Has tardado " + time + ", y has traído "+ numPickedItems+" de los "+ totalItems +" alimentos objetivo. Y además quisistes traerte "+ GameManager.GetInstance().numWrongPickedItems+" que no hacía falta.";
+        return "Has tardado " + time + ", y has traído "+ numPickedItems+" de los "+ totalItems +" alimentos objetivo. Y además quisiste traerte "+ GameManager.GetInstance().numWrongPickedItems+" que no hacía falta.";
     }
 
     string CalculateTrolleyScore()
@@ -150,7 +150,7 @@ public class StoryBehaviour : MonoBehaviour
         int moderatePosition = GameManager.GetInstance().numElementsModeratePositionTrolley;
         if(wrongPosition == 0 && moderatePosition == 0)
         {
-            line = "Y has traido todo en perfecto estado. Has organizado muy bien el carro, ¡enhorabuena!";
+            line = "Y has traído todo en perfecto estado. Has organizado muy bien el carro, ¡enhorabuena!";
         }
         else if(wrongPosition==0&&moderatePosition<4)
         {
@@ -160,7 +160,7 @@ public class StoryBehaviour : MonoBehaviour
             line = "Has tenido algunos fallos leves al colocar las cosas en el carro. Tienes que tener un poco más de cuidado, pero por suerte nada se ha roto.";
         }else
         {
-            line = "Parece que alguno de los objetivos se ha roto. Tienes que prestar atención a qué objetos pones encima de cuales. Quizás tengas que volver a ir a hacer la compra...";
+            line = "Parece que alguno de los objetivos se ha roto. Tienes que prestar atención qué objetos pones encima de cuáles. Quizás tengas que volver a ir a hacer la compra...";
         }
         return line;
     }
