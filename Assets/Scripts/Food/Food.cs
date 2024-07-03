@@ -62,12 +62,9 @@ public class Food : MonoBehaviour
     [SerializeField]
     public int width; // { get; private set; }
     [SerializeField]
-
     public weightLevel weight; // { get; private set; }
     [SerializeField]
     public hardnessLevel hardness; // { get; private set; }
-
-    GameObject gameObject;
 
     [SerializeField]
     public Sprite sprite;

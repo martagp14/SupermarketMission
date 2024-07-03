@@ -27,51 +27,13 @@ public class SupermarketMap : MonoBehaviour
         MapGeneration();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClickSection(Food.Category category)
     {
-        ////establecer section en GM
-        //Food.Category section;
-        //switch (sectionName)
-        //{
-        //    case "Perfumeria":
-        //        section = Food.Category.perfumery;
-        //        break;
-        //    case "Legumbre":
-        //        section = Food.Category.legume;
-        //        break;
-        //    case "Pescaderia":
-        //        section = Food.Category.fish;
-        //        break;
-        //    case "Panaderia":
-        //        section = Food.Category.bakery;
-        //        break;
-        //    case "Fruteria":
-        //        section = Food.Category.fruit;
-        //        break;
-        //    case "Nevera":
-        //        section = Food.Category.fridge;
-        //        break;
-        //    case "Cajas":
-        //        section = Food.Category.cashier;
-        //        GameManager.GetInstance().GoToScene("ObstaclesGame");
-        //        break;
-        //    default:
-        //        section = Food.Category.bakery;
-        //        break;
-        //}
-
         GameManager.GetInstance().actualSection = category;
         if(category == Food.Category.cashier)
-            GameManager.GetInstance().GoToScene("ObstaclesGame");
-
-        //ZIr  s escena seccion
-        lvlLoader.LoadNextLevel("SupermarketSection");
+            lvlLoader.LoadNextLevel("ObstaclesGame");
+        else
+            lvlLoader.LoadNextLevel("SupermarketSection");
     }
 
     public void ShowAndHideList()

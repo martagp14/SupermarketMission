@@ -20,26 +20,11 @@ public class GameManager : MonoBehaviour
     public float trolleySpentTime = 0f;
     public float[] minigamesSpentTime = {0f,0f,0f,0f,0f,0f};
 
-    public int numWrongPickedItems = 0;
-    public int numElementsCorrectPositionTrolley = 0;
-    public int numElementsModeratePositionTrolley = 0;
-    public int numElementsWrongPositionTrolley = 0;
-
     public Food.Category actualSection;
     public Food.Category[] sectionDistribution = new Food.Category[6];
 
     public Food[,] trolleyStatus;       //8x3
-    //public Food[,,] trolleyStatus;       //4x2x3
-    //public GameObject[,,] trolleyStatusGO;
-
-    //SHOPPING LIST
-    //public List<string> shoppingList;
-    //public List<string> fruitList;
-    //public List<string> bakeryList;
-    //public List<string> legumeList;
-    //public List<string> fridgeList;
-    //public List<string> fishList;
-    //public List<string> perfumeryList;
+    public List<Food> pickedItems;
 
     public List<Food> bakeryFoodList;
     public List<Food> fruitFoodList;
@@ -47,9 +32,12 @@ public class GameManager : MonoBehaviour
     public List<Food> fridgeFoodList;
     public List<Food> fishFoodList;
     public List<Food> perfumeryFoodList;
-    public int pickedListItems = 0;
 
-    public List<Food> pickedItems;
+    public int pickedListItems = 0;
+    public int numWrongPickedItems = 0;
+    public int numElementsCorrectPositionTrolley = 0;
+    public int numElementsModeratePositionTrolley = 0;
+    public int numElementsWrongPositionTrolley = 0;
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -69,8 +57,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        //this.InitializeLists();
     }
 
     void InitializeGame()

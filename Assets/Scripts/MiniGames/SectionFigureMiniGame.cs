@@ -20,7 +20,6 @@ public class SectionFigureMiniGame : MonoBehaviour
 
     public bool stopMiniGame = false;
 
-    private int correctSelected = 0;
     private int wrongSelected = 0;
     List<Food> correctItems = new List<Food>();
 
@@ -88,7 +87,7 @@ public class SectionFigureMiniGame : MonoBehaviour
                 groceryList = new List<Food>();
                 break;
         }
-        ClearAlreadyTakenItems(groceryList);
+        CountAlreadyTakenItems(groceryList);
         ShuffleList(possibilities);
         //Instanciar la fial de figuras
         for (currentIndex=0; currentIndex<6; currentIndex++)
@@ -101,7 +100,7 @@ public class SectionFigureMiniGame : MonoBehaviour
         }
     }
 
-    void ClearAlreadyTakenItems(List<Food> list)
+    void CountAlreadyTakenItems(List<Food> list)
     {
         int countAlreadytaken = 0;
         foreach (Food f in list)
@@ -217,7 +216,6 @@ public class SectionFigureMiniGame : MonoBehaviour
                     wrongSelected++;
                 }
                 //groceryList.RemoveAt(index);
-                correctSelected++;
                 Debug.Log("se han cogido correctos " + correctItems.Count +" y en la lista hay "+ groceryList.Count);
                 if (correctItems.Count == groceryList.Count)
                     stopMiniGame = true;

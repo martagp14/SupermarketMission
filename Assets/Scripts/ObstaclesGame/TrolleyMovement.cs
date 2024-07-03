@@ -29,7 +29,6 @@ public class TrolleyMovement : MonoBehaviour
         }
     }
 
-    //Movement of the trolley using arrow or mouse
     IEnumerator DeactivateTrigger()
     {
         yield return new WaitForSeconds(0.5f);

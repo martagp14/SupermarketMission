@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 39754965}
   - component: {fileID: 39754964}
   - component: {fileID: 39754968}
-  - component: {fileID: 39754969}
   m_Layer: 5
   m_Name: GroceryListCanvas
   m_TagString: Untagged
@@ -262,19 +261,6 @@ MonoBehaviour:
   fridgeIcons: {fileID: 21300000, guid: 90a0b66abc7c4724f9842a9c6d8d6aac, type: 3}
   fishIcons: {fileID: 21300000, guid: 9bec3ef63c1c9eb498c7369388a5bdd0, type: 3}
   perfumeryIcons: {fileID: 21300000, guid: af25450764db9914fab7326364120f51, type: 3}
---- !u!114 &39754969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39754963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4103a3a6eca25124d83df9fca0f1a3a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elementsList: {fileID: 123813026}
 --- !u!1 &47969677
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,8 +697,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 0
   index: 0
-  isCorrect: 0
-  dndManager: {fileID: 39754969}
   panelList: {fileID: 990788953}
   items: []
 --- !u!222 &139287554
@@ -2268,8 +2252,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 4
   index: 0
-  isCorrect: 0
-  dndManager: {fileID: 39754969}
   panelList: {fileID: 2104651926}
   items: []
 --- !u!222 &786945909
@@ -2408,8 +2390,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 5
   index: 0
-  isCorrect: 0
-  dndManager: {fileID: 39754969}
   panelList: {fileID: 1946795699}
   items: []
 --- !u!222 &823956139
@@ -3068,8 +3048,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 2
   index: 0
-  isCorrect: 0
-  dndManager: {fileID: 39754969}
   panelList: {fileID: 744888263}
   items: []
 --- !u!222 &1009443216
@@ -3141,7 +3119,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.34117648, g: 0.96862745, b: 0.84705883, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3417,8 +3395,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 3
   index: 0
-  isCorrect: 0
-  dndManager: {fileID: 39754969}
   panelList: {fileID: 396492848}
   items: []
 --- !u!222 &1115562442
@@ -3884,8 +3860,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 1
   index: 0
-  isCorrect: 0
-  dndManager: {fileID: 39754969}
   panelList: {fileID: 601544272}
   items: []
 --- !u!114 &1389222355

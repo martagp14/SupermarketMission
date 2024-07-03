@@ -39,26 +39,6 @@ public class LevelIntroLoader : MonoBehaviour
        
     }
 
-    private void Update()
-    {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    StartLightTransition();
-        //}
-    }
-
-    public void LoadNextLevel(string nameScene)
-    {
-        StartCoroutine(LoadLevel(nameScene));
-    }
-
-    IEnumerator LoadLevel(string scene)
-    {
-        transition.SetTrigger("Start");
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(scene);
-    }
-
     public void StartDarkTransition()
     {
         Debug.Log("Oscurecer");

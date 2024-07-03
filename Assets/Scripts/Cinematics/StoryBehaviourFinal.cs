@@ -77,7 +77,7 @@ public class StoryBehaviourFinal : MonoBehaviour
     //    DialogManager.CompleteTextRevealed += showNewText;
     //}
 
-    public new void showNewText()
+    public void showNewText()
     {
         Debug.Log("Next line");
         if (index < lines.Length - 1)

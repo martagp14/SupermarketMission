@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 121.9, y: -97.600006}
+  m_AnchoredPosition: {x: 121.899994, y: -97.600006}
   m_SizeDelta: {x: 193, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &253508304
@@ -518,7 +518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 101.1, y: 99.4}
+  m_AnchoredPosition: {x: 101.100006, y: 99.4}
   m_SizeDelta: {x: 663, y: 181}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626647310
@@ -1071,7 +1071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -87, y: -71.91301}
+  m_AnchoredPosition: {x: -87, y: -71.913025}
   m_SizeDelta: {x: 382.944, y: 380.933}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313517312
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 1403319895}
   - component: {fileID: 1403319894}
   m_Layer: 5
-  m_Name: CheckButton
+  m_Name: GroceryListButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -894,8 +894,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layer2: {fileID: 1217172528}
-  layer1: {fileID: 0}
-  layer0: {fileID: 0}
   lightFrame: {fileID: 21300000, guid: cabe11a09d62ebe4b95e766808f99184, type: 3}
   midFrame: {fileID: 21300000, guid: 27c377b16b2272b418387f08ff2d90ac, type: 3}
   grossFrame: {fileID: 21300000, guid: 10ef67c01884b994a9967bd38307b464, type: 3}
@@ -1993,7 +1991,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 317474878}
         m_TargetAssemblyTypeName: TrolleyDragAndDropManager, Assembly-CSharp
-        m_MethodName: OnClickReload
+        m_MethodName: OnClickNext
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

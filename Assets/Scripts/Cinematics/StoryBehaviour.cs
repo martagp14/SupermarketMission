@@ -79,22 +79,16 @@ public class StoryBehaviour : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.T))
             {
                 //Skip story
-                levelLoader.LoadNextLevel("GroceryList");
+                if (SceneManager.GetActiveScene().name == "StartingCinematic")
+                {
+                    //Skip story
+                    levelLoader.LoadNextLevel("GroceryList");
+                }
+                else
+                {
+                    levelLoader.LoadNextLevel("MainMenu");
+                }
             }
-        }
-    }
-
-    public void OnClickEnterName()
-    {
-        if (dataCollector.CheckAndSaveAgentData())
-        {
-            //Todo: Check is name Input is empty
-            var initial = GameManager.GetInstance().playerInitial;
-            Debug.Log("Player Name: " + GameManager.GetInstance().playerName);
-            SetLines();
-            //levelLoader.StartTransition();
-            StartCoroutine(showIntroMessage());
-            //Todo: start comic animation
         }
     }
 
@@ -118,7 +112,7 @@ public class StoryBehaviour : MonoBehaviour
                 lines = new string[numLines];
                 lines[0] = "¡" + GameManager.GetInstance().playerName + "! ¿Puedes venir un momento, por favor?";
                 lines[1] = "Aquí estás. Pues verás, tengo una misión para ti.";
-                lines[2] = "Tu padre iba ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
+                lines[2] = "Tu padre iba a ponerse a hacer la comida, pero al parecer nos faltan muchos ingredientes y tenemos un poco de prisa.";
                 lines[3] = "¿Crees que podrías conseguirlos todos por tu cuenta, agente " + GameManager.GetInstance().playerInitial + "? ";
                 lines[4] = "¿Si? Veo la decisión en tus ojos. Pues aquí tienes la lista. Prepárate para la misión.";
                 break;

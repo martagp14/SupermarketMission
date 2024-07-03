@@ -61,7 +61,7 @@ public class ObstaclesGame : MonoBehaviour
 
     IEnumerator SpawnObjects()
     {
-        Quaternion rotation = new Quaternion(0, 0, 0, 1);
+        Quaternion rotation;
         while (!isGameOver&&numObstacles< MAX_NUMOBSTACLES)
         {
             var index = Random.Range(0, 3);
@@ -113,7 +113,6 @@ public class ObstaclesGame : MonoBehaviour
                 var obs2 = Instantiate(stand);
                 obs.gameObject.transform.SetPositionAndRotation(standSpawnPoints[0], new Quaternion(0, 0, 0, 1f));
                 obs2.gameObject.transform.SetPositionAndRotation(standSpawnPoints[1], new Quaternion(0, 1f, 0, 0));
-                //obs2.GetComponent<ObstacleMovement>().speed *= -1;
             }
         }
     }

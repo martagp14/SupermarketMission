@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
 
     private RectTransform rectTrans;
@@ -32,26 +32,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         //Debug.Log("BeginDrag");
         canvasGroup.blocksRaycasts = false;
-        //if (this.transform.parent.GetComponentInParent<DropField>())
-        //{
-        //    Debug.Log("El padre es un drop field " + this.transform.parent);
-        //    this.transform.parent.GetComponentInParent<DropField>().element = null;
-        //    this.transform.parent.GetComponentInParent<DropField>().isOccupied = false;
-
-        //}
         transform.parent = initialParent;
-
-        //if (eData != null)
-        //{
-        //    Debug.Log("Supueto en el que estaba " + eData.pointerEnter);
-        //    if (eData.pointerEnter.GetComponentInParent<DropField>())
-        //    {
-        //        Debug.Log("El padre es un drop field " + eData.pointerEnter);
-        //        eData.pointerEnter.GetComponentInParent<DropField>().element = null;
-        //        eData.pointerEnter.GetComponentInParent<DropField>().isOccupied = false;
-        //        eData = null;
-        //    }
-        //}
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -79,28 +60,12 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 transform.parent = initialParent;
             }
             else {
-                if (!eventData.pointerEnter.GetComponent<DropField>().isOccupied)
-                {
-                    //eventData.pointerEnter.GetComponent<DropField>().isOccupied = true;
-                    //eventData.pointerEnter.GetComponentInParent<DropField>().element = this;
-                    //Debug.Log("supuesto receptor"+eventData.pointerEnter);
-                    //eData = eventData;
-                    //Debug.Log("supuesto receptor" + eventData.pointerEnter);
+
                     transform.parent = eventData.pointerEnter.gameObject.transform;
-                }
-                else
-                {
-                    transform.position = iniPos;
-                    transform.parent = initialParent;
-                }
+
             }
         }
 
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        //Debug.Log("Click");
     }
 
     public Food.Category getValue()

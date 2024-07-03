@@ -26,8 +26,6 @@ public class SectionColorsMiniGame : MonoBehaviour
     {
         PrepareMiniGame();
         PrepareToggles();
-        //Esperar 3 segundos y desactivar
-        //StartCoroutine(MiniGameFlow());
     }
 
     private void PrepareMiniGame()
@@ -65,7 +63,7 @@ public class SectionColorsMiniGame : MonoBehaviour
                 groceryList = new List<Food>();
                 break;
         }
-        ClearAlreadyTakenItems(groceryList);
+        CountAlreadyTakenItems(groceryList);
         //Instancia los botones de los colores que tenga los alimentos
         List<Food.colors> sectionColors = new List<Food.colors>();
         foreach(Food f in sectionFood)
@@ -128,7 +126,7 @@ public class SectionColorsMiniGame : MonoBehaviour
         }
     }
 
-    void ClearAlreadyTakenItems(List<Food> list)
+    void CountAlreadyTakenItems(List<Food> list)
     {
         int countAlreadytaken = 0;
         foreach (Food f in list)
@@ -147,11 +145,6 @@ public class SectionColorsMiniGame : MonoBehaviour
     {
         if (filterImage.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("FadedFilter"))
         {
-            foreach (Toggle t in toggles)
-            {
-                t.GetComponent<CanvasGroup>().alpha = 0;
-                t.GetComponent<CanvasGroup>().interactable = false;
-            }
             //Visualizar solo los alimentos que tengas ese color
             //Poner el filtro a ese color
             Color32 temp = SetColorButton(color);
@@ -159,7 +152,7 @@ public class SectionColorsMiniGame : MonoBehaviour
             filterImage.color = new Color32(temp.r, temp.g, temp.b, 125);
             //Recorrer toogles y porner alfa a 0 de los que lo tengan
             Debug.Log("Pulsado para " + color);
-            bool hasColor = false;
+            bool hasColor;
             foreach (Toggle toggle in toggles)
             {
                 hasColor = false;

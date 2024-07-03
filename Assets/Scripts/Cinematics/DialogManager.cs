@@ -41,9 +41,6 @@ public class DialogManager : MonoBehaviour
     [SerializeField]
     [Range(0.1f, 0.5f)] private float sendDoneDelay = 0.2f;
 
-    public static event Action CompleteTextRevealed;
-    public static event Action<char> CharacterRevealed;
-
     [SerializeField] private StoryBehaviour sb;
     [SerializeField] private LevelIntroLoader introLoader;
 
@@ -58,27 +55,16 @@ public class DialogManager : MonoBehaviour
         textBoxFullEventDelay = new WaitForSeconds(sendDoneDelay);
     }
 
-    //private void OnEnable()
-    //{
-    //    TMPro_EventManager.TEXT_CHANGED_EVENT.Add(SetText);
-    //}
-    //private void OnDisable()
-    //{
-    //    TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(SetText);
-    //}
-
     // Start is called before the first frame update
     void Start()
     {
         textBox.ForceMeshUpdate();
-        //SetText(testText);
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
         {
-            //Debug.Log(textBox.maxVisibleCharacters +" - " + (textBox.textInfo.characterCount - 1) +" - "+ readyForNewText);
             if(textBox.maxVisibleCharacters <= textBox.textInfo.characterCount -1)
             {
                 Skip();
@@ -103,26 +89,12 @@ public class DialogManager : MonoBehaviour
         if (!currentlySkipping)
         {
             currentlySkipping = true;
-
-            //if (!quickSkip)
-            //{
-            //    StartCoroutine(SkipSpeedUpRest());
-            //}
             if (typeWriterCoroutine != null)
                 StopCoroutine(typeWriterCoroutine);
             textBox.maxVisibleCharacters = textBox.textInfo.characterCount;
             readyForNewText = true;
             currentlySkipping = false;
-
-            //sb.showNewText();
-            //CompleteTextRevealed?.Invoke();
         }
-    }
-
-    private IEnumerator SkipSpeedUpRest()
-    {
-        yield return new WaitUntil(() => textBox.maxVisibleCharacters == textBox.textInfo.characterCount -1);
-        currentlySkipping = false;
     }
 
     public void SetText(string text)
@@ -149,16 +121,13 @@ public class DialogManager : MonoBehaviour
 
         while (currentCharacterIndex < textInfo.characterCount)
         {
-            Debug.Log("Uno  mas" + currentCharacterIndex + "--" + textInfo.characterCount);
-
             var lastCharacterIndex = textInfo.characterCount - 1;
+            //Es el fianl de la frase, y hace la pausa de final y para la ejecucion de la funcion
             if(currentCharacterIndex == lastCharacterIndex)
             {
                 textBox.maxVisibleCharacters++;
                 yield return textBoxFullEventDelay;
-                //CompleteTextRevealed?.Invoke();
                 readyForNewText = true;
-                //sb.showNewText();
                 yield break;
             }
 
@@ -174,7 +143,6 @@ public class DialogManager : MonoBehaviour
                 yield return currentlySkipping? skipDelay: simpleDelay;
             }
 
-            CharacterRevealed?.Invoke(character);
             currentCharacterIndex++; 
             
         }
