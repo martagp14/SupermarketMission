@@ -40,6 +40,7 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         //Debug.Log("BeginDrag");
         canvasGroup.blocksRaycasts = false;
         //Borrar el objecto de la lista cuando se le esta sacando de un drop field

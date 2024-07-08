@@ -36,6 +36,7 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         canvasGroup.blocksRaycasts = false;
         //Borrar el objecto de la lista cuando se le esta sacando de un drop field
         if (this.transform.parent.GetComponentInParent<TrolleyDropField>())

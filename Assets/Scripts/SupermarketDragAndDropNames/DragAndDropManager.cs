@@ -58,6 +58,7 @@ public class DragAndDropManager : MonoBehaviour
 
     public void OnClickCheck()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickTechButtonSFX);
         var correct = this.CheckResults();
         if (correct)
         {

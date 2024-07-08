@@ -30,6 +30,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         //Debug.Log("BeginDrag");
         canvasGroup.blocksRaycasts = false;
         transform.parent = initialParent;

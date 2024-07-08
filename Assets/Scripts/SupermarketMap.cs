@@ -29,6 +29,7 @@ public class SupermarketMap : MonoBehaviour
 
     public void OnClickSection(Food.Category category)
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         GameManager.GetInstance().actualSection = category;
         if(category == Food.Category.cashier)
             lvlLoader.LoadNextLevel("ObstaclesGame");
@@ -38,6 +39,7 @@ public class SupermarketMap : MonoBehaviour
 
     public void ShowAndHideList()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         groceryListCanvas.SetActive(!groceryListCanvas.activeSelf);
     }
 

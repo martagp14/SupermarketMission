@@ -10,6 +10,13 @@ public class ExplanationCanvas : MonoBehaviour
 
     public void Close()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickTechButtonSFX);
+        this.gameObject.SetActive(false);
+        EventManager.OnTimerStart();
+    }
+
+    public void AutoClose()
+    {
         this.gameObject.SetActive(false);
         EventManager.OnTimerStart();
     }
@@ -23,7 +30,7 @@ public class ExplanationCanvas : MonoBehaviour
         }
         else
         {
-            this.Close();
+            this.AutoClose();
         }
     }
 

@@ -74,6 +74,7 @@ public class GroceryListChecker : MonoBehaviour
 
     public void OnClickCheck()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickTechButtonSFX);
         //Check if correct
         if (checkClassification())
         {

@@ -43,6 +43,8 @@ public class StoryBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().generalMusic);
+
         changeInProgress = false;
         storyCanvas.gameObject.SetActive(false);
 

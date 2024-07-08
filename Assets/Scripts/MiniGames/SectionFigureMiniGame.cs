@@ -143,6 +143,7 @@ public class SectionFigureMiniGame : MonoBehaviour
 
     void ObjectSelected(GameObject foodSelected)
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         GameObject food = darkIcons.Peek();
         //Check if the toggle activated is the actual posiible object
         if(foodSelected.GetComponent<Food>().foodName == food.GetComponent<Food>().foodName)

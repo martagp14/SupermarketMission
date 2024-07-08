@@ -178,8 +178,10 @@ MonoBehaviour:
   SFXAudioSource: {fileID: 8538544101720550818}
   mixer: {fileID: 24100000, guid: 99f6e78fffe0b7c40bb007447fc7a0e6, type: 2}
   generalMusic: {fileID: 8300000, guid: cc0e49c392518dd469581b3bfa7e7f28, type: 3}
-  obstaclesSceneMusic: {fileID: 8300000, guid: a6acfa87b01067d479282a105b0bfb0e, type: 3}
-  clickButtonSFX: {fileID: 0}
+  obstaclesSceneMusic: {fileID: 8300000, guid: e53b65baa91f666448fc61e3064a154b, type: 3}
+  clickTechButtonSFX: {fileID: 8300000, guid: 3a0bb71491829c5438b36d478fd898c4, type: 3}
+  clickButtonSFX: {fileID: 8300000, guid: 6ecd7cfcc1b2c65478b67e9f8019192a, type: 3}
+  trolleyHitSFX: {fileID: 8300000, guid: b0f1f69ecbd5ae8489d50dfc3af17262, type: 3}
 --- !u!1 &3453938747967961887
 GameObject:
   m_ObjectHideFlags: 0

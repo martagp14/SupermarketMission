@@ -3422,6 +3422,8 @@ MonoBehaviour:
   scorebardCanvas: {fileID: 740446852}
   optionsCanvas: {fileID: 1736306701}
   mainCanvas: {fileID: 1751920655}
+  MusicSlider: {fileID: 1924608560}
+  SFXSlider: {fileID: 1965489596}
 --- !u!1 &1868482956
 GameObject:
   m_ObjectHideFlags: 0

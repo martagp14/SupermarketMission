@@ -38,6 +38,7 @@ public class TrolleyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().trolleyHitSFX);
         anim.SetTrigger("Damaged");
         miniGameManager.DamagePlayer();
     }

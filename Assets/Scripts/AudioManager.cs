@@ -16,7 +16,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip obstaclesSceneMusic;
 
     [Header("SFX Tracks")]
+    public AudioClip clickTechButtonSFX;
     public AudioClip clickButtonSFX;
+    public AudioClip trolleyHitSFX;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void LoadMain()
@@ -56,11 +58,14 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicVolume(float sliderValue)
     {
+        Debug.Log("Setting music value to " + sliderValue);
         mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue)*20);
+        GameManager.GetInstance().musicVolume = sliderValue;
     }
 
     public void SetSFXVolume(float sliderValue)
     {
         mixer.SetFloat("SFXVolume", Mathf.Log10(sliderValue) * 20);
+        GameManager.GetInstance().SFXVolume = sliderValue;
     }
 }

@@ -189,7 +189,7 @@ public class SectionColorsMiniGame : MonoBehaviour
 
     void ObjectSelected(GameObject foodSelected)
     {
-        
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         //correcto
         //foodSelected.GetComponent<Renderer>().enabled = false;
         //ColorBlock c = foodSelected.GetComponent<Toggle>().colors;

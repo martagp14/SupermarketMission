@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public string playerGender;
     public bool daltonicUser = false;
 
+    public float musicVolume = 0.5f;
+    public float SFXVolume = 0.5f;
+
     public bool[] firstTimeScene = { true, true, true, true, true, true, true };
 
     public float currentSpentTime = 0f;
@@ -62,6 +65,8 @@ public class GameManager : MonoBehaviour
     void InitializeGame()
     {
         trolleyStatus = new Food[8, 3];
+        musicVolume = 0.5f;
+        SFXVolume = 0.5f;
     }
 
     public static GameManager GetInstance()
@@ -81,5 +86,50 @@ public class GameManager : MonoBehaviour
         playerAge = age;
         playerGender = gender;
     }
+
+    public void ResetGameManager()
+    {
+        playerName = "";
+        playerInitial = "";
+        playerAge = 7;
+        playerGender = "";
+        daltonicUser = false;
+
+        //firstTimeScene = { true, true, true, true, true, true, true };
+
+        currentSpentTime = 0f;
+        groceryListSpentTime = 0f;
+        SupermarketMapSpentTime = 0f;
+        trolleySpentTime = 0f;
+
+        minigamesSpentTime = new float[6];
+        trolleyStatus = new Food[8, 3];
+
+        //for (int i = 0; i < minigamesSpentTime.Length; i++)
+        //{
+        //    minigamesSpentTime[i] = 0;
+        //}
+        //for (int i = 0; i < trolleyStatus.GetLength(0); i++)
+        //{
+        //    for (int j = 0; j < trolleyStatus.GetLength(1); j++)
+        //    {
+        //        trolleyStatus[i,j] = null;
+        //    }
+        //}
+        pickedItems = new List<Food>();
+
+        bakeryFoodList=new List<Food>();
+        fruitFoodList = new List<Food>();
+        legumeFoodList = new List<Food>();
+        fridgeFoodList = new List<Food>();
+        fishFoodList = new List<Food>();
+        perfumeryFoodList = new List<Food>();
+
+        pickedListItems = 0;
+        numWrongPickedItems = 0;
+        numElementsCorrectPositionTrolley = 0;
+        numElementsModeratePositionTrolley = 0;
+        numElementsWrongPositionTrolley = 0;
+}
 
 }

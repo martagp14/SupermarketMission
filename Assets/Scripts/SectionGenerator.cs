@@ -252,6 +252,7 @@ public class SectionGenerator : MonoBehaviour
 
     public void OnClickGroceryList()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         groceryListCanvas.gameObject.SetActive(!groceryListCanvas.gameObject.activeSelf);
         groceryListCanvas.gameObject.GetComponent<GroceryListDisplay>().RefreshSection();
     }

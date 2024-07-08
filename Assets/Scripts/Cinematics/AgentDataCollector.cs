@@ -33,12 +33,14 @@ public class AgentDataCollector : MonoBehaviour
 
     public void IncrementAge()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         age++;
         ageText.text = age.ToString();
     }
 
     public void DecrementAge()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
         age--;
         if (age < 1)
             age = 1;
@@ -47,7 +49,9 @@ public class AgentDataCollector : MonoBehaviour
 
     public void SetGender(string value)
     {
-        if(value == "Femenino")
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickButtonSFX);
+
+        if (value == "Femenino")
         {
             chicaSelectedImage.gameObject.SetActive(true);
             chicoSelectedImage.gameObject.SetActive(false);
@@ -78,6 +82,8 @@ public class AgentDataCollector : MonoBehaviour
     {
         if (CheckAndSaveAgentData())
         {
+            AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickTechButtonSFX);
+
             lvlLoader.LoadNextLevel("StartingCinematic");
         }
     }

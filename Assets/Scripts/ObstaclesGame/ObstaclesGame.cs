@@ -158,6 +158,7 @@ public class ObstaclesGame : MonoBehaviour
 
     public void OnClickedContinue()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickTechButtonSFX);
         introLoader.LoadNextLevel("FinalCinematic");
     }
 }

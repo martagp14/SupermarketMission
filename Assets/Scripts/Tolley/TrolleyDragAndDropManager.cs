@@ -192,6 +192,7 @@ public class TrolleyDragAndDropManager : MonoBehaviour
 
     public void OnClickNext()
     {
+        AudioManager.GetInstance().PlaySFXClip(AudioManager.GetInstance().clickTechButtonSFX);
         if (newFoodParent.transform.childCount==0)
         {
             SaveTrolley();
