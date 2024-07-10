@@ -37,16 +37,20 @@ public class ObstaclesGame : MonoBehaviour
         this.CongratsPanel.SetActive(false);
         introLoader = FindObjectOfType<LevelLoader>();
 
+        if (!GameManager.GetInstance().firstTimeScene[6])
+            StartGame();
+
         explanationCanvas = FindObjectOfType<ExplanationCanvas>();
         explanationCanvas.SetTextChecking(6, "Hemos llegado al tramo final de esta misión, hay que salir de este lugar. ¿Serás capaz de esquivar todos los obstáculos que hay de camino a las cajas? " +
                         "Te deseo muy buena suerte, Agente " + GameManager.GetInstance().playerInitial + ". \nDesplázate con las flechas del teclado y ten cuidado de no quedarte sin vidas.");
-
+        
         numObstacles = 0;
         isGameOver = false;
         playerLifes = hearts.Count-1;
         numObstaclesText.text = numObstacles + "/"+ MAX_NUMOBSTACLES;
         AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().obstaclesSceneMusic);
         StartCoroutine(SpawnStands());
+        
     }
 
     // Update is called once per frame

@@ -164,4 +164,102 @@ public class GameManager : MonoBehaviour
         Debug.Log(score);
         dbCom.SendInsertRequest(score);
     }
+
+    public void EvaluateFinalTrolley()
+    {
+        for (int i = 0; i < trolleyStatus.GetLength(0); i++)
+        {
+            //Si existe el de arriba
+            if (trolleyStatus[i, 0])
+            {
+                trolleyStatus[i, 0].GetComponent<Food>().trolleyStatus = Food.positionStatus.good;
+                trolleyStatus[i, 1].GetComponent<Food>().trolleyStatus = Food.positionStatus.good;
+                trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.good;
+                if (trolleyStatus[i, 0].GetComponent<Food>().weight == Food.weightLevel.mid && trolleyStatus[i, 1].GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                {
+                    trolleyStatus[i, 1].GetComponent<Food>().trolleyStatus = Food.positionStatus.moderate;
+                    numElementsModeratePositionTrolley++;
+                }
+                else
+                if (trolleyStatus[i, 0].GetComponent<Food>().weight == Food.weightLevel.heavy && trolleyStatus[i, 1].GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                {
+                    trolleyStatus[i, 1].GetComponent<Food>().trolleyStatus = Food.positionStatus.wrong;
+                    numElementsWrongPositionTrolley++;
+                }
+                else
+                if (trolleyStatus[i, 0].GetComponent<Food>().weight == Food.weightLevel.heavy && trolleyStatus[i, 1].GetComponent<Food>().hardness == Food.hardnessLevel.mid)
+                {
+                    trolleyStatus[i, 1].GetComponent<Food>().trolleyStatus = Food.positionStatus.moderate;
+                    numElementsModeratePositionTrolley++;
+                }
+                if (trolleyStatus[i, 0].GetComponent<Food>().weight == Food.weightLevel.mid && trolleyStatus[i, 2].GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.moderate;
+                    numElementsModeratePositionTrolley++;
+                }
+                else
+                if (trolleyStatus[i, 0].GetComponent<Food>().weight == Food.weightLevel.heavy && trolleyStatus[i, 2].GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.wrong;
+                    numElementsWrongPositionTrolley++;
+                }
+                else if (trolleyStatus[i, 0].GetComponent<Food>().weight == Food.weightLevel.heavy && trolleyStatus[i, 2].GetComponent<Food>().hardness == Food.hardnessLevel.mid)
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.moderate;
+                    numElementsModeratePositionTrolley++;
+                }
+            }
+            else
+            {
+                if (trolleyStatus[i, 1])
+                {
+                    trolleyStatus[i, 1].GetComponent<Food>().trolleyStatus = Food.positionStatus.good;
+                }
+                if (trolleyStatus[i, 2])
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.good;
+                }
+            }
+            //Si existe el del medio
+            if (trolleyStatus[i, 1] && trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus != Food.positionStatus.wrong)
+            {
+                if (trolleyStatus[i, 1].GetComponent<Food>().weight == Food.weightLevel.mid && trolleyStatus[i, 2].GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.moderate;
+                    numElementsModeratePositionTrolley++;
+                }
+                else
+                if (trolleyStatus[i, 1].GetComponent<Food>().weight == Food.weightLevel.heavy && trolleyStatus[i, 2].GetComponent<Food>().hardness == Food.hardnessLevel.fragile)
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.wrong;
+                    numElementsWrongPositionTrolley++;
+                }
+                else
+                if (trolleyStatus[i, 1].GetComponent<Food>().weight == Food.weightLevel.heavy && trolleyStatus[i, 2].GetComponent<Food>().hardness == Food.hardnessLevel.mid)
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.moderate;
+                    numElementsModeratePositionTrolley++;
+                }
+
+            }
+            else
+            {
+                if (trolleyStatus[i, 2] && trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus != Food.positionStatus.wrong)
+                {
+                    trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus = Food.positionStatus.good;
+                }
+            }
+
+            if(trolleyStatus[i, 2])
+                if(trolleyStatus[i, 2].GetComponent<Food>().trolleyStatus == Food.positionStatus.good)
+                    numElementsCorrectPositionTrolley++;
+            if (trolleyStatus[i, 1]) 
+                if (trolleyStatus[i, 1].GetComponent<Food>().trolleyStatus == Food.positionStatus.good)
+                    numElementsCorrectPositionTrolley++;
+            if (trolleyStatus[i, 0]) 
+                if (trolleyStatus[i, 0].GetComponent<Food>().trolleyStatus == Food.positionStatus.good)
+                    numElementsCorrectPositionTrolley++;
+
+        }
+    }
 }

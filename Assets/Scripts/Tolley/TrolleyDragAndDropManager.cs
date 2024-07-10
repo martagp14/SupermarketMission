@@ -169,18 +169,18 @@ public class TrolleyDragAndDropManager : MonoBehaviour
                         break;
                 }
                 //Comparar color para guardar su status en GM
-                switch (trolley[index[1], index[0]].GetComponent<Food>().trolleyStatus)
-                {
-                    case Food.positionStatus.good:
-                        GameManager.GetInstance().numElementsCorrectPositionTrolley++;
-                        break;
-                    case Food.positionStatus.moderate:
-                        GameManager.GetInstance().numElementsModeratePositionTrolley++;
-                        break;
-                    case Food.positionStatus.wrong:
-                        GameManager.GetInstance().numElementsWrongPositionTrolley++;
-                        break;
-                }
+                //switch (trolley[index[1], index[0]].GetComponent<Food>().trolleyStatus)
+                //{
+                //    case Food.positionStatus.good:
+                //        GameManager.GetInstance().numElementsCorrectPositionTrolley++;
+                //        break;
+                //    case Food.positionStatus.moderate:
+                //        GameManager.GetInstance().numElementsModeratePositionTrolley++;
+                //        break;
+                //    case Food.positionStatus.wrong:
+                //        GameManager.GetInstance().numElementsWrongPositionTrolley++;
+                //        break;
+                //}
 
             }
             else

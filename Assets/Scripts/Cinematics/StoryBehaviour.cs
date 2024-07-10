@@ -149,7 +149,8 @@ public class StoryBehaviour : MonoBehaviour
 
     string CalculateTrolleyScore()
     {
-        string line = "";
+        GameManager.GetInstance().EvaluateFinalTrolley();
+        string line;
         int wrongPosition = GameManager.GetInstance().numElementsWrongPositionTrolley;
         int moderatePosition = GameManager.GetInstance().numElementsModeratePositionTrolley;
         if(wrongPosition == 0 && moderatePosition == 0)
