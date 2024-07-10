@@ -36,7 +36,7 @@ public class GroceryListChecker : MonoBehaviour
     void Start()
     {
         levelLoader = FindObjectOfType<LevelLoader>();
-        
+        AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().generalMusic);
         notificationCanvas.gameObject.SetActive(false);
         this.GenerateGroceryListV2();
         dropFields = FindObjectsOfType<DropFieldGroceryList>();

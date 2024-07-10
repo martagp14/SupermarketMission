@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Slider MusicSlider;
     [SerializeField] Slider SFXSlider;
 
-
     // Start is called before the first frame update
     void Start()
     {

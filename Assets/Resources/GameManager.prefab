@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2955814550281746508}
   - component: {fileID: 1081265464448089772}
+  - component: {fileID: 437591568206965566}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   playerAge: 0
   playerGender: 
   daltonicUser: 0
+  musicVolume: 0
+  SFXVolume: 0
   firstTimeScene: 01010101010101
   currentSpentTime: 0
   groceryListSpentTime: 0
@@ -61,12 +64,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  numWrongPickedItems: 0
-  numElementsCorrectPositionTrolley: 0
-  numElementsModeratePositionTrolley: 0
-  numElementsWrongPositionTrolley: 0
   actualSection: 0
   sectionDistribution: 000000000000000000000000000000000000000000000000
+  pickedItems: []
   bakeryFoodList: []
   fruitFoodList: []
   legumeFoodList: []
@@ -74,4 +74,19 @@ MonoBehaviour:
   fishFoodList: []
   perfumeryFoodList: []
   pickedListItems: 0
-  pickedItems: []
+  numWrongPickedItems: 0
+  numElementsCorrectPositionTrolley: 0
+  numElementsModeratePositionTrolley: 0
+  numElementsWrongPositionTrolley: 0
+--- !u!114 &437591568206965566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2485363830105344825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4350ca8800dc91748b717fe124a39476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

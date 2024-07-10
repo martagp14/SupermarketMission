@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     public int numElementsModeratePositionTrolley = 0;
     public int numElementsWrongPositionTrolley = 0;
 
+    DataBaseComunicator dbCom;
+
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void LoadMain()
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
         trolleyStatus = new Food[8, 3];
         musicVolume = 0.5f;
         SFXVolume = 0.5f;
+        dbCom = this.gameObject.GetComponent<DataBaseComunicator>();
     }
 
     public static GameManager GetInstance()
@@ -130,6 +133,35 @@ public class GameManager : MonoBehaviour
         numElementsCorrectPositionTrolley = 0;
         numElementsModeratePositionTrolley = 0;
         numElementsWrongPositionTrolley = 0;
-}
+    }
 
+    public void SendResultToDB()
+    {
+        Debug.Log(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        string date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        //string score = @"""name"": ""name2"", ""start"": """ + date + @""", ""end"": ""2024-07-09 19:27:34""";
+
+        string score = @"""name"": """ + this.playerName + @""", 
+                        ""age"": """ + this.playerAge + @""",
+                        ""gender"": """ + this.playerGender + @""",
+                        ""totalTime"": """ + this.currentSpentTime.ToString().Replace(",", ".") + @""",
+                        ""clasifyListTime"": """ + this.groceryListSpentTime.ToString().Replace(",", ".") + @""",
+                        ""identifyMapTime"": """ + this.SupermarketMapSpentTime.ToString().Replace(",", ".") + @""",
+                        ""organizeTrolleyTime"": """ + this.trolleySpentTime.ToString().Replace(",", ".") + @""",
+                        ""bakeryMGTime"": """ + this.minigamesSpentTime[0].ToString().Replace(",", ".") + @""",
+                        ""fruitsMGTime"": """ + this.minigamesSpentTime[1].ToString().Replace(",", ".") + @""",
+                        ""legumesMGTime"": """ + this.minigamesSpentTime[2].ToString().Replace(",", ".") + @""",
+                        ""fridgeMGTime"": """ + this.minigamesSpentTime[3].ToString().Replace(",", ".") + @""",
+                        ""fishMGTime"": """ + this.minigamesSpentTime[4].ToString().Replace(",", ".") + @""",
+                        ""perfumeryMGTime"": """ + this.minigamesSpentTime[5].ToString().Replace(",", ".") + @""",
+                        ""correctPickedItems"": """ + this.pickedListItems + @""",
+                        ""wrongPickedItems"": """ + this.numWrongPickedItems + @""",
+                        ""correctPositionTroley"": """ + this.numElementsCorrectPositionTrolley + @""",
+                        ""moderatePositionTrolley"": """ + this.numElementsModeratePositionTrolley + @""",
+                        ""wrongPositionTrolley"": """ + this.numElementsWrongPositionTrolley + @""",
+                        ""date"": """ + date + @"""";
+
+        Debug.Log(score);
+        dbCom.SendInsertRequest(score);
+    }
 }

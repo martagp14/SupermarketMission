@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
 
     [Header ("Music Tracks")]
     public AudioClip generalMusic;
+    public AudioClip cinematicsMusic;
     public AudioClip obstaclesSceneMusic;
 
     [Header("SFX Tracks")]

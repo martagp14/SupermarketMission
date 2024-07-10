@@ -40,10 +40,12 @@ public class StoryBehaviour : MonoBehaviour
 
     private AgentDataCollector dataCollector;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().generalMusic);
+        AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().cinematicsMusic);
 
         changeInProgress = false;
         storyCanvas.gameObject.SetActive(false);
@@ -195,6 +197,7 @@ public class StoryBehaviour : MonoBehaviour
                     }
                     else
                     {
+                        GameManager.GetInstance().SendResultToDB();
                         levelLoader.LoadNextLevel("MainMenu");
                     }
 
@@ -235,4 +238,6 @@ public class StoryBehaviour : MonoBehaviour
         ShowNewText();
         
     }
+
+
 }
