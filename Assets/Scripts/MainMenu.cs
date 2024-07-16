@@ -20,8 +20,6 @@ public class MainMenu : MonoBehaviour
         optionsCanvas.gameObject.SetActive(false);
         mainCanvas.gameObject.SetActive(true);
         AudioManager.GetInstance().PlayMusicClip(AudioManager.GetInstance().generalMusic);
-
-        Debug.Log(GameManager.GetInstance().trolleyStatus.GetLength(0));
     }
 
     // Update is called once per frame

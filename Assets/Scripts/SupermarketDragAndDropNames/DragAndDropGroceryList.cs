@@ -50,7 +50,7 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
             this.transform.parent.GetComponentInParent<DropFieldGroceryList>().items.Remove(this.gameObject);
         }
 
-        this.transform.parent = upperParent.gameObject.transform;
+        this.transform.SetParent(upperParent.gameObject.transform);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -67,7 +67,7 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
         {
             //For the object to come back if it's drag outside the screen
             //transform.position = iniPos;
-            transform.parent = initialParent;
+            transform.SetParent(initialParent, false);
             this.transform.SetSiblingIndex(scrollIndex);
         }
         else
@@ -86,18 +86,18 @@ public class DragAndDropGroceryList : MonoBehaviour, IBeginDragHandler, IEndDrag
 
                         this.GetComponent<RectTransform>().anchoredPosition = usefulParent.GetComponent<RectTransform>().anchoredPosition;
                         //usefulParent.GetComponent<DropFieldGroceryList>().AddItemToList(this.gameObject);
-                        this.transform.parent = usefulParent.transform.GetChild(0).transform;
+                        this.transform.SetParent(usefulParent.transform.GetChild(0).transform);
                     }
                     else
                     {
                         transform.position = iniPos;
-                        transform.parent = initialParent;
+                        transform.SetParent(initialParent);
                         this.transform.SetSiblingIndex(scrollIndex);
                     }
                 }
                 else {
                     transform.position = iniPos;
-                    transform.parent = initialParent;
+                    transform.SetParent(initialParent);
                     this.transform.SetSiblingIndex(scrollIndex);
                 }
                 

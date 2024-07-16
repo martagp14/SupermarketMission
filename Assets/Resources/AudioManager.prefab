@@ -177,7 +177,7 @@ MonoBehaviour:
   musicAudioSource: {fileID: 547540314612604012}
   SFXAudioSource: {fileID: 8538544101720550818}
   mixer: {fileID: 24100000, guid: 99f6e78fffe0b7c40bb007447fc7a0e6, type: 2}
-  generalMusic: {fileID: 8300000, guid: a45ad9bfc77bf654ea1ce796e5cc4d18, type: 3}
+  generalMusic: {fileID: 8300000, guid: 7c3cfc34d9f09ac4da3755abe8f738b4, type: 3}
   cinematicsMusic: {fileID: 8300000, guid: b66950017cc35ea418c0037f1cff6270, type: 3}
   obstaclesSceneMusic: {fileID: 8300000, guid: e53b65baa91f666448fc61e3064a154b, type: 3}
   clickTechButtonSFX: {fileID: 8300000, guid: 3a0bb71491829c5438b36d478fd898c4, type: 3}

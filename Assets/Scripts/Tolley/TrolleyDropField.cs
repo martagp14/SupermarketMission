@@ -56,7 +56,7 @@ public class TrolleyDropField : MonoBehaviour, IDropHandler
                 Debug.Log("El de abajo ocupado" + element.name);
                 //Con el nuevo padre
                 element.GetComponent<RectTransform>().position = columnDropFields[indexI].GetComponent<RectTransform>().position;
-                element.transform.parent = columnDropFields[indexI].transform;
+                element.transform.SetParent(columnDropFields[indexI].transform, true);
                 //
                 dndManager.trolley[indexJ, indexI] = element.gameObject;
                 dndManager.evaluateColumn(indexJ);
@@ -69,7 +69,7 @@ public class TrolleyDropField : MonoBehaviour, IDropHandler
         else
         {
             element.GetComponent<RectTransform>().position = columnDropFields[indexI].GetComponent<RectTransform>().position;
-            element.transform.parent = columnDropFields[indexI].transform;
+            element.transform.SetParent(columnDropFields[indexI].transform, true) ;
             dndManager.trolley[indexJ, indexI] = element.gameObject;
             dndManager.evaluateColumn(indexJ);
         }
@@ -90,7 +90,7 @@ public class TrolleyDropField : MonoBehaviour, IDropHandler
                 dndManager.trolley[indexJ, indexI] = columnDropFields[indexI-1].transform.GetChild(0).gameObject;
 
                 columnDropFields[indexI - 1].transform.GetChild(0).GetComponent<RectTransform>().position = columnDropFields[indexI].GetComponent<RectTransform>().position;
-                columnDropFields[indexI - 1].transform.GetChild(0).parent = columnDropFields[indexI].transform;
+                columnDropFields[indexI - 1].transform.GetChild(0).SetParent(columnDropFields[indexI].transform,true);
                 
                 //Y llamar a recursividad con la pos de arriba
                 RelocateColumnElements(indexI-1);

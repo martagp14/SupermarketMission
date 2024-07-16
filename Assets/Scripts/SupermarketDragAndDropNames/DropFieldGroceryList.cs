@@ -24,7 +24,7 @@ public class DropFieldGroceryList : MonoBehaviour, IDropHandler
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = this.GetComponent<RectTransform>().anchoredPosition;
                 items.Add(eventData.pointerDrag);
-                eventData.pointerDrag.transform.parent = panelList;
+                eventData.pointerDrag.transform.SetParent(panelList);
             }
         }
     }

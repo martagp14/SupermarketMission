@@ -64,8 +64,8 @@ public class TrolleyDragAndDropManager : MonoBehaviour
             //if (foodItem.alreadyTaken)
             //{
             GameObject element = Instantiate(TrolleyElementPrefab);
-            element.transform.parent = newFoodParent.transform;
-            element.transform.localScale = new Vector3(1f,1f,1f);
+            element.transform.SetParent(newFoodParent.transform, true);
+            element.transform.localScale = new Vector3(1f, 1f, 1f);
             element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
             element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
             element.GetComponent<Food>().CopyFood(foodItem);
@@ -105,8 +105,9 @@ public class TrolleyDragAndDropManager : MonoBehaviour
             {
                 GameObject element = Instantiate(TrolleyElementPrefab);
                 element.GetComponent<RectTransform>().position = layer2.transform.GetChild(i).GetComponent<RectTransform>().position;
-                element.transform.parent = layer2.transform.GetChild(i);
-                element.transform.localScale = new Vector3(1f,1f,1f);
+                //element.transform.localScale = new Vector3(1.08f, 1.08f, 1.08f);
+                element.transform.SetParent(layer2.transform.GetChild(i),true);
+                element.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
                 element.GetComponent<TrolleyDragAndDrop>().upperParent = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<TrolleyDragAndDrop>().canvas = this.gameObject.GetComponent<Canvas>();
                 element.GetComponent<Food>().CopyFood(GameManager.GetInstance().trolleyStatus[index[1], index[0]]);

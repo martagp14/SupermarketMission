@@ -46,7 +46,7 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
             this.transform.parent.GetComponentInParent<TrolleyDropField>().RelocateColumnElements(this.transform.parent.GetComponentInParent<TrolleyDropField>().GetIndexes()[0]);
         }
 
-        this.transform.parent = upperParent.gameObject.transform;
+        this.transform.SetParent(upperParent.gameObject.transform);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -60,14 +60,14 @@ public class TrolleyDragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHand
         if (eventData.pointerEnter == null)
         {
             //For the object to come back if it's drag outside the screen
-            transform.parent = initialParent;
+            transform.SetParent(initialParent);
             this.GetComponent<Image>().color = Color.white;
         }
         else
         {
             if (eventData.pointerEnter.GetComponent<TrolleyDropField>() == null)
             {
-                    transform.parent = initialParent;
+                transform.SetParent(initialParent) ;
                     this.GetComponent<Image>().color = Color.white;
             }
         }

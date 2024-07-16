@@ -219,7 +219,10 @@ public class SectionFigureMiniGame : MonoBehaviour
                 //groceryList.RemoveAt(index);
                 Debug.Log("se han cogido correctos " + correctItems.Count +" y en la lista hay "+ groceryList.Count);
                 if (correctItems.Count == groceryList.Count)
+                {
                     stopMiniGame = true;
+                    EventManager.OnTimerStop();
+                }
             }
             else
             {
