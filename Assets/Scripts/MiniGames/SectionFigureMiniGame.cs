@@ -19,6 +19,7 @@ public class SectionFigureMiniGame : MonoBehaviour
     List<Food> groceryList;
 
     public bool stopMiniGame = false;
+    private int actualPID = 0;
 
     private int wrongSelected = 0;
     List<Food> correctItems = new List<Food>();
@@ -28,17 +29,23 @@ public class SectionFigureMiniGame : MonoBehaviour
         PrepareMiniGame();
         PrepareToggles();
         //Esperar 3 segundos y mostrar el siguiente item
-        StartCoroutine(MiniGameFlow());
+        StartCoroutine(PickedItemCorrutine());
     }
 
-    IEnumerator MiniGameFlow()
+    IEnumerator PickedItemCorrutine()
     {
-        while (!stopMiniGame) {
+        int pid = ++actualPID;
+        Debug.Log("Mi PID es: " + pid);
+        while (pid == actualPID && !stopMiniGame)
+        {
+            this.NextItem();
             yield return new WaitForSeconds(2);
-            if(!stopMiniGame)
-                this.NextItem();
         }
-        this.SaveCorrectItems();
+        if (stopMiniGame)
+        {
+            this.SaveCorrectItems();
+        }
+        Debug.Log("Me destruyo: " + pid);
     }
 
     void PrepareToggles()
@@ -229,7 +236,7 @@ public class SectionFigureMiniGame : MonoBehaviour
                 //No esta en la lista de la compra
                 wrongSelected++;
             }
-            this.NextItem();
+            StartCoroutine(PickedItemCorrutine());
         }
         else
         {
